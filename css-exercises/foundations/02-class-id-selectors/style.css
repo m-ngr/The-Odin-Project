@@ -1,0 +1,17 @@
+.odds {
+  background-color: rgb(247, 175, 175);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#sec {
+  color: blue;
+  font-size: 36px;
+}
+.larger {
+  font-size: 24px;
+}
+
+#forth {
+  background-color: lightgreen;
+  font-size: 24px;
+  font-weight: bold;
+}
