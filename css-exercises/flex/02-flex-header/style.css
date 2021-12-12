@@ -1,4 +1,20 @@
-.header  {
+.header {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* .logo {
+    margin: auto; /*can also be used to put logo in the center
+} */
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 5px;
+}
+/* ================================================= */
+.header {
   font-family: monospace;
   background: papayawhip;
 }
