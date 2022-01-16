@@ -1,0 +1,109 @@
+body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+header,
+footer {
+  background-color: #293241;
+  color: white;
+  flex-grow: 0;
+  font-size: 20px;
+}
+h1 {
+  font-size: 28px;
+  margin: 15px;
+}
+main {
+  flex-grow: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #2a9d8f;
+}
+
+.info p {
+  margin: 10px;
+  font-size: large;
+}
+
+#content {
+  flex-grow: 1;
+  display: flex;
+}
+#game {
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 350px;
+  padding: 50px 10px;
+  background-color: #e9ecef;
+}
+#controller {
+  width: 250px;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #81b29a;
+}
+/*====================================================================*/
+#rounds {
+  width: 75%;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #212529;
+  color: #fff;
+}
+button:hover {
+  background-color: seagreen;
+}
+#play-btn {
+  width: 75%;
+}
+.result p {
+  font-size: 24px;
+  width: 75%;
+  margin: 20px auto;
+  padding: 8px 0px;
+  border-radius: 0.5rem;
+}
+
+.win {
+  color: green;
+  background-color: lightgreen;
+}
+
+.tie {
+  color: royalblue;
+  background-color: lightskyblue;
+}
+
+.lost {
+  color: crimson;
+  background-color: lightpink;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: springgreen;
+}

@@ -5,14 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <script src="script.js"></script>
-    <h1>Rock Paper Scissors</h1>
-    <p>The game is playable from the console, just type:</p>
-    <ul>
-      <li><code>game();</code> to play a 5 rounds game.</li>
-      <li><code>game(n);</code> to play n rounds game.</li>
-    </ul>
+    <header>
+      <h1>Rock Paper Scissors</h1>
+    </header>
+    <main>
+      <div class="info">
+        <p id="player-score">Your Score: 0</p>
+        <p id="computer-score">Computer Score: 0</p>
+        <p id="round-info">Round: 0/5</p>
+      </div>
+
+      <div id="content">
+        <div id="game">
+          <div id="selections">
+            <button disabled>Rock</button>
+            <button disabled>Paper</button>
+            <button disabled>Scissors</button>
+          </div>
+
+          <div class="result">
+            <p id="result"></p>
+            <p id="game-result"></p>
+          </div>
+        </div>
+        <div id="controller">
+          <label for="rounds"> Number of rounds per game</label>
+          <input
+            type="number"
+            id="rounds"
+            name="rounds"
+            min="1"
+            max="100"
+            value="5"
+          />
+          <button id="play-btn">Play</button>
+        </div>
+      </div>
+    </main>
+    <footer>
+      Coded by
+      <a
+        href="https://www.linkedin.com/in/mahmoud-elnagar1698/"
+        target="_blank"
+      >
+        Mahmoud Elnagar
+      </a>
+    </footer>
   </body>
 </html>
