@@ -25,7 +25,7 @@ function makeGrid() {
 
   let gridLen = getGridLength();
   makeGrid.grid = createGrid(gridLen);
-  document.body.appendChild(makeGrid.grid);
+  document.getElementById("render").appendChild(makeGrid.grid);
 
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
