@@ -9,3 +9,5 @@ This page contains a list of projects I made throughout The Odin Project curricu
 - Project 3: [Rock Paper Scissors](https://mahmoud-elnagar1698.github.io/The-Odin-Project/rock-paper-scissors/ "JavaScript").
 
 - Project 4: [Etch A Sketch](https://mahmoud-elnagar1698.github.io/The-Odin-Project/etch-a-sketch/ "JavaScript").
+
+- Project 5: [Calculator](https://mahmoud-elnagar1698.github.io/The-Odin-Project/calculator/ "Foundation Final Project").
