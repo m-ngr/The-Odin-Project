@@ -1,0 +1,204 @@
+@font-face {
+  font-family: "Norse";
+  src: url(./fonts/Norse-Bold.otf);
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+/* ============================================================================== */
+:root.light {
+  --bg-color: #f8f8f8;
+  --highligh-bg-color: white;
+  --tone-color: #596d48;
+  --txt-color: black;
+}
+:root.dark {
+  --bg-color: #060606;
+  --highligh-bg-color: #040303;
+  --tone-color: yellowgreen;
+  --txt-color: white;
+}
+/* ============================================================================== */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  font-family: "Roboto", sans-serif;
+}
+p {
+  margin: 0;
+}
+/* ================================================= */
+aside {
+  background-color: #596d48;
+  background-image: url(./images/bg-leaf.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: min(640px, 40%);
+}
+.logo {
+  margin: 20vh 0;
+  padding: 10px 0;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.logo img {
+  width: clamp(50px, 8vw, 80px);
+}
+.logo figcaption {
+  font-family: "Norse", sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(60px, 10vw, 108px);
+}
+/* ================================================= */
+main {
+  flex: auto;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+main section {
+  padding-right: 15%;
+  padding-left: 30px;
+}
+/* ---------------------------------------------------- */
+header {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  flex: auto;
+  font-family: "Norse", sans-serif;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 42px;
+  margin: 10px;
+  color: var(--tone-color);
+}
+.toggle {
+  appearance: none;
+  width: 36px;
+  height: 18px;
+  border: 3px solid var(--txt-color);
+  border-radius: 50px;
+  position: relative;
+}
+.toggle:checked {
+  background-color: var(--bg-color);
+}
+.toggle::before {
+  content: "•";
+  color: var(--txt-color);
+  font-size: 36px;
+  line-height: 11px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: left 0.4s;
+}
+.toggle:checked::before {
+  left: 58%;
+}
+
+/* --------------------------------------------------- */
+.top-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+.top-text p:nth-child(3) {
+  margin: 20px 0;
+}
+/* ---------------------------------------------------- */
+.highlight {
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--highligh-bg-color, white);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.176);
+}
+form h2 {
+  margin: 10px 0;
+  font-size: 20px;
+}
+form div {
+  display: flex;
+  gap: clamp(20px, 10%, 50px);
+  margin: 5px 0;
+}
+form div div {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+form label {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+/* -------------------------------- */
+form input {
+  appearance: none;
+  border: 2px solid #e5e7eb;
+  border-radius: 3px;
+  background-color: var(--highligh-bg-color);
+  color: var(--txt-color);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px var(--bg-color) inset !important;
+  -webkit-text-fill-color: var(--txt-color) !important;
+}
+
+form input:valid {
+  border-color: var(--tone-color);
+}
+form input:invalid {
+  border-color: #e22626;
+}
+form input:placeholder-shown {
+  border-color: #e5e7eb;
+}
+form input:focus {
+  outline: none;
+  border-color: royalblue;
+}
+/* ---------------------------------------------------- */
+button {
+  margin: 30px 0;
+  padding: 10px 20px;
+  color: var(--tone-color);
+  cursor: pointer;
+  font-weight: bold;
+  border: 3px solid var(--tone-color);
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+  background-color: var(--bg-color);
+}
+button:hover {
+  background-color: var(--tone-color);
+  color: white;
+  box-shadow: 0 0 0;
+}
+a {
+  color: var(--tone-color);
+  font-weight: bold;
+  text-decoration: none;
+}
+footer {
+  margin: 10px 0;
+  text-align: center;
+}
