@@ -21,16 +21,24 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  width: 100vw;
   display: flex;
   font-family: "Roboto", sans-serif;
+}
+/*Hide scrollbar*/
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
 }
 p {
   margin: 0;
 }
 /* ================================================= */
 aside {
-  background-color: #596d48;
+  background-color: var(--tone-color);
   background-image: url(./images/bg-leaf.jpg);
   background-repeat: no-repeat;
   background-position: center center;
@@ -66,7 +74,7 @@ main {
   justify-content: center;
 }
 main section {
-  padding-right: 15%;
+  padding-right: 10%;
   padding-left: 30px;
 }
 /* ---------------------------------------------------- */
@@ -82,15 +90,17 @@ h1 {
   text-transform: uppercase;
   font-weight: normal;
   font-size: 42px;
-  margin: 10px;
+  margin: 10px 0;
   color: var(--tone-color);
 }
 .toggle {
+  margin: 0 15px;
+  padding: 0;
   appearance: none;
   width: 36px;
   height: 18px;
   border: 3px solid var(--txt-color);
-  border-radius: 50px;
+  border-radius: 20px;
   position: relative;
 }
 .toggle:checked {
@@ -150,11 +160,12 @@ form label {
 form input {
   appearance: none;
   border: 2px solid #e5e7eb;
-  border-radius: 3px;
+  border-radius: 4px;
   background-color: var(--highligh-bg-color);
   color: var(--txt-color);
+  outline: none;
 }
-
+/*trick to colorize autofill*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -167,15 +178,25 @@ form input:valid {
   border-color: var(--tone-color);
 }
 form input:invalid {
-  border-color: #e22626;
+  border-color: red;
 }
 form input:placeholder-shown {
   border-color: #e5e7eb;
 }
 form input:focus {
-  outline: none;
   border-color: royalblue;
 }
+form output {
+  color: red;
+  font-size: 14px;
+  visibility: hidden;
+  height: 0;
+}
+input:invalid:not(input:placeholder-shown):not(input:focus) + output {
+  visibility: visible;
+  height: auto;
+}
+
 /* ---------------------------------------------------- */
 button {
   margin: 30px 0;
@@ -197,6 +218,10 @@ a {
   color: var(--tone-color);
   font-weight: bold;
   text-decoration: none;
+}
+a:hover {
+  background-color: var(--tone-color);
+  color: var(--bg-color);
 }
 footer {
   margin: 10px 0;

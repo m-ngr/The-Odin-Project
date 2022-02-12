@@ -33,7 +33,7 @@
         <p>Sign up <em>now</em> to get started.</p>
         <p>You <em>know</em> you want to.</p>
       </section>
-      <form action="#" method="get">
+      <form action="#" method="get" autocomplete="off">
         <section class="highlight">
           <h2>Let's do this!</h2>
           <div>
@@ -48,7 +48,9 @@
                 pattern="^[a-zA-Z- ]{3,20}$"
                 minlength="3"
                 maxlength="20"
+                title="[3: 20] Only letters, space or hyphen"
               />
+              <output>[3: 20] Only letters, space or hyphen</output>
             </div>
             <div>
               <label for="last-name">last name</label>
@@ -61,7 +63,9 @@
                 pattern="^[a-zA-Z- ]{3,20}$"
                 minlength="3"
                 maxlength="20"
+                title="[3: 20] Only letters, space or hyphen"
               />
+              <output>[3: 20] Only letters, space or hyphen</output>
             </div>
           </div>
           <div>
@@ -74,7 +78,9 @@
                 required
                 placeholder=" "
                 pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
+                title="ex: example@domain.com"
               />
+              <output>Email in form: example@domain.com</output>
             </div>
             <div>
               <label for="phone">phone number</label>
@@ -85,7 +91,9 @@
                 required
                 placeholder=" "
                 pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
+                title="ex: +010123456789"
               />
+              <output> Phone number in form: +010123456789 </output>
             </div>
           </div>
           <div>
@@ -99,8 +107,14 @@
                 placeholder=" "
                 minlength="8"
                 maxlength="30"
-                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
+                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$"
+                title="Min 8 characters, at least one upper case English letter, one
+                lower case English letter and one number."
               />
+              <output for="pwd">
+                Min 8 characters, at least one upper case English letter, one
+                lower case English letter and one number.
+              </output>
             </div>
             <div>
               <label for="cnf-pwd">confirm password</label>
@@ -112,8 +126,11 @@
                 placeholder=" "
                 minlength="8"
                 maxlength="30"
-                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
+                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$"
+                title="Min 8 characters, at least one upper case English letter, one
+                lower case English letter and one number."
               />
+              <output for="cnf-pwd">Passwords don't match</output>
             </div>
           </div>
         </section>
