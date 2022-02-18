@@ -6,7 +6,7 @@
   --minor-f-color: #444444;
   --mono-bg-color: #1a92d4;
   --mono-f-color: #fff;
-  --mono-hv-color: rgba(0, 0, 0, 0.2);
+  --hover-color: rgba(0, 0, 0, 0.2);
 }
 * {
   margin: 0;
@@ -18,7 +18,7 @@ a {
   text-decoration: none;
 }
 h2 {
-  font-size: 21px;
+  font-size: 1.2rem;
 }
 body {
   color: var(--main-f-color);
@@ -26,7 +26,7 @@ body {
   min-height: 100vh;
   font-family: "Roboto", sans-serif;
   display: grid;
-  grid-template-columns: minmax(min-content, 250px) 1fr;
+  grid-template-columns: max-content 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     "sidebar header"
@@ -37,165 +37,217 @@ header {
   grid-area: header;
   background-color: var(--main-bg-color);
   color: var(--main-f-color);
-  padding: 25px;
+  padding: 1.4rem;
+  box-shadow: 0px 3px 10px 0px #00000036;
+  z-index: 1;
+
   display: grid;
   grid-template-columns: minmax(max-content, 1fr) auto;
-  gap: 10px;
+  grid-template-areas:
+    "searchbar options"
+    "welcome actions";
+  gap: 0.6rem;
   place-items: center stretch;
+}
+header input[type="image"] {
+  height: 100%;
+  box-sizing: border-box;
 }
 /* -------------- search-bar ----------------- */
 .search-bar {
+  grid-area: searchbar;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px;
+  grid-template-columns: min-content 1fr;
+  gap: 0.6rem;
   align-items: center;
 }
 .search-bar > input[type="search"] {
-  border-radius: 20px;
+  border-radius: 1.1rem;
   border: none;
   background-color: var(--minor-bg-color);
-  padding: 5px 12px;
+  padding: 0.3rem 0.7rem;
+  max-width: 700px;
+  min-width: 200px;
+  font-size: 1rem;
 }
 /* ----------------- options --------------- */
 .options {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
+  grid-area: options;
+  display: grid;
+  grid-template-columns: 1fr repeat(2, max-content);
+  justify-content: end;
+  place-items: center end;
+  gap: 0.84rem;
 }
 .options .round-image {
-  width: 36px;
+  height: 2.3rem;
 }
 .options > a {
   font-weight: bold;
-  padding: 8px 10px;
-  border-radius: 20px;
+  padding: 0.45rem 0.6rem;
+  border-radius: 1.1rem;
+}
+/* ------------------ welcome ---------------- */
+.welcome {
+  grid-area: welcome;
+}
+.welcome h2 {
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
 /* ----------------- actions --------------- */
 .actions {
+  grid-area: actions;
   display: flex;
   justify-content: space-evenly;
-  gap: 10px;
+  gap: 0.6rem;
 }
 .actions > button {
   background-color: var(--mono-bg-color);
   color: var(--mono-f-color);
-  padding: 10px 20px;
+  padding: 0.6rem 1.1rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 1.1rem;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 0.9rem;
 }
 /* ================================= Sidebar ============================= */
 aside {
   grid-area: sidebar;
   background-color: var(--mono-bg-color);
   color: var(--mono-f-color);
+  overflow: hidden;
 }
 .logo {
   display: flex;
   align-items: center;
-  gap: 5px;
-  margin: 25px 15px 40px 10px;
+  gap: 0.3rem;
+  margin: 1.4rem 2.8rem 2.25rem 0.6rem;
 }
 .logo h1 {
-  font-size: clamp(21px, 3vw, 27px);
+  font-size: clamp(1.2rem, 2.4vw, 2rem);
 }
 .logo img {
-  width: clamp(28px, 4vw, 48px);
+  width: clamp(1.8rem, 3.6vw, 3.6rem);
 }
 /* ------------------------------ */
 aside > nav {
   display: grid;
-  gap: 40px;
+  gap: 2.25rem;
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
 }
 aside > nav li {
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content 1fr;
   align-items: center;
-  gap: 15px;
-  padding: 5px 15px;
+  gap: 0.84rem;
+  padding: 0.3rem 0.84rem;
 }
-/* ================================ content =============================== */
+aside > nav li img {
+  height: 100%;
+}
+/* ================================ main =============================== */
 main {
   grid-area: content;
   background-color: var(--minor-bg-color);
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 15px;
-  padding: 15px;
+  grid-template-columns: 1fr min-content;
+  gap: 0.84rem;
+  padding: 0.84rem;
 }
 /* ------------------- content ------------------- */
 main h2 {
-  margin-bottom: 10px;
+  margin: 0.6rem 0 0.84rem 0;
 }
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-auto-rows: 200px;
-  gap: 20px;
-}
-.card {
-  background-color: var(--main-bg-color);
-  border-left: 10px solid var(--mono-bg-color);
-  border-radius: 10px;
-  padding: 15px;
-  display: grid;
-  grid-template-rows: min-content 1fr min-content;
-  gap: 3px;
-}
-.card-buttons {
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 10px;
-}
-.card p {
-  color: var(--minor-f-color);
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  grid-auto-rows: 11rem;
+  gap: 1.1rem;
 }
 /* ---------------- side-content ----------------- */
 .side-content {
   display: grid;
-  gap: 40px;
+  gap: 2.25rem;
   grid-auto-rows: min-content;
 }
 .side-content h3 {
-  font-size: 18px;
+  font-size: 1rem;
 }
 /* ---------- announcements ------- */
+.announcements a {
+  display: block;
+  padding: 0.45rem;
+  border-radius: 0.45rem;
+}
 .announcements li:not(:first-child) {
-  border-top: 2px solid var(--minor-f-color);
-  padding-top: 15px;
+  border-top: 0.12rem solid var(--minor-f-color);
+  padding-top: 0.39rem;
 }
 .announcements li p {
   color: var(--minor-f-color);
+  padding-left: 0.45rem;
 }
 /* ---------- trending ------- */
+.trending .side-card {
+  gap: 0.3rem;
+}
+.trending li {
+  padding: 0.3rem;
+  border-radius: 0.6rem;
+}
 .trending .user-layout {
-  grid-template-columns: minmax(36px, 60px) 1fr;
-  font-size: 16px;
-  gap: 5px 10px;
+  font-size: 0.9rem;
+  gap: 0.3rem 0.6rem;
 }
 .trending .ul-bot-text {
   color: var(--minor-f-color);
 }
 /*============================= General =========================*/
+.card {
+  background-color: var(--main-bg-color);
+  border-left: 0.6rem solid var(--mono-bg-color);
+  border-radius: 0.6rem;
+  padding: 1.1rem 0.8rem 0.6rem 0.6rem;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  gap: 0.3rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.card-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.6rem;
+}
+.card-buttons input[type="image"] {
+  width: 1.4rem;
+}
+.card p {
+  color: var(--minor-f-color);
+  padding-left: 0.3rem;
+}
+.card h3 {
+  font-size: 1.1rem;
+}
+/* -------------------- side-card -------------------- */
 .side-card {
   background-color: var(--main-bg-color);
   color: var(--main-f-color);
-  border-radius: 10px;
-  padding: 25px;
+  border-radius: 0.6rem;
+  padding: 1.1rem;
   display: grid;
-  gap: 15px;
+  gap: 0.8rem;
 }
-/* ---------------------------------- */
+/* ----------------- user-layout ----------------- */
 .user-layout {
   display: grid;
-  grid-template-columns: minmax(60px, 80px) 1fr;
+  grid-template-columns: max-content max-content;
   grid-template-rows: 1fr 1fr;
-  gap: 5px 15px;
+  gap: 0.3rem 0.84rem;
 }
 .user-layout > img {
   grid-row: 1 / span 2;
-  width: 100%;
+  height: 100%;
   align-self: center;
 }
 .user-layout .ul-top-text {
@@ -231,36 +283,110 @@ main h2 {
   background-color: var(--mono-bg-color);
   border-radius: 50%;
 }
+/* ----------------------------- effects ------------------ */
+input[type="image"]:not(.round-image) {
+  border-radius: 50%;
+  padding: 0.3rem;
+}
+
+.card h3 a:hover,
+.announcements a:hover,
+.trending li:hover,
+aside nav li:hover,
+.actions button:hover,
+.options a:hover,
+input[type="image"]:hover {
+  background-image: linear-gradient(var(--hover-color), var(--hover-color));
+  cursor: pointer;
+  transform: scale(105%);
+}
+.card h3 a:active,
+.announcements a:active,
+.trending li:active,
+aside nav li:active,
+.actions button:active,
+.options a:active,
+input[type="image"]:active {
+  transform: scale(92%);
+}
+.card h3 a,
+.announcements a,
+.trending li,
+aside nav li,
+.actions button,
+.options a,
+input[type="image"] {
+  transition: transform 0.4s;
+}
+
 /*======================= Media query trial ==========================*/
-@media (max-width: 916px) {
+@media (max-width: 900px) {
   body {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: "header" "content" "sidebar";
   }
+  /* ================================ Header =================================*/
+  header {
+    padding: 0.6rem;
+    gap: 0.6rem;
+  }
+
+  /* -------------- search-bar ----------------- */
+  .search-bar {
+    gap: 0.3rem;
+  }
+  /* ----------------- options --------------- */
+  .options {
+    gap: 0.6rem;
+  }
+  .options > a {
+    font-size: 0.9rem;
+  }
+  /* ------------------ welcome ---------------- */
+  .welcome.user-layout {
+    gap: 0.3rem 0.6rem;
+  }
+  /* ----------------- actions --------------- */
+  .actions button {
+    padding: 0.45rem 0.9rem;
+  }
+  /* ============================ Sidebar ============================== */
   aside > nav {
     grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    gap: 1.1rem;
   }
   .logo {
     justify-content: center;
+    margin: 0.84rem 0.6rem 1.1rem 0.6rem;
+  }
+  /* =================================== main ========================== */
+  main {
+    grid-template-columns: 1fr;
+    gap: 0.84rem;
   }
 }
-
-/* -------------------------------------------------------------- */
-input[type="image"]:not(.round-image) {
-  border-radius: 50%;
-  padding: 5px;
+/* ------------------------------------------------- */
+@media (max-width: 600px) {
+  /* ================================ Header =================================*/
+  header {
+    grid-template-columns: 1fr;
+    grid-template-areas: "options" "searchbar" "welcome" "actions";
+  }
+  /* ----------------- options --------------- */
+  .options input:first-child {
+    justify-self: start;
+  }
+  /* ----------------- actions --------------- */
+  .actions {
+    justify-content: center;
+  }
 }
-aside > nav li:active,
-button:active,
-.options a:active,
-input[type="image"]:active {
-  transform: scale(0.92);
-}
-aside > nav li:hover,
-button:hover,
-.options > a:hover,
-input[type="image"]:hover {
-  background-image: linear-gradient(var(--mono-hv-color), var(--mono-hv-color));
-  cursor: pointer;
+/* ------------------------------- */
+@media (min-width: 1600px) {
+  header {
+    grid-template-columns: max-content 1fr max-content max-content;
+    grid-template-areas: "welcome searchbar actions options";
+  }
 }
