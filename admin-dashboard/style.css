@@ -133,7 +133,7 @@ aside {
 aside > nav {
   display: grid;
   gap: 2.25rem;
-  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
 }
 aside > nav li {
   display: grid;
