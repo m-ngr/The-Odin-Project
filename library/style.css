@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  font-size: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+}
+/* =============================== Header ======================================= */
+header {
+  padding: 20px;
+  padding-left: 50px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  z-index: 1;
+}
+/* =============================== Main ======================================= */
+main {
+  background-color: #f0eef1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: max-content;
+  gap: 20px;
+  padding: 20px;
+}
+/* ================================= Book ======================================= */
+.card {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+  min-width: 200px;
+  /* max-width: 300px; */
+}
+.btn {
+  font-size: 100%;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  filter: brightness(90%);
+}
+.red-bgc {
+  background-color: #ff9c9c;
+}
+.green-bgc {
+  background-color: #9cff9c;
+}
+/* =============================== Footer ======================================= */
+footer {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+a.round-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.round-social img {
+  border-radius: 50%;
+  height: 28px;
+  transition: all 0.3s;
+}
+.round-social img:hover {
+  transform: rotate(360deg) scale(120%);
+}
+/* ============================== Add-Button =================================== */
+.round-add {
+  padding: 0;
+  background-color: rgb(184, 62, 62);
+  color: white;
+  border-radius: 50%;
+  border: none;
+  font-size: 60px;
+  width: 70px;
+  height: 70px;
+  font-stretch: 100%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s;
+  text-align: center;
+}
+.round-add:hover {
+  transform: rotate(90deg) scale(105%);
+}
+/* =============================================================================== */
+.add-form {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: none;
+}
+.add-form.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-form > form {
+  width: 300px;
+  background-color: #f0eef1;
+}
+[type="text"],
+[type="number"] {
+  font-size: 100%;
+  width: 100%;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  border-radius: 8px;
+}
+.add-form input[type="checkbox"] {
+  accent-color: white;
+  width: 20px;
+  height: 20px;
+}
+.add-form div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
