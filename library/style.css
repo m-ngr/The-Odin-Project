@@ -1,13 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+:root {
+  --rad: 0.45rem;
+  --gap: 1.12rem;
+  --small-gap: 0.6rem;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: inherit;
+}
+button,
+input {
+  font-size: inherit;
+  font-weight: inherit;
+  outline: none;
+  border: none;
+  color: inherit;
 }
 a {
-  font-size: 100%;
+  font-size: inherit;
   color: inherit;
   text-decoration: none;
+}
+h2 {
+  font-size: 1.4rem;
 }
 body {
   font-family: "Poppins", sans-serif;
@@ -17,42 +34,49 @@ body {
 }
 /* =============================== Header ======================================= */
 header {
-  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  padding: var(--gap);
   padding-left: 50px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+}
+header .btn {
+  width: auto;
+  background-color: inherit;
+  border: 0.12rem solid #fff;
+  font-size: 0.9rem;
 }
 /* =============================== Main ======================================= */
 main {
   background-color: #f0eef1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16.7rem, 1fr));
   grid-auto-rows: max-content;
-  gap: 20px;
-  padding: 20px;
+  gap: var(--gap);
+  padding: var(--gap);
 }
-/* ================================= Book ======================================= */
+/* ================================= Card ======================================= */
 .card {
   background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
-  border-radius: 8px;
+  gap: var(--gap);
+  padding: var(--gap);
+  border-radius: var(--rad);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
-  min-width: 200px;
-  /* max-width: 300px; */
+  min-width: 11.12rem;
 }
 .btn {
-  font-size: 100%;
+  font-size: 1.1rem;
   width: 100%;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
+  padding: var(--small-gap) var(--gap);
+  border-radius: var(--rad);
   cursor: pointer;
 }
 .btn:hover {
@@ -66,11 +90,17 @@ main {
 }
 /* =============================== Footer ======================================= */
 footer {
-  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: var(--small-gap);
+  padding: var(--small-gap);
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--small-gap);
 }
 a.round-social {
   display: flex;
@@ -79,7 +109,7 @@ a.round-social {
 }
 .round-social img {
   border-radius: 50%;
-  height: 28px;
+  height: 1.6rem;
   transition: all 0.3s;
 }
 .round-social img:hover {
@@ -87,27 +117,29 @@ a.round-social {
 }
 /* ============================== Add-Button =================================== */
 .round-add {
-  padding: 0;
-  background-color: rgb(184, 62, 62);
-  color: white;
-  border-radius: 50%;
-  border: none;
-  font-size: 60px;
-  width: 70px;
-  height: 70px;
-  font-stretch: 100%;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-  outline: none;
+  right: var(--gap);
+  bottom: var(--gap);
+
+  background-color: #000;
+  color: #fff;
+
+  border-radius: 50%;
   transition: transform 0.3s;
-  text-align: center;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  font-size: 50px;
+  line-height: 60px;
+
+  z-index: 1;
+  opacity: 0.7;
 }
 .round-add:hover {
-  transform: rotate(90deg) scale(105%);
+  opacity: 1;
+  transform: rotate(90deg) scale(110%);
 }
-/* =============================================================================== */
+/* ==================================== Add-Form =========================================== */
 .add-form {
   background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -125,26 +157,47 @@ a.round-social {
 }
 
 .add-form > form {
-  width: 300px;
+  width: 16.7rem;
   background-color: #f0eef1;
 }
-[type="text"],
-[type="number"] {
-  font-size: 100%;
+.t-input {
   width: 100%;
-  border: 0;
-  outline: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: var(--small-gap);
+  border-radius: var(--rad);
 }
-.add-form input[type="checkbox"] {
+.t-input.invalid {
+  background-color: rgb(255, 218, 218, 50%);
+}
+.t-input:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.check-wrapper input[type="checkbox"] {
   accent-color: white;
-  width: 20px;
-  height: 20px;
+  width: 1.15rem;
+  height: 1.15rem;
 }
-.add-form div {
+.check-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: var(--small-gap);
+}
+.add-form output {
+  border-left: 0.12rem solid red;
+  padding-left: var(--small-gap);
+  color: red;
+  font-size: 0.78rem;
+  align-self: flex-start;
+}
+/* ============================================================ */
+@media screen and (max-width: 480px) {
+  :root {
+    --gap: 0.6rem;
+  }
+  header {
+    padding: var(--gap);
+  }
+  footer {
+    flex-direction: column;
+  }
 }

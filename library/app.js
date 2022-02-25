@@ -1,5 +1,73 @@
-let library = new Library("lib-grid");
+// ============================== Book =========================================
+function Book(title, author, pages, isRead) {
+  if (!title || !author || !pages) {
+    throw new Error("Invalid Book Info");
+  }
 
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.isRead = Boolean(isRead);
+  this.createHTML();
+}
+
+Book.prototype.isEqual = function (book) {
+  return this.title === book.title;
+};
+
+Book.prototype.createHTML = function () {
+  const card = document.createElement("article");
+  const title = document.createElement("h2");
+  const author = document.createElement("p");
+  const pages = document.createElement("p");
+  const read = document.createElement("button");
+  const remove = document.createElement("button");
+
+  this.html = card;
+  this.readButton = read;
+
+  card.className = "card";
+  title.innerText = this.title;
+  author.innerText = this.author;
+  pages.innerText = `${this.pages} Pages`;
+  this.showState();
+  remove.innerText = "Remove";
+  remove.className = "btn";
+
+  read.addEventListener("click", toggleRead);
+  remove.addEventListener("click", removeBook);
+
+  card.appendChild(title);
+  card.appendChild(author);
+  card.appendChild(pages);
+  card.appendChild(read);
+  card.appendChild(remove);
+};
+
+Book.prototype.showState = function () {
+  if (this.isRead) {
+    this.readButton.innerText = "Read";
+    this.readButton.className = "btn green-bgc";
+  } else {
+    this.readButton.innerText = "Not read";
+    this.readButton.className = "btn red-bgc";
+  }
+};
+// -------------- book events ---------------
+function toggleRead(e) {
+  const title = e.target.parentNode.firstChild.innerHTML;
+  const book = library.getBookByTitle(title);
+  if (book !== null) {
+    book.isRead = !book.isRead;
+    book.showState();
+  }
+}
+
+function removeBook(e) {
+  const title = e.target.parentNode.firstChild.innerHTML;
+  library.removeBook(title);
+}
+// =============================== Library ====================================
 function Library(gridId = "", books = []) {
   this.books = [...books];
   this.grid = null;
@@ -9,11 +77,7 @@ function Library(gridId = "", books = []) {
 }
 
 Library.prototype.addBook = function (newBook) {
-  this.books.forEach((book) => {
-    if (book.isEqual(newBook)) {
-      return false;
-    }
-  });
+  if (this.hasTitle(newBook.title)) return false;
   this.books.push(newBook);
   this.grid.appendChild(newBook.html);
   return true;
@@ -50,80 +114,27 @@ Library.prototype.showBooks = function () {
   this.books.forEach((book) => this.grid.appendChild(book.html));
 };
 
-//   =====================================================================
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-  this.html = this.createHTML();
-}
-
-Book.prototype.isEqual = function (book) {
-  return this.title === book.title;
-};
-
-Book.prototype.createHTML = function () {
-  const card = document.createElement("article");
-  const title = document.createElement("h2");
-  const author = document.createElement("p");
-  const pages = document.createElement("p");
-  const read = document.createElement("button");
-  const remove = document.createElement("button");
-  //   =========================================
-  card.className = "card";
-  title.innerText = this.title;
-  author.innerText = this.author;
-  pages.innerText = `${this.pages} Pages`;
-  if (this.isRead) {
-    read.innerText = "Read";
-    read.className = "btn green-bgc";
-  } else {
-    read.innerText = "Not read";
-    read.className = "btn red-bgc";
-  }
-  remove.innerText = "Remove";
-  remove.className = "btn";
-  //   ===========================================
-  read.addEventListener("click", toggleRead);
-  remove.addEventListener("click", removeBook);
-  //   ===========================================
-  card.appendChild(title);
-  card.appendChild(author);
-  card.appendChild(pages);
-  card.appendChild(read);
-  card.appendChild(remove);
-  return card;
-};
-// =========================================================================
-function toggleRead(e) {
-  const title = e.target.parentNode.firstChild.innerHTML;
-  const book = library.getBookByTitle(title);
-  if (book === null) {
-    return;
-  }
-  if (book.isRead) {
-    book.isRead = false;
-    e.target.innerText = "Not read";
-    e.target.classList.add("red-bgc");
-    e.target.classList.remove("green-bgc");
-  } else {
-    book.isRead = true;
-    e.target.innerText = "Read";
-    e.target.classList.add("green-bgc");
-    e.target.classList.remove("red-bgc");
-  }
-}
-
-function removeBook(e) {
-  const title = e.target.parentNode.firstChild.innerHTML;
-  library.removeBook(title);
-}
-//==============================================================
+const library = new Library("lib-grid");
+//================================== Add Form =====================================
 function AddForm() {
   this.showButton.addEventListener("click", () => this.show());
   this.html.addEventListener("click", (e) => this.hide(e.target));
   this.submitButton.addEventListener("click", (e) => this.submit(e));
+
+  this.titleInput.addEventListener("focusout", () => this.validateTitle());
+  this.authorInput.addEventListener("focusout", () => this.validateAuthor());
+
+  this.pagesInput.addEventListener("focusout", () => this.validatePages());
+
+  this.titleInput.addEventListener("focusin", () =>
+    this.resetElement(this.titleInput, this.titleOutput)
+  );
+  this.authorInput.addEventListener("focusin", () =>
+    this.resetElement(this.authorInput, this.authorOutput)
+  );
+  this.pagesInput.addEventListener("focusin", () =>
+    this.resetElement(this.pagesInput, this.pagesOutput)
+  );
 }
 AddForm.prototype.showButton = document.getElementById("show-add-form");
 AddForm.prototype.html = document.getElementById("add-form");
@@ -143,50 +154,90 @@ AddForm.prototype.readInput = AddForm.prototype.html.querySelector("#read");
 AddForm.prototype.submitButton =
   AddForm.prototype.html.querySelector('[type="submit"]');
 
+AddForm.prototype.setInvalid = function (inputElement, outputElement, message) {
+  outputElement.value = message;
+  outputElement.hidden = false;
+  inputElement.classList.add("invalid");
+};
+
+AddForm.prototype.resetElement = function (inputElement, outputElement) {
+  outputElement.value = "";
+  outputElement.hidden = true;
+  inputElement.classList.remove("invalid");
+};
+
+AddForm.prototype.resetOutputs = function () {
+  this.resetElement(this.titleInput, this.titleOutput);
+  this.resetElement(this.authorInput, this.authorOutput);
+  this.resetElement(this.pagesInput, this.pagesOutput);
+};
+
 AddForm.prototype.validateTitle = function () {
+  this.resetElement(this.titleInput, this.titleOutput);
   if (this.titleInput.value.trim() === "") {
-    this.titleOutput.value = "Please, enter a title for your book";
-    this.titleOutput.hidden = false;
+    this.setInvalid(
+      this.titleInput,
+      this.titleOutput,
+      "Please, enter a title for your book"
+    );
     return false;
   }
   if (library.hasTitle(this.titleInput.value.trim())) {
-    this.titleOutput.value = "This book already exists in your library";
-    this.titleOutput.hidden = false;
+    this.setInvalid(
+      this.titleInput,
+      this.titleOutput,
+      "This book already exists in your library"
+    );
     return false;
   }
   return true;
 };
 
 AddForm.prototype.validateAuthor = function () {
+  this.resetElement(this.authorInput, this.authorOutput);
   if (this.authorInput.value.trim() === "") {
-    this.authorOutput.value = "Please, enter the author of your book";
-    this.authorOutput.hidden = false;
+    this.setInvalid(
+      this.authorInput,
+      this.authorOutput,
+      "Please, enter the author of your book"
+    );
     return false;
   }
   return true;
 };
 
 AddForm.prototype.validatePages = function () {
+  this.resetElement(this.pagesInput, this.pagesOutput);
   if (this.pagesInput.value.trim() === "") {
-    this.pagesOutput.value = "Please, enter the number of pages of your book";
-    this.pagesOutput.hidden = false;
+    this.setInvalid(
+      this.pagesInput,
+      this.pagesOutput,
+      "Please, enter the number of pages of your book"
+    );
     return false;
   }
   const pageNum = Number(this.pagesInput.value);
   if (!Number.isInteger(pageNum) || pageNum < 1) {
-    this.pagesOutput.value = "Please, enter an integer greater than 0";
-    this.pagesOutput.hidden = false;
+    this.setInvalid(
+      this.pagesInput,
+      this.pagesOutput,
+      "Please, enter an integer greater than 0"
+    );
     return false;
   }
+  this.pagesInput.value = pageNum;
   return true;
 };
 
 AddForm.prototype.validate = function () {
-  this.resetOutputs();
-  return this.validateTitle() && this.validateAuthor() && this.validatePages();
+  let res = this.validateTitle();
+  res = this.validateAuthor() && res;
+  res = this.validatePages() && res;
+  return res;
 };
 
 AddForm.prototype.hide = function (element) {
+  element = element ?? this.html;
   if (element === this.html) {
     this.html.classList.remove("show");
   }
@@ -205,15 +256,6 @@ AddForm.prototype.resetInputs = function () {
   this.readInput.checked = false;
 };
 
-AddForm.prototype.resetOutputs = function () {
-  this.titleOutput.value = "";
-  this.titleOutput.hidden = true;
-  this.authorOutput.value = "";
-  this.authorOutput.hidden = true;
-  this.pagesOutput.value = "";
-  this.pagesOutput.hidden = true;
-};
-
 AddForm.prototype.submit = function (e) {
   e.preventDefault();
   if (this.validate()) {
@@ -225,14 +267,16 @@ AddForm.prototype.submit = function (e) {
         this.readInput.checked
       )
     );
-    this.hide(this.html);
+    this.hide();
   }
 };
 
 const addForm = new AddForm();
-
-// =============================================================
-for (let i = 1; i < 10; ++i) {
-  library.addBook(new Book(`Title ${i}`, `Author ${i}`, i * 100, i % 2));
+// =============================== Dummy Button ====================================
+document.getElementById("dummy-button").addEventListener("click", addDummyData);
+function addDummyData() {
+  for (let n = 1; n < 5; ++n) {
+    let i = Math.floor(Math.random() * 1000);
+    library.addBook(new Book(`Title ${i}`, `Author ${i}`, i * 10, i % 2));
+  }
 }
-// ===============================================================

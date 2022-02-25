@@ -12,30 +12,23 @@
   <body>
     <header>
       <h1>Library</h1>
+      <button class="btn" id="dummy-button">Fill with Dummy Data</button>
     </header>
-    <main id="lib-grid">
-      <!-- <article class="book">
-        <h2>Title</h2>
-        <p>Author</p>
-        <p>125 Pages</p>
-        <button class="red-button">Not read</button>
-        <button>Remove</button>
-      </article>
-      <article class="book">
-        <h2>Title</h2>
-        <p>Author</p>
-        <p>125 Pages</p>
-        <button class="red-button">Not read</button>
-        <button>Remove</button>
-      </article> -->
-    </main>
+    <main id="lib-grid"></main>
     <section>
-      <button id="show-add-form" class="round-add">+</button>
+      <input
+        type="image"
+        id="show-add-form"
+        class="round-add"
+        src="./images/plus.svg"
+        alt="+"
+      />
       <div id="add-form" class="add-form">
-        <form action="#" method="post" class="card">
+        <form action="#" method="post" class="card" autocomplete="off">
           <h2>Add new book</h2>
           <input
             type="text"
+            class="t-input"
             name="title"
             id="title"
             placeholder="Title"
@@ -45,6 +38,7 @@
           <output hidden for="title"></output>
           <input
             type="text"
+            class="t-input"
             name="author"
             id="author"
             placeholder="Author"
@@ -54,6 +48,7 @@
           <output hidden for="author"></output>
           <input
             type="number"
+            class="t-input"
             name="pages"
             id="pages"
             placeholder="Pages"
@@ -62,7 +57,7 @@
             title="Number of pages of the book"
           />
           <output hidden for="pages"></output>
-          <div>
+          <div class="check-wrapper">
             <input type="checkbox" name="read" id="read" />
             <label for="">Mark as read</label>
           </div>
@@ -73,29 +68,31 @@
 
     <footer>
       <p>Coded by Mahmoud Elnagar</p>
-      <a
-        href="https://github.com/Mahmoud-Elnagar1698"
-        target="_blank"
-        class="round-social"
-      >
-        <img src="./images/github.svg" alt="github" title="github" />
-      </a>
+      <nav class="social-links">
+        <a
+          href="https://github.com/Mahmoud-Elnagar1698"
+          target="_blank"
+          class="round-social"
+        >
+          <img src="./images/github.svg" alt="github" title="github" />
+        </a>
 
-      <a
-        href="https://www.linkedin.com/in/mahmoud-elnagar1698/"
-        target="_blank"
-        class="round-social"
-      >
-        <img src="./images/linkedin.svg" alt="linkedin" title="linkedin" />
-      </a>
+        <a
+          href="https://www.linkedin.com/in/mahmoud-elnagar1698/"
+          target="_blank"
+          class="round-social"
+        >
+          <img src="./images/linkedin.svg" alt="linkedin" title="linkedin" />
+        </a>
 
-      <a
-        href="https://twitter.com/Elnajar_Mahmoud"
-        target="_blank"
-        class="round-social"
-      >
-        <img src="./images/twitter.svg" alt="twitter" title="twitter" />
-      </a>
+        <a
+          href="https://twitter.com/Elnajar_Mahmoud"
+          target="_blank"
+          class="round-social"
+        >
+          <img src="./images/twitter.svg" alt="twitter" title="twitter" />
+        </a>
+      </nav>
     </footer>
   </body>
 </html>
