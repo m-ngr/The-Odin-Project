@@ -19,3 +19,7 @@ This page contains a list of projects I made throughout The Odin Project curricu
 - Project 1: [Sign up Form](https://mahmoud-elnagar1698.github.io/The-Odin-Project/sign-up-form/ "Intermediate HTML and CSS  Project").
 
 - Project 2: [Admin Dashboard](https://mahmoud-elnagar1698.github.io/The-Odin-Project/admin-dashboard/ "Intermediate HTML and CSS Final Project").
+
+## JavaScript
+
+- Project 1: [Library](https://mahmoud-elnagar1698.github.io/The-Odin-Project/library/ "OOP using prototype and constructor functions").
