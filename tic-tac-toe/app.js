@@ -63,11 +63,20 @@ const game = ((eventSystem) => {
   const public = {};
 
   let started = false;
+  let computerPlayer = false;
+  let roundOver = true;
+
   let player1 = {};
   let player2 = {};
   let currentPlayer = player1;
 
   eventSystem.addEvent(eventSystem.events().change, togglePlayer);
+  eventSystem.addEvent(eventSystem.events().win, endRound);
+  eventSystem.addEvent(eventSystem.events().tie, endRound);
+
+  function endRound() {
+    roundOver = true;
+  }
 
   function togglePlayer() {
     if (currentPlayer.isEqual(player1)) {
@@ -82,9 +91,31 @@ const game = ((eventSystem) => {
     eventSystem.raiseEvent(eventSystem.events().togglePlayer, { ...player });
   }
 
+  function playComputer(board = []) {
+    if (
+      computerPlayer &&
+      !roundOver &&
+      currentPlayer.isEqual(player2) &&
+      board.filter((itm) => itm === undefined).length !== 0
+    ) {
+      let pos;
+      do {
+        pos = Math.floor(Math.random() * board.length);
+      } while (board[pos] !== undefined);
+
+      setTimeout(public.play.bind(public, pos, true), 1000);
+    }
+  }
+
   // ------------------------- Public ------------------------
 
-  public.start = (player1Name, player1Marker, player2Name, player2Marker) => {
+  public.start = (
+    player1Name,
+    player1Marker,
+    player2Name,
+    player2Marker,
+    computerPlay = false
+  ) => {
     if (started) {
       console.error("The game is already started");
       return;
@@ -103,18 +134,30 @@ const game = ((eventSystem) => {
       return;
     }
 
+    computerPlayer = computerPlay;
+
+    if (computerPlayer) {
+      eventSystem.addEvent(eventSystem.events().change, playComputer);
+      player2Name = "Computer";
+    }
+
     player1 = Player(player1Name, player1Marker);
     player2 = Player(player2Name, player2Marker);
 
     setCurrentPlayer(player1);
 
     started = true;
+    roundOver = false;
     eventSystem.raiseEvent(eventSystem.events().start, null);
   };
 
-  public.play = (position) => {
+  public.play = (position, computer = false) => {
     if (!started) {
       console.error("Please, start the game first");
+      return;
+    }
+
+    if (computerPlayer && currentPlayer.isEqual(player2) && !computer) {
       return;
     }
 
@@ -127,6 +170,7 @@ const game = ((eventSystem) => {
 
     setCurrentPlayer(player1);
     eventSystem.raiseEvent(eventSystem.events().reset, null);
+    roundOver = false;
   };
 
   public.getPlayer = (marker) => {
@@ -139,9 +183,14 @@ const game = ((eventSystem) => {
 
   public.exit = () => {
     started = false;
+    computerPlayer = false;
+    roundOver = true;
+
     player1 = {};
     player2 = {};
+
     eventSystem.raiseEvent(eventSystem.events().exit, null);
+    eventSystem.removeEvent(eventSystem.events().change, playComputer);
   };
 
   return public;
@@ -235,12 +284,14 @@ const gameBoard = ((eventSystem) => {
   const startPanel = document.getElementById("start-panel");
   const player1Input = startPanel.querySelector("#player1-name");
   const player2Input = startPanel.querySelector("#player2-name");
+  const computerInput = startPanel.querySelector("#computer");
   const startButton = startPanel.querySelector("#start");
 
   for (let i = 0; i < squares.length; ++i) {
-    squares[i].addEventListener("click", game.play.bind(squares[i], i));
+    squares[i].addEventListener("click", game.play.bind(squares[i], i, false));
   }
 
+  computerInput.addEventListener("change", setPlayer2);
   startButton.addEventListener("click", startGame);
   resetButton.addEventListener("click", game.reset);
   exitButton.addEventListener("click", game.exit);
@@ -258,7 +309,23 @@ const gameBoard = ((eventSystem) => {
 
   function startGame(e) {
     e.preventDefault();
-    game.start(player1Input.value, "X", player2Input.value, "O");
+    game.start(
+      player1Input.value,
+      "X",
+      player2Input.value,
+      "O",
+      computerInput.checked
+    );
+  }
+
+  function setPlayer2() {
+    if (computerInput.checked) {
+      player2Input.value = "Computer";
+      player2Input.readOnly = true;
+    } else {
+      player2Input.value = "";
+      player2Input.readOnly = false;
+    }
   }
 
   function showPlayer(player) {

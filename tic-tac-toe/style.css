@@ -224,9 +224,20 @@ button:hover {
   color: var(--main-bg-color);
 }
 
-input {
+input[type="text"] {
   padding: var(--small-gap);
   border-radius: var(--rad);
   min-width: 12rem;
   width: 100%;
+}
+.check-wrapper input[type="checkbox"] {
+  accent-color: white;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.check-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--small-gap);
 }
