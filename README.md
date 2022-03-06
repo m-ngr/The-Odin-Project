@@ -24,4 +24,4 @@ This page contains a list of projects I made throughout The Odin Project curricu
 
 - Project 1: [Library](https://mahmoud-elnagar1698.github.io/The-Odin-Project/library/ "OOP using prototype and constructor functions").
 
-- Project 2: [Library](https://mahmoud-elnagar1698.github.io/The-Odin-Project/tic-tac-toe/ "OOP using Factory, Module, and Mediator Patterns").
+- Project 2: [Tic Tac Toe](https://mahmoud-elnagar1698.github.io/The-Odin-Project/tic-tac-toe/ "OOP using Factory, Module, and Mediator Patterns").
