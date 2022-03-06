@@ -20,63 +20,136 @@ const eventSystem = (() => {
     }
   };
 
+  public.removeEvent = (eventName, callback) => {
+    events[eventName] = events[eventName] || [];
+    events[eventName] = events[eventName].filter(
+      (handler) => handler !== callback
+    );
+  };
+
   public.events = () => {
+    //pre-defined events that are special to this specific project
     return {
       change: "change",
       win: "win",
       tie: "tie",
       play: "play",
       reset: "reset",
+      start: "start",
+      exit: "exit",
+      togglePlayer: "toggle-player",
     };
   };
+
   return public;
 })();
-// ===============================================================
+// =============================== Player ================================
 function Player(name = "", marker = "") {
-  const public = {};
+  const public = Object.create(Player.shared);
 
   public.name = () => name;
   public.marker = () => marker;
-  public.isEqual = (player) => marker === player.marker();
 
   return public;
 }
-// ===============================================================
+
+Player.shared = {
+  isEqual: function (player) {
+    return this.marker() === player.marker();
+  },
+};
+// =============================== game ==================================
 const game = ((eventSystem) => {
   const public = {};
 
-  const player1 = Player("Player1 Name", "X");
-  const player2 = Player("Player2 Name", "O");
-
+  let started = false;
+  let player1 = {};
+  let player2 = {};
   let currentPlayer = player1;
+
+  eventSystem.addEvent(eventSystem.events().change, togglePlayer);
 
   function togglePlayer() {
     if (currentPlayer.isEqual(player1)) {
-      currentPlayer = player2;
+      setCurrentPlayer(player2);
     } else {
-      currentPlayer = player1;
+      setCurrentPlayer(player1);
     }
   }
 
-  eventSystem.addEvent(eventSystem.events().change, togglePlayer);
-  // --------------------------------------------
-  public.getCurrentPlayer = () => currentPlayer;
+  function setCurrentPlayer(player) {
+    currentPlayer = player;
+    eventSystem.raiseEvent(eventSystem.events().togglePlayer, { ...player });
+  }
 
-  public.setMark = (position) => {
+  // ------------------------- Public ------------------------
+
+  public.start = (player1Name, player1Marker, player2Name, player2Marker) => {
+    if (started) {
+      console.error("The game is already started");
+      return;
+    }
+
+    player1Name = player1Name || "Player X";
+    player1Marker = player1Marker || "X";
+    player2Name = player2Name || "Player O";
+    player2Marker = player2Marker || "O";
+
+    player1Marker = player1Marker.slice(0, 1);
+    player2Marker = player2Marker.slice(0, 1);
+
+    if (player1Marker === player2Marker) {
+      console.error("Please choose two different single char markers");
+      return;
+    }
+
+    player1 = Player(player1Name, player1Marker);
+    player2 = Player(player2Name, player2Marker);
+
+    setCurrentPlayer(player1);
+
+    started = true;
+    eventSystem.raiseEvent(eventSystem.events().start, null);
+  };
+
+  public.play = (position) => {
+    if (!started) {
+      console.error("Please, start the game first");
+      return;
+    }
+
     const marker = currentPlayer.marker();
     eventSystem.raiseEvent(eventSystem.events().play, { position, marker });
   };
 
   public.reset = () => {
-    currentPlayer = player1;
+    if (!started) return;
+
+    setCurrentPlayer(player1);
     eventSystem.raiseEvent(eventSystem.events().reset, null);
+  };
+
+  public.getPlayer = (marker) => {
+    if (started) {
+      if (player1.marker() === marker) return { ...player1 };
+      if (player2.marker() === marker) return { ...player2 };
+    }
+    return null;
+  };
+
+  public.exit = () => {
+    started = false;
+    player1 = {};
+    player2 = {};
+    eventSystem.raiseEvent(eventSystem.events().exit, null);
   };
 
   return public;
 })(eventSystem);
-// ================================================================
+// =============================== game board ============================
 const gameBoard = ((eventSystem) => {
   const public = {};
+
   let board = Array(9);
   const segments = [
     // rows
@@ -92,26 +165,26 @@ const gameBoard = ((eventSystem) => {
     [2, 4, 6],
   ];
 
+  eventSystem.addEvent(eventSystem.events().start, reset);
+  eventSystem.addEvent(eventSystem.events().exit, reset);
   eventSystem.addEvent(eventSystem.events().reset, reset);
   eventSystem.addEvent(eventSystem.events().change, check);
-  eventSystem.addEvent(eventSystem.events().play, (arg) =>
-    public.setMark(arg.position, arg.marker)
-  );
+  eventSystem.addEvent(eventSystem.events().play, setMark);
 
   function reset() {
     board = Array(9);
   }
 
-  function check() {
+  function check(board) {
     for (const segment of segments) {
-      let winnerMarker = checkSegment(segment);
+      let winnerMarker = checkSegment(segment, board);
       if (winnerMarker !== null) {
         eventSystem.raiseEvent(eventSystem.events().win, winnerMarker);
         return true;
       }
     }
 
-    if (public.board().filter((itm) => itm === undefined).length === 0) {
+    if (board.filter((itm) => itm === undefined).length === 0) {
       eventSystem.raiseEvent(eventSystem.events().tie, null);
       return true;
     } else {
@@ -119,7 +192,7 @@ const gameBoard = ((eventSystem) => {
     }
   }
 
-  function checkSegment(segment = []) {
+  function checkSegment(segment = [], board) {
     const segmentMark = board[segment[0]] || null;
     for (const idx of segment) {
       if (board[idx] !== segmentMark) {
@@ -128,33 +201,109 @@ const gameBoard = ((eventSystem) => {
     }
     return segmentMark;
   }
-  // ------------------------------------------------------
-  public.board = () => [...board];
 
-  public.setMark = (pos, mark) => {
-    if (pos < 0 || pos >= board.length || board[pos] !== undefined) {
+  function setMark({ position, marker }) {
+    if (
+      position < 0 ||
+      position >= board.length ||
+      board[position] !== undefined
+    ) {
       return false;
     }
-    board[pos] = mark;
+
+    board[position] = marker;
     eventSystem.raiseEvent(eventSystem.events().change, public.board());
     return true;
-  };
+  }
+
+  // -------------------------- Public ----------------------------
+
+  public.board = () => [...board];
 
   return public;
 })(eventSystem);
+// ============================== display ================================
+((eventSystem, game) => {
+  const gameLayer = document.getElementById("game");
+  const playerLabel = gameLayer.querySelector("#player-label");
+  const squares = gameLayer.querySelectorAll(".square");
+  const resetButton = gameLayer.querySelector("#reset");
+  const exitButton = gameLayer.querySelector("#exit");
 
-// ================================================================
+  const result = document.getElementById("result");
 
-eventSystem.addEvent(eventSystem.events().change, (arr) => {
-  console.log(arr[0] ?? "_", arr[1] ?? "_", arr[2] ?? "_");
-  console.log(arr[3] ?? "_", arr[4] ?? "_", arr[5] ?? "_");
-  console.log(arr[6] ?? "_", arr[7] ?? "_", arr[8] ?? "_");
-});
+  const startPanel = document.getElementById("start-panel");
+  const player1Input = startPanel.querySelector("#player1-name");
+  const player2Input = startPanel.querySelector("#player2-name");
+  const startButton = startPanel.querySelector("#start");
 
-eventSystem.addEvent(eventSystem.events().win, (marker) => {
-  console.log(`the winner is ${marker}`);
-});
+  for (let i = 0; i < squares.length; ++i) {
+    squares[i].addEventListener("click", game.play.bind(squares[i], i));
+  }
 
-eventSystem.addEvent(eventSystem.events().tie, () => {
-  console.log(`gameover, Tie!`);
-});
+  startButton.addEventListener("click", startGame);
+  resetButton.addEventListener("click", game.reset);
+  exitButton.addEventListener("click", game.exit);
+  result.addEventListener("click", hideResult);
+
+  eventSystem.addEvent(eventSystem.events().change, render);
+  eventSystem.addEvent(eventSystem.events().start, reset);
+  eventSystem.addEvent(eventSystem.events().exit, reset);
+  eventSystem.addEvent(eventSystem.events().reset, reset);
+  eventSystem.addEvent(eventSystem.events().win, showWinner);
+  eventSystem.addEvent(eventSystem.events().tie, showTie);
+  eventSystem.addEvent(eventSystem.events().exit, showStartPanel);
+  eventSystem.addEvent(eventSystem.events().start, hideStartPanel);
+  eventSystem.addEvent(eventSystem.events().togglePlayer, showPlayer);
+
+  function startGame(e) {
+    e.preventDefault();
+    game.start(player1Input.value, "X", player2Input.value, "O");
+  }
+
+  function showPlayer(player) {
+    playerLabel.innerText = `[${player.marker()}] ${player.name()} it's your turn`;
+  }
+
+  function render(board) {
+    for (let i = 0; i < board.length; ++i) {
+      squares[i].innerText = board[i] ?? "";
+    }
+  }
+
+  function reset() {
+    squares.forEach((square) => {
+      square.innerText = "";
+    });
+  }
+
+  function showWinner(winnerMark) {
+    showResult(`The winner is ${game.getPlayer(winnerMark).name()}`);
+  }
+
+  function showTie() {
+    showResult("Tie!");
+  }
+
+  function showResult(resultText = "") {
+    result.innerText = resultText;
+    result.classList.add("show");
+  }
+
+  function hideResult() {
+    result.innerText = "";
+    result.classList.remove("show");
+    game.reset();
+  }
+
+  function showStartPanel() {
+    startPanel.classList.add("show");
+    gameLayer.classList.remove("show");
+  }
+
+  function hideStartPanel() {
+    startPanel.classList.remove("show");
+    gameLayer.classList.add("show");
+  }
+})(eventSystem, game);
+// ====================================================================

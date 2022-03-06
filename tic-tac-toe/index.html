@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="/images/favicon.svg" type="image/x-icon" />
     <script src="app.js" defer></script>
   </head>
   <body>
     <header>
+      <img src="./images/favicon.svg" alt="logo" />
       <h1>Tic Tac Toe</h1>
     </header>
-    <main>
+    <main id="game">
+      <h2 id="player-label" class="player-label"></h2>
       <section id="board" class="board">
         <div class="square"></div>
         <div class="square"></div>
@@ -24,8 +27,11 @@
         <div class="square"></div>
         <div class="square"></div>
       </section>
+      <section id="controls" class="controls">
+        <button id="reset">Reset</button>
+        <button id="exit">Exit</button>
+      </section>
     </main>
-
     <footer>
       <p>Coded by Mahmoud Elnagar</p>
       <nav class="social-links">
@@ -54,5 +60,42 @@
         </a>
       </nav>
     </footer>
+
+    <section>
+      <section id="start-panel" class="start-panel overlay show">
+        <div class="overlay-content">
+          <img src="./images/favicon.svg" alt="logo" />
+          <h2 class="welcome-label">Welcome To Tic-Tac-Toe Game</h2>
+          <form action="" autocomplete="off">
+            <div class="label-input">
+              <label for="player1-name">Player-X</label>
+              <input
+                type="text"
+                id="player1-name"
+                minlength="1"
+                maxlength="20"
+                required
+                placeholder="Player-X Name"
+                value="Player 1"
+              />
+            </div>
+            <div class="label-input">
+              <label for="player2-name">Player-O</label>
+              <input
+                type="text"
+                id="player2-name"
+                minlength="1"
+                maxlength="20"
+                required
+                placeholder="Player-O Name"
+                value="Player 2"
+              />
+            </div>
+            <button id="start">Start</button>
+          </form>
+        </div>
+      </section>
+      <div id="result" class="result overlay"></div>
+    </section>
   </body>
 </html>

@@ -1,8 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Peralta&display=swap");
 :root {
-  --rad: 0.45rem;
-  --gap: 1.12rem;
-  --small-gap: 0.6rem;
+  --rad: 0.62rem; /*11px*/
+  --gap: 1.12rem; /*20px*/
+  --small-gap: 0.6rem; /*10px*/
+
+  --main-bg-color: #f0eef1;
+  --main-f-color: teal;
+
+  --minor-bg-color: #fff;
+  --minor-f-color: #000;
+
+  --tone-bg-color: teal;
+  --tone-f-color: #f0dba9;
+
+  --overlay-bg-color: #00000070;
+  --overlay-f-color: #fff;
 }
 * {
   margin: 0;
@@ -16,15 +28,9 @@ input {
   font-weight: inherit;
   outline: none;
   border: none;
-  color: inherit;
-}
-a {
-  font-size: inherit;
-  color: inherit;
-  text-decoration: none;
 }
 h2 {
-  font-size: 1.4rem;
+  font-size: 2rem;
 }
 body {
   font-family: "Poppins", sans-serif;
@@ -34,45 +40,137 @@ body {
 }
 /* =============================== Header ======================================= */
 header {
-  background-color: #000;
-  color: #fff;
+  font-family: "Peralta", "Poppins", sans-serif;
+  background-color: var(--tone-bg-color);
+  color: var(--tone-f-color);
   padding: var(--gap);
   padding-left: 50px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: var(--gap);
 }
+header > img {
+  height: 100%;
+}
 /* =============================== Main ======================================= */
 main {
-  background-color: #f0eef1;
-  display: grid;
+  background-color: var(--main-bg-color);
+  color: var(--main-f-color);
+  display: none;
+  place-items: center;
   gap: var(--gap);
   padding: var(--gap);
 }
-/* ================================ Board ======================================= */
-.board {
+main.show {
+  display: grid;
+}
+/* ================================ Game Start ================================== */
+.start-panel.overlay {
+  font-family: "Peralta", "Poppins", sans-serif;
+  background-color: var(--tone-bg-color);
+  color: var(--tone-f-color);
+  justify-items: center;
+  padding: var(--small-gap);
+  font-size: 1.2rem;
+}
+.start-panel img {
+  margin-top: var(--gap);
+  width: clamp(5.5rem, min(20vw, 25vh), 11.12rem);
+}
+.welcome-label {
+  font-size: clamp(1.4rem, 5.3vw, 2rem);
+}
+.start-panel form {
+  display: grid;
+  gap: var(--gap);
+  place-items: center;
+  padding: var(--gap);
+  width: 80%;
+}
+.label-input {
   width: 100%;
-  /* background-color: rgb(189, 26, 26); */
+  display: grid;
+  gap: var(--small-gap);
+  justify-items: start;
+}
+.start-panel button {
+  margin-top: var(--gap);
+  width: 60%;
+  border-color: var(--tone-f-color);
+}
+.start-panel button:hover {
+  background-color: var(--tone-f-color);
+  color: var(--tone-bg-color);
+}
+
+/* ================================ Board ======================================= */
+.player-label {
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: normal;
+  background-color: var(--main-f-color);
+  color: var(--main-bg-color);
+  padding: var(--small-gap) var(--gap);
+  border-radius: var(--rad);
+  text-align: center;
+}
+.board {
   display: grid;
   grid-template-columns: repeat(3, max-content);
   grid-template-rows: repeat(3, max-content);
   place-content: center;
-  gap: 10px;
+  gap: var(--small-gap);
 }
 
 .square {
-  min-width: 100px;
-  min-height: 100px;
-  border: 5px solid rgb(0, 0, 0);
-  border-radius: 10px;
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 0.3rem solid var(--main-f-color);
+  border-radius: 1rem;
   display: grid;
   place-content: center;
-  font-size: 64px;
+  font-size: 3.56rem;
 }
-
+/* ================================ controls ====================================== */
+.controls {
+  width: 100%;
+  display: flex;
+  gap: var(--gap);
+  justify-content: center;
+  font-size: 1.2rem;
+}
+/* ================================= Result ====================================== */
+.result.overlay.show {
+  display: grid;
+  place-content: center;
+}
+/* ================================ Overlay ===================================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-bg-color);
+  color: var(--overlay-f-color);
+  display: none;
+  text-align: center;
+  font-size: 3rem;
+  overflow-y: auto;
+}
+.overlay.show {
+  display: block;
+}
+.overlay-content {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  min-height: 100%;
+}
 /* =============================== Footer ======================================= */
 footer {
+  background-color: var(--minor-bg-color);
+  color: var(--minor-f-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,4 +207,26 @@ a.round-social {
   footer {
     flex-direction: column;
   }
+}
+/* =============================== button ================================== */
+button {
+  background-color: inherit;
+  color: inherit;
+  width: 8.3rem;
+  padding: var(--small-gap) var(--gap);
+  border: 0.167rem solid var(--main-f-color);
+  border-radius: var(--rad);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--main-f-color);
+  color: var(--main-bg-color);
+}
+
+input {
+  padding: var(--small-gap);
+  border-radius: var(--rad);
+  min-width: 12rem;
+  width: 100%;
 }
