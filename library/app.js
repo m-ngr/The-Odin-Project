@@ -1,277 +1,322 @@
 // ============================== Book =========================================
-function Book(title, author, pages, isRead) {
-  if (!title || !author || !pages) {
-    throw new Error("Invalid Book Info");
+class Book {
+  #title;
+  #author;
+  #pages;
+  #isRead;
+  #html;
+  #readButton;
+
+  constructor(title, author, pages, isRead = false) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+
+    this.#createHTML();
   }
 
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = Boolean(isRead);
-  this.createHTML();
-}
-
-Book.prototype.isEqual = function (book) {
-  return this.title === book.title;
-};
-
-Book.prototype.createHTML = function () {
-  const card = document.createElement("article");
-  const title = document.createElement("h2");
-  const author = document.createElement("p");
-  const pages = document.createElement("p");
-  const read = document.createElement("button");
-  const remove = document.createElement("button");
-
-  this.html = card;
-  this.readButton = read;
-
-  card.className = "card";
-  title.innerText = this.title;
-  author.innerText = this.author;
-  pages.innerText = `${this.pages} Pages`;
-  this.showState();
-  remove.innerText = "Remove";
-  remove.className = "btn";
-
-  read.addEventListener("click", toggleRead);
-  remove.addEventListener("click", removeBook);
-
-  card.appendChild(title);
-  card.appendChild(author);
-  card.appendChild(pages);
-  card.appendChild(read);
-  card.appendChild(remove);
-};
-
-Book.prototype.showState = function () {
-  if (this.isRead) {
-    this.readButton.innerText = "Read";
-    this.readButton.className = "btn green-bgc";
-  } else {
-    this.readButton.innerText = "Not read";
-    this.readButton.className = "btn red-bgc";
+  get title() {
+    return this.#title;
   }
-};
-// -------------- book events ---------------
-function toggleRead(e) {
-  const title = e.target.parentNode.firstChild.innerHTML;
-  const book = library.getBookByTitle(title);
-  if (book !== null) {
-    book.isRead = !book.isRead;
-    book.showState();
-  }
-}
 
-function removeBook(e) {
-  const title = e.target.parentNode.firstChild.innerHTML;
-  library.removeBook(title);
+  set title(value) {
+    if (!value) {
+      throw new Error("Invalid Book Title");
+    }
+    this.#title = value;
+  }
+
+  get author() {
+    return this.#author;
+  }
+
+  set author(value) {
+    if (!value) {
+      throw new Error("Invalid Book Author");
+    }
+    this.#author = value;
+  }
+
+  get pages() {
+    return this.#pages;
+  }
+
+  set pages(value) {
+    if (!value || !Number.isInteger(+value) || +value < 1) {
+      throw new Error("Invalid Book Pages");
+    }
+    this.#pages = value;
+  }
+
+  get isRead() {
+    return this.#isRead;
+  }
+
+  set isRead(value) {
+    this.#isRead = Boolean(value);
+  }
+
+  get html() {
+    return this.#html;
+  }
+
+  isEqual(book) {
+    return this.title === book.title;
+  }
+
+  #createHTML() {
+    const card = document.createElement("article");
+    const title = document.createElement("h2");
+    const author = document.createElement("p");
+    const pages = document.createElement("p");
+    const read = document.createElement("button");
+    const remove = document.createElement("button");
+
+    this.#html = card;
+    this.#readButton = read;
+
+    card.className = "card";
+    title.innerText = this.title;
+    author.innerText = this.author;
+    pages.innerText = `${this.pages} Pages`;
+    this.#showState();
+    remove.innerText = "Remove";
+    remove.className = "btn";
+
+    read.addEventListener("click", this.toggleRead.bind(this));
+    remove.addEventListener("click", this.remove.bind(this));
+
+    card.appendChild(title);
+    card.appendChild(author);
+    card.appendChild(pages);
+    card.appendChild(read);
+    card.appendChild(remove);
+  }
+
+  #showState() {
+    if (this.isRead) {
+      this.#readButton.innerText = "Read";
+      this.#readButton.className = "btn green-bgc";
+    } else {
+      this.#readButton.innerText = "Not read";
+      this.#readButton.className = "btn red-bgc";
+    }
+  }
+
+  toggleRead() {
+    this.isRead = !this.isRead;
+    this.#showState();
+  }
+
+  remove() {
+    library.removeBook(this);
+  }
 }
 // =============================== Library ====================================
-function Library(gridId = "", books = []) {
-  this.books = [...books];
-  this.grid = null;
-  if (gridId !== "") {
-    this.grid = document.getElementById(gridId);
-  }
-}
+const library = (() => {
+  const public = {};
 
-Library.prototype.addBook = function (newBook) {
-  if (this.hasTitle(newBook.title)) return false;
-  this.books.push(newBook);
-  this.grid.appendChild(newBook.html);
-  return true;
-};
+  let books = [];
+  const grid = document.getElementById("lib-grid");
 
-Library.prototype.removeBook = function (title) {
-  let targetBook = this.getBookByTitle(title);
-  if (targetBook !== null) {
-    this.grid.removeChild(targetBook.html);
-  }
-  this.books = this.books.filter((book) => book.title !== title);
-};
+  public.addBook = function (newBook) {
+    if (public.hasTitle(newBook.title)) return false;
+    books.push(newBook);
+    grid.appendChild(newBook.html);
+    return true;
+  };
 
-Library.prototype.getBookByTitle = function (title) {
-  for (let book of this.books) {
-    if (book.title === title) {
-      return book;
+  public.removeBook = function (targetBook) {
+    grid.removeChild(targetBook.html);
+    books = books.filter((book) => book.title !== targetBook.title);
+  };
+
+  public.getBookByTitle = function (title) {
+    for (let book of books) {
+      if (book.title === title) {
+        return book;
+      }
     }
-  }
-  return null;
-};
+    return null;
+  };
 
-Library.prototype.hasTitle = function (title) {
-  for (let book of this.books) {
-    if (book.title === title) {
-      return true;
+  public.hasTitle = function (title) {
+    for (let book of books) {
+      if (book.title === title) {
+        return true;
+      }
     }
-  }
-  return false;
-};
+    return false;
+  };
 
-Library.prototype.showBooks = function () {
-  this.grid.innerText = "";
-  this.books.forEach((book) => this.grid.appendChild(book.html));
-};
+  public.render = function () {
+    grid.innerText = "";
+    books.forEach((book) => grid.appendChild(book.html));
+  };
 
-const library = new Library("lib-grid");
+  return public;
+})();
 //================================== Add Form =====================================
-function AddForm() {
-  this.showButton.addEventListener("click", () => this.show());
-  this.html.addEventListener("click", (e) => this.hide(e.target));
-  this.submitButton.addEventListener("click", (e) => this.submit(e));
+(() => {
+  const showButton = document.getElementById("show-add-form");
+  const addForm = document.getElementById("add-form");
+  const titleInput = addForm.querySelector("#title");
+  const titleOutput = addForm.querySelector('output[for="title"]');
+  const authorInput = addForm.querySelector("#author");
+  const authorOutput = addForm.querySelector('output[for="author"]');
+  const pagesInput = addForm.querySelector("#pages");
+  const pagesOutput = addForm.querySelector('output[for="pages"]');
+  const readInput = addForm.querySelector("#read");
+  const submitButton = addForm.querySelector('[type="submit"]');
 
-  this.titleInput.addEventListener("focusout", () => this.validateTitle());
-  this.authorInput.addEventListener("focusout", () => this.validateAuthor());
+  showButton.addEventListener("click", showForm);
+  addForm.addEventListener("click", (e) => hideForm(e.target));
+  submitButton.addEventListener("click", submit);
 
-  this.pagesInput.addEventListener("focusout", () => this.validatePages());
+  titleInput.addEventListener("focusout", validateTitle);
+  authorInput.addEventListener("focusout", validateAuthor);
+  pagesInput.addEventListener("focusout", validatePages);
 
-  this.titleInput.addEventListener("focusin", () =>
-    this.resetElement(this.titleInput, this.titleOutput)
+  titleInput.addEventListener(
+    "focusin",
+    resetElement.bind(null, titleInput, titleOutput)
   );
-  this.authorInput.addEventListener("focusin", () =>
-    this.resetElement(this.authorInput, this.authorOutput)
+  authorInput.addEventListener(
+    "focusin",
+    resetElement.bind(null, authorInput, authorOutput)
   );
-  this.pagesInput.addEventListener("focusin", () =>
-    this.resetElement(this.pagesInput, this.pagesOutput)
+  pagesInput.addEventListener(
+    "focusin",
+    resetElement.bind(null, pagesInput, pagesOutput)
   );
-}
-AddForm.prototype.showButton = document.getElementById("show-add-form");
-AddForm.prototype.html = document.getElementById("add-form");
-AddForm.prototype.titleInput = AddForm.prototype.html.querySelector("#title");
-AddForm.prototype.titleOutput = AddForm.prototype.html.querySelector(
-  'output[for="title"]'
-);
-AddForm.prototype.authorInput = AddForm.prototype.html.querySelector("#author");
-AddForm.prototype.authorOutput = AddForm.prototype.html.querySelector(
-  'output[for="author"]'
-);
-AddForm.prototype.pagesInput = AddForm.prototype.html.querySelector("#pages");
-AddForm.prototype.pagesOutput = AddForm.prototype.html.querySelector(
-  'output[for="pages"]'
-);
-AddForm.prototype.readInput = AddForm.prototype.html.querySelector("#read");
-AddForm.prototype.submitButton =
-  AddForm.prototype.html.querySelector('[type="submit"]');
 
-AddForm.prototype.setInvalid = function (inputElement, outputElement, message) {
-  outputElement.value = message;
-  outputElement.hidden = false;
-  inputElement.classList.add("invalid");
-};
-
-AddForm.prototype.resetElement = function (inputElement, outputElement) {
-  outputElement.value = "";
-  outputElement.hidden = true;
-  inputElement.classList.remove("invalid");
-};
-
-AddForm.prototype.resetOutputs = function () {
-  this.resetElement(this.titleInput, this.titleOutput);
-  this.resetElement(this.authorInput, this.authorOutput);
-  this.resetElement(this.pagesInput, this.pagesOutput);
-};
-
-AddForm.prototype.validateTitle = function () {
-  this.resetElement(this.titleInput, this.titleOutput);
-  if (this.titleInput.value.trim() === "") {
-    this.setInvalid(
-      this.titleInput,
-      this.titleOutput,
-      "Please, enter a title for your book"
-    );
-    return false;
+  function setInvalid(inputElement, outputElement, message) {
+    outputElement.value = message;
+    outputElement.hidden = false;
+    inputElement.classList.add("invalid");
   }
-  if (library.hasTitle(this.titleInput.value.trim())) {
-    this.setInvalid(
-      this.titleInput,
-      this.titleOutput,
-      "This book already exists in your library"
-    );
-    return false;
+
+  function resetElement(inputElement, outputElement) {
+    outputElement.value = "";
+    outputElement.hidden = true;
+    inputElement.classList.remove("invalid");
   }
-  return true;
-};
 
-AddForm.prototype.validateAuthor = function () {
-  this.resetElement(this.authorInput, this.authorOutput);
-  if (this.authorInput.value.trim() === "") {
-    this.setInvalid(
-      this.authorInput,
-      this.authorOutput,
-      "Please, enter the author of your book"
-    );
-    return false;
+  function resetOutputs() {
+    resetElement(titleInput, titleOutput);
+    resetElement(authorInput, authorOutput);
+    resetElement(pagesInput, pagesOutput);
   }
-  return true;
-};
 
-AddForm.prototype.validatePages = function () {
-  this.resetElement(this.pagesInput, this.pagesOutput);
-  if (this.pagesInput.value.trim() === "") {
-    this.setInvalid(
-      this.pagesInput,
-      this.pagesOutput,
-      "Please, enter the number of pages of your book"
-    );
-    return false;
+  function validateTitle() {
+    resetElement(titleInput, titleOutput);
+
+    if (titleInput.value.trim() === "") {
+      setInvalid(
+        titleInput,
+        titleOutput,
+        "Please, enter a title for your book"
+      );
+      return false;
+    }
+
+    if (library.hasTitle(titleInput.value.trim())) {
+      setInvalid(
+        titleInput,
+        titleOutput,
+        "This book already exists in your library"
+      );
+      return false;
+    }
+
+    return true;
   }
-  const pageNum = Number(this.pagesInput.value);
-  if (!Number.isInteger(pageNum) || pageNum < 1) {
-    this.setInvalid(
-      this.pagesInput,
-      this.pagesOutput,
-      "Please, enter an integer greater than 0"
-    );
-    return false;
+
+  function validateAuthor() {
+    resetElement(authorInput, authorOutput);
+
+    if (authorInput.value.trim() === "") {
+      setInvalid(
+        authorInput,
+        authorOutput,
+        "Please, enter the author of your book"
+      );
+      return false;
+    }
+
+    return true;
   }
-  this.pagesInput.value = pageNum;
-  return true;
-};
 
-AddForm.prototype.validate = function () {
-  let res = this.validateTitle();
-  res = this.validateAuthor() && res;
-  res = this.validatePages() && res;
-  return res;
-};
+  function validatePages() {
+    resetElement(pagesInput, pagesOutput);
 
-AddForm.prototype.hide = function (element) {
-  element = element ?? this.html;
-  if (element === this.html) {
-    this.html.classList.remove("show");
+    if (pagesInput.value.trim() === "") {
+      setInvalid(
+        pagesInput,
+        pagesOutput,
+        "Please, enter the number of pages of your book"
+      );
+      return false;
+    }
+
+    const pageNum = Number(pagesInput.value);
+
+    if (!Number.isInteger(pageNum) || pageNum < 1) {
+      setInvalid(
+        pagesInput,
+        pagesOutput,
+        "Please, enter an integer greater than 0"
+      );
+      return false;
+    }
+
+    pagesInput.value = pageNum;
+    return true;
   }
-};
 
-AddForm.prototype.show = function () {
-  this.resetInputs();
-  this.resetOutputs();
-  this.html.classList.add("show");
-};
-
-AddForm.prototype.resetInputs = function () {
-  this.titleInput.value = "";
-  this.authorInput.value = "";
-  this.pagesInput.value = "";
-  this.readInput.checked = false;
-};
-
-AddForm.prototype.submit = function (e) {
-  e.preventDefault();
-  if (this.validate()) {
-    library.addBook(
-      new Book(
-        this.titleInput.value,
-        this.authorInput.value,
-        this.pagesInput.value,
-        this.readInput.checked
-      )
-    );
-    this.hide();
+  function validate() {
+    let res = validateTitle();
+    res = validateAuthor() && res;
+    res = validatePages() && res;
+    return res;
   }
-};
 
-const addForm = new AddForm();
+  function hideForm(element) {
+    element = element ?? addForm;
+    if (element === addForm) {
+      addForm.classList.remove("show");
+    }
+  }
+
+  function showForm() {
+    resetInputs();
+    resetOutputs();
+    addForm.classList.add("show");
+  }
+
+  function resetInputs() {
+    titleInput.value = "";
+    authorInput.value = "";
+    pagesInput.value = "";
+    readInput.checked = false;
+  }
+
+  function submit(e) {
+    e.preventDefault();
+    if (validate()) {
+      library.addBook(
+        new Book(
+          titleInput.value,
+          authorInput.value,
+          pagesInput.value,
+          readInput.checked
+        )
+      );
+      hideForm();
+    }
+  }
+})();
 // =============================== Dummy Button ====================================
 document.getElementById("dummy-button").addEventListener("click", addDummyData);
 function addDummyData() {
