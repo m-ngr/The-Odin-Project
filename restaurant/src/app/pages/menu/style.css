@@ -1,0 +1,8 @@
+.menu-list {
+  background-color: var(--tone-bg-color);
+  padding: 50px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}

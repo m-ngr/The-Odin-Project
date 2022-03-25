@@ -1,0 +1,19 @@
+footer {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+.social-icon:hover {
+  color: var(--tone-f-color);
+}

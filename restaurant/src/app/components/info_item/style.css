@@ -1,0 +1,11 @@
+.info-item {
+  display: flex;
+  gap: 10px;
+}
+.info-item > span {
+  width: 1.2rem;
+  font-size: 1.2rem;
+}
+.info-item span {
+  color: var(--tone-f-color);
+}

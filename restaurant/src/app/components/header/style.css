@@ -1,0 +1,18 @@
+header {
+  background-color: var(--dark-color);
+  color: var(--tone-f-color);
+
+  font-family: "Sansita Swashed", cursive;
+  letter-spacing: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+  padding: 10px;
+}
+
+header > img {
+  height: 60px;
+}

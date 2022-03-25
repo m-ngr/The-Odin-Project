@@ -1,0 +1,46 @@
+.home-page {
+  background-image: url(./images/bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  padding-left: 25%;
+  padding-right: 25%;
+  color: var(--light-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.home-page > h2 {
+  font-family: "Fredoka One", cursive;
+  font-size: 3rem;
+  font-weight: normal;
+  text-align: center;
+
+  background: linear-gradient(
+    to right,
+    var(--tone-f-color),
+    var(--minor-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.home-page > p {
+  font-family: "Fredoka One", cursive;
+  color: var(--minor-color);
+}
+
+.home-info {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  width: clamp(300px, 70%, 500px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

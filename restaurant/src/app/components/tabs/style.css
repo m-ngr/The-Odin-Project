@@ -1,0 +1,35 @@
+.tab > nav {
+  position: sticky;
+  top: 0;
+  user-select: none;
+}
+
+.tab > nav > ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  background-color: var(--dark-color);
+  color: var(--light-color);
+}
+
+.tab > nav li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+}
+
+.tab > nav li:hover {
+  color: var(--tone-f-color);
+}
+
+.tab > nav li.selected {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.tab > section {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  height: 100%;
+}
