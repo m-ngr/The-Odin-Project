@@ -1,7 +1,7 @@
 import "./style.css";
 
 export function infoItem(iconHTML, infoHTML) {
-  const infoElement = document.createElement("div");
+  const infoElement = document.createElement("article");
   const icon = document.createElement("span");
   const description = document.createElement("p");
 

@@ -1,6 +1,7 @@
 import "./style.css";
 
 class TabSystem {
+  // implemented with class for practice and convenience
   #tabs = [];
   #_selected;
 
@@ -29,8 +30,10 @@ class TabSystem {
   }
 
   add(name = "", id = "", body) {
+    name = name.trim();
     id = id.trim().toLowerCase();
-    if (name.trim() === "") throw Error("Tab name can't be empty");
+    if (name === "") throw Error("Tab name can't be empty");
+    if (id === "") throw Error("Tab id can't be empty");
     if (this.#hasTab(id)) throw Error("Tab id must be unique");
 
     const tab = { name, id, body };
@@ -86,5 +89,6 @@ class TabSystem {
 }
 
 export function tabs() {
+  //function wrapper is used to avoid the `new` keyword
   return new TabSystem();
 }

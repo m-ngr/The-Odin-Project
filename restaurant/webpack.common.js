@@ -9,11 +9,19 @@ module.exports = {
     clean: true,
     assetModuleFilename: "assets/[name].[hash][ext][query]",
   },
+
   module: {
     rules: [
       {
         test: /\.html$/i,
         loader: "html-loader",
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name].[hash][ext][query]",
+        },
       },
     ],
   },

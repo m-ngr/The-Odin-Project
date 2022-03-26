@@ -7,16 +7,16 @@
 .tab > nav > ul {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: var(--gap);
 
   background-color: var(--dark-color);
   color: var(--light-color);
 }
 
 .tab > nav li {
-  padding: 10px;
+  padding: var(--small-gap);
   cursor: pointer;
-  border-radius: 4px 4px 0 0;
+  border-radius: var(--small-rad) var(--small-rad) 0 0;
 }
 
 .tab > nav li:hover {
@@ -29,7 +29,10 @@
 }
 
 .tab > section {
-  background-color: var(--light-color);
-  color: var(--dark-color);
   height: 100%;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
 }

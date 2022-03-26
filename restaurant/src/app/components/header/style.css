@@ -9,10 +9,14 @@ header {
   justify-content: center;
   align-items: center;
 
-  gap: 10px;
-  padding: 10px;
+  gap: var(--gap);
+  padding: var(--small-gap);
 }
 
 header > img {
-  height: 60px;
+  height: clamp(1.5rem, 7vw, 3.3rem);
+}
+
+header > h1 {
+  font-size: clamp(1.25rem, 7vw, 3rem);
 }

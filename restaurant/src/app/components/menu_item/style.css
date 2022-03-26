@@ -2,11 +2,11 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-rows: min-content 1fr;
-  gap: 10px 20px;
+  gap: var(--small-gap) var(--gap);
 }
 
 .menu-item > img {
-  width: 120px;
+  width: 6rem;
   grid-row: span 2;
 }
 
@@ -15,10 +15,25 @@
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: var(--small-gap);
   padding: 10px 0 5px 0;
   border-bottom: 1px dashed var(--dark-color);
 }
+
 .menu-item-price {
   color: var(--tone-f-color);
+}
+
+.menu-item > p {
+  border-left: 0.2rem solid var(--tone-f-color);
+  padding: 0 var(--small-gap);
+}
+
+@media screen and (max-width: 480px) {
+  .menu-item {
+    grid-template-columns: auto;
+  }
+  .menu-item > img {
+    place-self: center;
+  }
 }

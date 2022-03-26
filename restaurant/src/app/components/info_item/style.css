@@ -1,6 +1,6 @@
 .info-item {
   display: flex;
-  gap: 10px;
+  gap: var(--small-gap);
 }
 .info-item > span {
   width: 1.2rem;

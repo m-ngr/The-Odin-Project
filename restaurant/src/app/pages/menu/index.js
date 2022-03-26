@@ -11,12 +11,12 @@ import image7 from "./images/7.png";
 import image8 from "./images/8.png";
 
 export const menu = document.createElement("article");
-const list = document.createElement("section");
+const container = document.createElement("section");
 menu.className = "page menu-page";
-list.className = "menu-list";
+container.className = "page-container menu-container";
 
-menu.append(list);
-list.append(
+menu.append(container);
+container.append(
   menuItem(
     "Hamburger",
     2.49,

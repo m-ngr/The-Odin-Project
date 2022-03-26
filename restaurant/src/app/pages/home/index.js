@@ -7,11 +7,11 @@ const sideTitle = document.createElement("p");
 const info = document.createElement("div");
 const address = infoItem(
   `<i class="fa-solid fa-location-dot"></i>`,
-  "1024 Oakwood Ave San Diego, CA 22434"
+  "9871 Aero Dr, San Diego, CA 92123, United States"
 );
 const hours = infoItem(
   `<i class="fa-solid fa-clock"></i>`,
-  "<span>Mon-Thurs:</span> 8am-8pm <br><span>Fri-Sun:</span> 8am-11pm"
+  "<span>Mon-Thurs:</span> 8am - 8pm <br><span>Fri-Sun:</span> 8am - 11pm"
 );
 
 home.className = "page home-page";

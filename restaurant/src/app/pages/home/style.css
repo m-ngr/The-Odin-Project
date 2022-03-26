@@ -7,11 +7,12 @@
   padding-left: 25%;
   padding-right: 25%;
   color: var(--light-color);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: var(--gap);
 }
 
 .home-page > h2 {
@@ -37,10 +38,20 @@
 
 .home-info {
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px;
-  border-radius: 10px;
-  width: clamp(300px, 70%, 500px);
+  padding: var(--gap);
+  border-radius: var(--rad);
+  width: clamp(300px, 70%, 28rem);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--small-gap);
+}
+
+@media screen and (max-width: 480px) {
+  .home-page {
+    padding-left: var(--gap);
+    padding-right: var(--gap);
+  }
+  .home-page > h2 {
+    font-size: 2rem;
+  }
 }

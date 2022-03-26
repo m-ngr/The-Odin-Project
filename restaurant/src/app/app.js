@@ -1,6 +1,6 @@
 import * as components from "./components/index";
 import * as pages from "./pages/index";
-import logo from "../images/favicon.svg";
+import logo from "../images/favicon.png";
 
 export default function run() {
   const body = document.body;
