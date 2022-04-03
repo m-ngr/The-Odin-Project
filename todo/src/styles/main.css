@@ -1,0 +1,37 @@
+@import url("../../node_modules/@fortawesome/fontawesome-free/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+
+@import url(./reset.css);
+@import url(./layout.css);
+
+:root {
+  --bg-color1: #fefcfe;
+  --bg-color2: #ececec;
+  --bg-color3: #f2f3f5;
+  --bg-color4: #f3f1f3;
+
+  --t-color1: #374958;
+
+  --accent-light: #2abd67;
+  --accent-dark: #1f8d4d;
+
+  --small-gap: 10px;
+  --gap: 20px;
+  --large-gap: 40px;
+
+  --small-rad: 5px;
+  --rad: 10px;
+  --large-rad: 20px;
+}
+
+:root.dark {
+  --bg-color1: #15202b;
+  --bg-color2: #192734;
+  --bg-color3: #22303c;
+  --bg-color4: #273746;
+
+  --t-color1: #eaebec;
+
+  --accent-light: #2abd67;
+  --accent-dark: #1f8d4d;
+}
