@@ -11,17 +11,17 @@ export function footer() {
   iconList.append(
     icon(
       "github",
-      "https://github.com/Mahmoud-Elnagar1698",
+      "https://github.com/m-ngr",
       `<i class="fa-brands fa-github"></i>`
     ),
     icon(
       "linkedin",
-      "https://www.linkedin.com/in/mahmoud-elnagar1698/",
+      "https://www.linkedin.com/in/m-ngr/",
       `<i class="fa-brands fa-linkedin"></i>`
     ),
     icon(
       "twitter",
-      "https://twitter.com/Elnajar_Mahmoud",
+      "https://twitter.com/dev_ngr",
       `<i class="fa-brands fa-twitter"></i>`
     )
   );
