@@ -3,6 +3,9 @@
 
 @import url(./reset.css);
 @import url(./layout.css);
+@import url(./header.css);
+@import url(./sidebar.css);
+@import url(./footer.css);
 
 :root {
   --bg-color1: #fefcfe;
@@ -14,6 +17,7 @@
 
   --accent-light: #2abd67;
   --accent-dark: #1f8d4d;
+  --accent-bg: #2abd6770;
 
   --small-gap: 10px;
   --gap: 20px;
@@ -31,7 +35,4 @@
   --bg-color4: #273746;
 
   --t-color1: #eaebec;
-
-  --accent-light: #2abd67;
-  --accent-dark: #1f8d4d;
 }

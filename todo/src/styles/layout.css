@@ -5,7 +5,7 @@ body {
 
   height: 100vh;
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: minmax(max-content, 30vw) 1fr;
   grid-template-rows: max-content 1fr max-content;
   grid-template-areas:
     "header header"
@@ -15,52 +15,6 @@ body {
 
 header {
   grid-area: header;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--small-gap);
-  padding: var(--gap);
-
-  background-color: var(--bg-color3);
-  font-size: 1.5rem;
-  border-bottom: 2px solid var(--accent-dark);
-}
-
-header > .logo {
-  display: flex;
-  align-items: center;
-  gap: var(--small-gap);
-
-  font-size: 2.5rem;
-  font-weight: bold;
-  user-select: none;
-}
-
-.i-logo {
-  color: var(--accent-dark);
-}
-
-:root.dark .i-logo {
-  color: var(--accent-light);
-}
-
-.i-btn {
-  background-color: var(--bg-color3);
-  padding: var(--small-gap);
-  border-radius: var(--small-rad);
-  cursor: pointer;
-}
-
-.i-btn:hover {
-  filter: contrast(85%);
-}
-
-.i-btn:active {
-  transform: scale(90%);
-}
-
-.theme-btn {
-  border-radius: 50%;
 }
 
 aside {

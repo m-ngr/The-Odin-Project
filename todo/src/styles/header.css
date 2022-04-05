@@ -1,0 +1,51 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--small-gap);
+  padding: var(--small-gap) var(--gap);
+
+  background-color: var(--bg-color3);
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--accent-dark);
+}
+
+header > .logo {
+  display: flex;
+  align-items: center;
+  gap: var(--small-gap);
+
+  font-weight: bold;
+  user-select: none;
+}
+
+.logo > * {
+  font-size: 2.5rem;
+}
+
+.i-logo {
+  color: var(--accent-dark);
+}
+
+:root.dark .i-logo {
+  color: var(--accent-light);
+}
+
+.i-btn {
+  background-color: var(--bg-color3);
+  padding: var(--small-gap);
+  border-radius: var(--small-rad);
+  cursor: pointer;
+}
+
+.i-btn:hover {
+  filter: contrast(85%);
+}
+
+.i-btn:active {
+  transform: scale(90%);
+}
+
+.theme-btn {
+  border-radius: 50%;
+}

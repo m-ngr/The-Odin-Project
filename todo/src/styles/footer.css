@@ -1,0 +1,27 @@
+footer {
+  background-color: var(--bg-color3);
+  color: var(--t-color1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--small-gap);
+  padding: var(--small-gap);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--small-gap);
+  font-size: 1.2rem;
+}
+
+.social-icon:hover {
+  color: var(--accent-dark);
+}
+
+@media screen and (max-width: 480px) {
+  footer {
+    flex-direction: column;
+  }
+}
