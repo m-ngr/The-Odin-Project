@@ -31,21 +31,21 @@ header > .logo {
   color: var(--accent-light);
 }
 
-.i-btn {
+.base-btn {
   background-color: var(--bg-color3);
   padding: var(--small-gap);
   border-radius: var(--small-rad);
-  cursor: pointer;
+  line-height: 1;
 }
 
-.i-btn:hover {
+.base-btn:hover {
   filter: contrast(85%);
 }
 
-.i-btn:active {
+.base-btn:active {
   transform: scale(90%);
 }
 
-.theme-btn {
+.circle {
   border-radius: 50%;
 }

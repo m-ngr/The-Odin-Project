@@ -5,6 +5,14 @@ aside {
   flex-direction: column;
   gap: var(--gap);
   user-select: none;
+
+  max-width: 350px;
+  width: 30vw;
+  min-width: max-content;
+}
+
+aside.hide {
+  display: none;
 }
 
 aside h2 {

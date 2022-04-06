@@ -5,7 +5,7 @@ body {
 
   height: 100vh;
   display: grid;
-  grid-template-columns: minmax(max-content, 30vw) 1fr;
+  grid-template-columns: max-content 1fr;
   grid-template-rows: max-content 1fr max-content;
   grid-template-areas:
     "header header"

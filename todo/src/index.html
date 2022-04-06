@@ -8,14 +8,18 @@
   </head>
   <body>
     <header>
-      <i class="i-btn menu-btn fa-solid fa-bars"></i>
+      <button class="base-btn" id="sidebar-btn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <div class="logo">
         <i class="i-logo fas fa-check-double" aria-hidden="true"></i>
         <h1>Todo List</h1>
       </div>
-      <i class="i-btn theme-btn fa-solid fa-moon"></i>
+      <button class="base-btn circle" id="theme-btn" title="Toggle theme">
+        <i class="fa-solid fa-sun"></i>
+      </button>
     </header>
-    <aside>
+    <aside id="sidebar">
       <section>
         <h2>Home</h2>
         <ul class="side-list">
