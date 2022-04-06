@@ -1,0 +1,81 @@
+main {
+  padding: var(--gap) var(--large-gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+}
+
+main > h2 {
+  background-color: var(--accent-light);
+  color: #f7f5f5;
+  padding: var(--small-gap);
+  border-radius: var(--small-rad);
+  font-weight: normal;
+  text-align: center;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: max-content minmax(200px, 1fr) repeat(4, max-content);
+  align-items: center;
+  gap: calc(var(--small-gap) / 2) var(--small-gap);
+  padding: var(--small-gap) var(--small-gap) calc(var(--small-gap) / 2);
+
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+.task-item details > p {
+  grid-column: 2/-1;
+  font-size: smaller;
+}
+
+.task-item :is(summary, details) {
+  display: contents;
+}
+.task-item summary {
+  cursor: pointer;
+}
+.task-item summary::marker {
+  content: none;
+}
+
+.check-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.round-check {
+  accent-color: var(--accent-dark);
+  cursor: pointer;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-weight: 900;
+  border-radius: 50%;
+
+  background-color: white;
+  color: white;
+
+  border: 2px solid var(--t-color1);
+}
+.round-check:checked {
+  background-color: var(--accent-light);
+  border-color: var(--accent-dark);
+}
+
+.round-check:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
