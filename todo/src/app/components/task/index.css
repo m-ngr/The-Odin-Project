@@ -1,0 +1,25 @@
+.task-item {
+  display: grid;
+  grid-template-columns: max-content minmax(200px, 1fr) repeat(4, max-content);
+  align-items: center;
+  gap: calc(var(--small-gap) / 2) var(--small-gap);
+  padding: var(--small-gap) var(--small-gap) calc(var(--small-gap) / 2);
+
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+.task-item details > p {
+  grid-column: 2/-1;
+  font-size: smaller;
+}
+
+.task-item :is(summary, details) {
+  display: contents;
+}
+.task-item summary {
+  cursor: pointer;
+}
+.task-item summary::marker {
+  content: none;
+}
