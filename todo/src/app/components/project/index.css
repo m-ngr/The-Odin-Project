@@ -1,11 +1,10 @@
-main {
+.project {
   padding: var(--gap) var(--large-gap);
   display: flex;
   flex-direction: column;
   gap: var(--small-gap);
 }
-
-main > h2 {
+.project > h2 {
   background-color: var(--accent-light);
   color: #f7f5f5;
   padding: var(--small-gap);

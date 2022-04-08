@@ -5,8 +5,8 @@ class Project {
     this.title = title;
   }
 
-  addTask(task) {
-    this.#tasks.push(task);
+  addTask(...tasks) {
+    this.#tasks.push(...tasks);
   }
 
   hasTask(queryTask) {

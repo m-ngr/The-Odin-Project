@@ -2,7 +2,7 @@ import { normalButton, binaryButton } from "../index";
 import { partial } from "../../utils/index";
 import "./index.css";
 
-export function task(taskInfo) {
+export function task(taskInfo, deleteEvent) {
   const taskWrapper = document.createElement("li");
   const taskElement = document.createElement("details");
   const headElement = document.createElement("summary");
@@ -18,7 +18,7 @@ export function task(taskInfo) {
     dateElement(taskInfo.date),
     importantButton(taskInfo.isImportant, partial(importantEvent, taskInfo)),
     editButton(),
-    deleteButton()
+    deleteButton(deleteEvent.bind(taskWrapper, taskInfo))
   );
 
   taskElement.append(headElement, bodyElement);
@@ -86,6 +86,10 @@ function editButton() {
   );
 }
 
-function deleteButton() {
-  return normalButton("Delete", '<i class="fa-solid fa-xmark"></i>', null);
+function deleteButton(clickEvent) {
+  return normalButton(
+    "Delete",
+    '<i class="fa-solid fa-xmark"></i>',
+    clickEvent
+  );
 }

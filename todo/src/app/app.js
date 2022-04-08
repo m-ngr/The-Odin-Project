@@ -4,15 +4,17 @@ import * as components from "./components/index";
 export default function run() {
   setup();
   // ================ TEST ==========================
-  let rt = components.task({
-    title: "Js Task Title",
-    date: "06/04/2022",
-    details: "Task details",
-    isCompleted: false,
-    isImportant: false,
-  });
 
-  document.getElementById("task-list").append(rt);
+  let t1 = task("Js Task Title", "details", "06/04/2022", false);
+  let t2 = task("Js Task Title", "details", "06/04/2022", false);
+  let t3 = task("Js Task Title", "details", "06/04/2022", false);
+
+  let p = project("JS Project dude");
+  p.addTask(t1, t2, t3);
+
+  let pro = components.project(p);
+
+  document.getElementById("content").append(pro);
 }
 
 function setup() {
