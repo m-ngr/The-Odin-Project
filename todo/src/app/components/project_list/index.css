@@ -1,0 +1,69 @@
+.titled-list.project-list {
+  padding: 0;
+}
+
+.project-list > ul {
+}
+
+.project-list lix {
+  background-color: var(--bg-color1);
+  padding: 5px var(--gap);
+  margin-bottom: 5px;
+  border-radius: var(--small-rad);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  gap: 5px;
+}
+
+.project-list li > button {
+  background-color: var(--bg-color1);
+  padding: 5px var(--gap);
+  width: 100%;
+  border-radius: var(--small-rad);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: center;
+  gap: 5px;
+  text-align: left;
+}
+
+.project-list button:hover {
+  filter: contrast(85%);
+}
+
+.project-list button.selected {
+  border-left: var(--small-rad) solid var(--accent-light);
+  background-color: var(--accent-bg);
+}
+
+.add-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  padding: var(--small-gap) var(--gap);
+  border-radius: var(--small-rad);
+  background-color: var(--bg-color2);
+}
+
+.add-btn:hover {
+  filter: contrast(85%);
+}
+
+.item-opt {
+  display: flex;
+  align-items: center;
+  gap: var(--small-gap);
+  visibility: hidden;
+}
+
+.item-opt > *:hover {
+  color: var(--accent-light);
+}
+
+.project-list button:hover .item-opt {
+  visibility: visible;
+}

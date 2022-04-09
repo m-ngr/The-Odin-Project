@@ -1,11 +1,11 @@
-.titled-list {
+.list-element {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 10px;
 }
 
-.titled-list > ul {
+.list-element > ul {
   display: flex;
   flex-direction: column;
   gap: 5px;

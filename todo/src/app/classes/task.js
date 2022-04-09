@@ -1,14 +1,14 @@
 class Task {
   #title = "";
   #details = "";
-  #date;
+  #dueDate = new Date();
   #isCompleted = false;
   #isImportant = false;
 
-  constructor(title, details, date, isImportant) {
+  constructor(title, details, dueDate, isImportant) {
     this.title = title;
     this.details = details;
-    this.date = date;
+    this.dueDate = dueDate;
     this.isImportant = isImportant;
   }
 
@@ -26,11 +26,11 @@ class Task {
     this.#details = value;
   }
 
-  get date() {
-    return this.#date;
+  get dueDate() {
+    return this.#dueDate.toLocaleDateString("en-GB");
   }
-  set date(value) {
-    this.#date = value;
+  set dueDate(value) {
+    this.#dueDate = new Date(value);
   }
 
   get isImportant() {
@@ -48,6 +48,13 @@ class Task {
   }
 }
 
-export function task(title, details, date, isImportant) {
-  return new Task(title, details, date, isImportant);
+export function task(title, details, dueDate, isImportant) {
+  return new Task(title, details, dueDate, isImportant);
 }
+
+/*
+- Load Date from  UTC String
+    let date = new Date("2011-04-11T23:01:30.000Z");
+- Save Date to UTC String
+    date.toJSON();
+*/
