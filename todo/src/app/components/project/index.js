@@ -1,28 +1,20 @@
 import "./index.css";
-import { task } from "../index";
+import { task, titledList, itButton } from "../index";
 import { partial } from "../../utils";
 
 export function project(projectInfo) {
-  const projectWrapper = document.createElement("div");
-  const titleElement = document.createElement("h2");
-  const taskListElement = document.createElement("ul");
-  const addTaskButton = document.createElement("button");
+  const taskElements = projectInfo.tasks.map((taskInfo) =>
+    task(taskInfo, partial(deleteEvent, projectInfo))
+  );
+  const projectElement = titledList(projectInfo.title, 2, ...taskElements);
 
-  projectWrapper.className = "project";
+  projectElement.classList.add("project");
 
-  titleElement.innerText = projectInfo.title;
-  taskListElement.className = "tasks";
+  const addButton = itButton("Add Task", '<i class="fa-solid fa-plus"></i>');
+  addButton.classList.add("add-btn");
 
-  projectInfo.tasks.forEach((taskInfo) => {
-    taskListElement.append(task(taskInfo, partial(deleteEvent, projectInfo)));
-  });
-
-  addTaskButton.className = "add-btn";
-  addTaskButton.innerHTML =
-    '<i class="fa-solid fa-plus"></i> <span>Add Task</span>';
-
-  projectWrapper.append(titleElement, taskListElement, addTaskButton);
-  return projectWrapper;
+  projectElement.append(addButton);
+  return projectElement;
 }
 
 function deleteEvent(projectInfo, taskInfo, event) {

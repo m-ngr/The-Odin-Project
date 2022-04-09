@@ -1,4 +1,4 @@
-export function normalButton(title = "", faIconHTML = "", clickEvent) {
+export function iButton(title = "", faIconHTML = "", clickEvent) {
   const element = document.createElement("button");
   element.innerHTML = faIconHTML || '<i class="fa-solid fa-square"></i>';
   element.title = title;

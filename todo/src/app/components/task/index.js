@@ -1,4 +1,4 @@
-import { normalButton, binaryButton } from "../index";
+import { iButton, iBinaryButton } from "../index";
 import { partial } from "../../utils/index";
 import "./index.css";
 
@@ -27,7 +27,7 @@ export function task(taskInfo, deleteEvent) {
 }
 
 function checkButton(checked, clickEvent) {
-  return binaryButton(
+  return iBinaryButton(
     checked,
     {
       title: "Unmark as completed",
@@ -59,7 +59,7 @@ function dateElement(date = "") {
 }
 
 function importantButton(isImportant = false, clickEvent) {
-  return binaryButton(
+  return iBinaryButton(
     isImportant,
     {
       title: "Unmark as important",
@@ -79,17 +79,9 @@ function importantEvent(taskInfo, event) {
 }
 
 function editButton() {
-  return normalButton(
-    "Edit",
-    '<i class="fa-solid fa-pen-to-square"></i>',
-    null
-  );
+  return iButton("Edit", '<i class="fa-solid fa-pen-to-square"></i>', null);
 }
 
 function deleteButton(clickEvent) {
-  return normalButton(
-    "Delete",
-    '<i class="fa-solid fa-xmark"></i>',
-    clickEvent
-  );
+  return iButton("Delete", '<i class="fa-solid fa-xmark"></i>', clickEvent);
 }

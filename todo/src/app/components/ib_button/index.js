@@ -1,4 +1,4 @@
-export function binaryButton(
+export function iBinaryButton(
   state = false,
   trueParameter = { title: "", faIconHTML: "" },
   falseParameter = { title: "", faIconHTML: "" },

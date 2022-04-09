@@ -1,20 +1,13 @@
-.project {
+.titled-list.project {
   padding: var(--gap) var(--large-gap);
-  display: flex;
-  flex-direction: column;
   gap: var(--small-gap);
 }
-.project > h2 {
+
+.titled-list.project > h2 {
   background-color: var(--accent-light);
   color: #f7f5f5;
   padding: var(--small-gap);
   border-radius: var(--small-rad);
   font-weight: normal;
   text-align: center;
-}
-
-.tasks {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 }
