@@ -5,11 +5,9 @@ export function devTestTool() {
   load();
   let main = document.getElementById("content");
 
-  let y = tc();
+  let x = components.listElement("hello", [tc()], { autoSelect: true });
 
-  let x = components.listElement("hello", 2, tc(), tc(), tc(), y);
-
-  x.selectElement(y);
+  x.selectElement(x.itemElement(0));
 
   main.append(x);
 }

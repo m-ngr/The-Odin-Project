@@ -5,8 +5,9 @@
   padding: 10px;
 }
 
-.list-element > ul {
+.list-element-list {
   display: flex;
   flex-direction: column;
+  list-style: none;
   gap: 5px;
 }
