@@ -1,15 +1,23 @@
 import { task, project, projectManager } from "./classes";
 import * as components from "./components";
 
+/**
+ * @todo change all CSS class names to a unique working group with a naming convension
+ */
+
 export function devTestTool() {
   load();
   let main = document.getElementById("content");
 
-  let x = components.listElement("hello", [tc()], { autoSelect: true });
+  let x = components.iconButton();
 
-  x.selectElement(x.itemElement(0));
+  let y = components.binaryButton();
 
-  main.append(x);
+  let z = components.iconTextButton();
+
+  let a = components.binaryTextButton();
+
+  main.append(x, y, z, a);
 }
 
 function tc() {

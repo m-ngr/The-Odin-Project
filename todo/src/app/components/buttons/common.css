@@ -1,0 +1,12 @@
+.common-btn {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  gap: 5px;
+}
