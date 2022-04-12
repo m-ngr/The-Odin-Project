@@ -1,5 +1,5 @@
 import { task, project, projectManager } from "./classes";
-import * as components from "./components";
+import * as elements from "./elements";
 
 /**
  * @todo change all CSS class names to a unique working group with a naming convension
@@ -9,9 +9,21 @@ export function devTestTool() {
   load();
   let main = document.getElementById("content");
 
-  let x = components.listElement("Home", []);
+  main.append(renderViewsList());
+}
 
-  main.append(x);
+function renderViewsList() {
+  let x = elements.listElement("Home", [
+    elements.iconTextButton(
+      "All Tasks",
+      '<i class="fa-solid fa-list-check"></i>',
+      () => {
+        console.log(viewAllFilter());
+      }
+    ),
+  ]);
+
+  return x;
 }
 
 function tc() {
