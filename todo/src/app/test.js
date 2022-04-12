@@ -9,15 +9,9 @@ export function devTestTool() {
   load();
   let main = document.getElementById("content");
 
-  let x = components.iconButton();
+  let x = components.listElement("Home", []);
 
-  let y = components.binaryButton();
-
-  let z = components.iconTextButton();
-
-  let a = components.binaryTextButton();
-
-  main.append(x, y, z, a);
+  main.append(x);
 }
 
 function tc() {

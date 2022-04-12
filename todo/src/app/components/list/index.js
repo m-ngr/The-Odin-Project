@@ -8,11 +8,16 @@ export function listElement(
   contentElements = [],
   options = {
     elementTag: "section",
+    elementClass: "list-element",
     titleTag: "h2",
+    titleClass: "list-element-title",
     listTag: "ul",
+    listClass: "list-element-list",
     itemTag: "li",
+    itemClass: "list-element-item",
     skipItemTag: false,
     autoSelect: false,
+    selectedClass: "list-element-selected",
     multiSelect: false,
   }
 ) {
@@ -20,17 +25,26 @@ export function listElement(
   element.titleElement = document.createElement(options.titleTag || "h2");
   element.listElement = document.createElement(options.listTag || "ul");
 
-  element.className = "list-element";
-  element.titleElement.className = "list-element-title";
-  element.listElement.className = "list-element-list";
+  element.className = options.elementClass || "list-element";
+  element.titleElement.className = options.titleClass || "list-element-title";
+  element.listElement.className = options.listClass || "list-element-list";
+
   element.titleElement.innerText = title;
   element.append(element.titleElement, element.listElement);
 
-  Object.assign(element, selectable(element.listElement));
+  Object.assign(
+    element,
+    selectable(
+      element.listElement,
+      options.selectedClass || "list-element-selected"
+    )
+  );
+
   Object.assign(
     element,
     controls(element.listElement, {
       itemTag: options.itemTag || "li",
+      itemClass: options.itemClass || "list-element-item",
       skipItemTag: options.skipItemTag || false,
       autoSelect: options.autoSelect || false,
       multiSelect: options.multiSelect || false,
@@ -45,7 +59,7 @@ export function listElement(
   return element;
 }
 
-function selectable(listElement) {
+function selectable(listElement, selectedClass = "") {
   let _selectedElements = [];
 
   return {
@@ -54,18 +68,20 @@ function selectable(listElement) {
     },
     selectElement(itemElement) {
       if ([...listElement.childNodes].includes(itemElement)) {
-        itemElement.classList.add("selected");
+        itemElement.classList.add(selectedClass);
         _selectedElements.push(itemElement);
       }
     },
     unselectElement(itemElement) {
       if (_selectedElements.includes(itemElement)) {
-        itemElement.classList.remove("selected");
+        itemElement.classList.remove(selectedClass);
         _selectedElements = _selectedElements.filter((e) => e !== itemElement);
       }
     },
     unselectAll() {
-      listElement.childNodes.forEach((li) => li.classList.remove("selected"));
+      listElement.childNodes.forEach((itemElement) =>
+        itemElement.classList.remove(selectedClass)
+      );
       _selectedElements = [];
     },
     isSelected(itemElement) {
@@ -80,6 +96,7 @@ function controls(
   listElement,
   options = {
     itemTag: "li",
+    itemClass: "list-element-item",
     skipItemTag: false,
     autoSelect: false,
     multiSelect: false,
@@ -136,7 +153,7 @@ function controls(
           itemElement.append(contentElement);
         }
 
-        itemElement.className = "list-element-item";
+        itemElement.className = options.itemClass || "list-element-item";
         listElement.append(itemElement);
 
         if (options.autoSelect) autoSelect(itemElement);
