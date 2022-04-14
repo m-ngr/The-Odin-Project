@@ -1,17 +1,93 @@
-import { titledList, itButton } from "../index";
-import { itcButton } from "../itc_button";
-import { projectItem } from "../project_item";
+import { iconTextButton, listElement } from "../../elements";
 import "./index.css";
 
 export function projectList(projectManager) {
-  const projectItems = projectManager.projects.map((proj) => {
-    return projectItem(proj, projectManager);
-  });
+  const element = listElement("Projects");
 
-  const projectList = titledList("Projects", 2, ...projectItems);
-  projectList.classList.add("project-list");
-  const addButton = itButton("Add Project", '<i class="fa-solid fa-plus"></i>');
+  showProjects(element, projectManager);
+  const addButton = iconTextButton(
+    "Add Task",
+    '<i class="fa-solid fa-plus"></i>'
+    //partial(showAddForm, element, projectObj)
+  );
 
-  projectList.append(addButton);
-  return projectList;
+  element.append(addButton);
+  return element;
 }
+
+function showProjects(element, projectManager) {
+  element.removeAll();
+
+  const taskElements = projectObj.tasks.map((taskObj) =>
+    taskElement(taskObj, partial(deleteEvent, element, projectObj))
+  );
+
+  element.addElements(...taskElements);
+}
+
+/*
+
+import "./index.css";
+import { iconTextButton, listElement } from "../../elements";
+import { task as taskElement } from "../task";
+import { partial } from "../../utils";
+import { taskForm } from "../task_form";
+import { task as taskObject } from "../../classes";
+
+export function project(projectObj) {
+  const element = listElement(projectObj.title);
+
+  showTasks(element, projectObj);
+
+  const addButton = iconTextButton(
+    "Add Task",
+    '<i class="fa-solid fa-plus"></i>',
+    partial(showAddForm, element, projectObj)
+  );
+
+  element.append(addButton);
+  return element;
+}
+
+function showTasks(element, projectObj) {
+  element.removeAll();
+
+  const taskElements = projectObj.tasks.map((taskObj) =>
+    taskElement(taskObj, partial(deleteEvent, element, projectObj))
+  );
+
+  element.addElements(...taskElements);
+}
+
+function deleteEvent(element, projectObj, taskObj, event) {
+  if (event) event.preventDefault();
+  projectObj.removeTask(taskObj);
+  element.removeElements(this.parentElement);
+}
+
+function showAddForm(element, projectObj) {
+  const button = this;
+
+  function addEvent(result) {
+    const newTask = taskObject(
+      result.title,
+      result.details,
+      result.dueDate,
+      result.isImportant
+    );
+    projectObj.addTask(newTask);
+    showTasks(element, projectObj);
+    button.style.display = "";
+  }
+
+  function cancelEvent() {
+    button.style.display = "";
+  }
+
+  const form = taskForm(addEvent, cancelEvent);
+  element.insertBefore(form, button);
+  button.style.display = "none";
+}
+
+
+*/

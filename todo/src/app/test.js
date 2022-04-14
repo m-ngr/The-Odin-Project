@@ -12,8 +12,14 @@ export function devTestTool() {
   window.t = projectManager.project(0).task(0);
   window.p = projectManager.project(0);
 
-  let x = components.project(window.p);
-
+  let x = components.projectForm(
+    function (res) {
+      console.log(this, res);
+    },
+    null,
+    "Sub",
+    { title: "bebo" }
+  );
   main.append(x);
 }
 
