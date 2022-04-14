@@ -139,11 +139,11 @@ function editButton(element, taskElement, taskObj) {
   );
 }
 
-function deleteButton(taskElement, taskObj, deleteEvent) {
+function deleteButton(element, taskObj, deleteEvent) {
   function clickEvent(event) {
     if (event) event.preventDefault();
-    if (deleteEvent) deleteEvent(taskObj, event);
-    taskElement.remove();
+    if (deleteEvent) deleteEvent.call(element, taskObj, event);
+    element.remove();
   }
 
   return iconButton("Delete", '<i class="fa-solid fa-xmark"></i>', clickEvent);

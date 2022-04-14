@@ -1,4 +1,4 @@
-.titled-list.project {
+.list-element.project {
   padding: var(--gap) var(--large-gap);
   gap: var(--small-gap);
 }

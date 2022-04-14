@@ -12,9 +12,7 @@ export function devTestTool() {
   window.t = projectManager.project(0).task(0);
   window.p = projectManager.project(0);
 
-  let x = components.task(window.t, (taskInfo) => {
-    window.p.removeTask(taskInfo);
-  });
+  let x = components.project(window.p);
 
   main.append(x);
 }

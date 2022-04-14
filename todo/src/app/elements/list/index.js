@@ -32,13 +32,15 @@ export function listElement(
   element.titleElement.innerText = title;
   element.append(element.titleElement, element.listElement);
 
-  Object.assign(
-    element,
-    selectable(
-      element.listElement,
-      options.selectedClass || "list-element-selected"
-    )
-  );
+  if (options.autoSelect) {
+    Object.assign(
+      element,
+      selectable(
+        element.listElement,
+        options.selectedClass || "list-element-selected"
+      )
+    );
+  }
 
   Object.assign(
     element,
@@ -167,6 +169,9 @@ function controls(
           console.error(error);
         }
       });
+    },
+    removeAll() {
+      listElement.innerHTML = "";
     },
   };
 }
