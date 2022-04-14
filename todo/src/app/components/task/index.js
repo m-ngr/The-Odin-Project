@@ -1,87 +1,150 @@
-import { iconButton, binaryButton } from "../index";
-import { partial } from "../../utils/index";
+import { iconButton, binaryButton } from "../../elements";
+import { taskForm } from "../task_form";
 import "./index.css";
 
-export function task(taskInfo, deleteEvent) {
-  const taskWrapper = document.createElement("li");
+/**
+ * @param {{title:String,
+ *          dueDate:Date,
+ *          details:String,
+ *          isCompleted:Boolean,
+ *          isImportant: Boolean}} taskObj
+ *
+ * @param {(taskObj: taskObj, ev: MouseEvent) => any} deleteEvent
+ */
+
+export function task(taskObj, deleteEvent) {
+  const element = document.createElement("section");
   const taskElement = document.createElement("details");
   const headElement = document.createElement("summary");
   const bodyElement = document.createElement("p");
 
-  taskWrapper.className = "task-item";
+  element.className = "task-element";
 
-  bodyElement.innerText = taskInfo.details;
+  element.checkButton = checkButton(taskObj);
+  element.titleElement = textElement("task-title");
+  element.dateElement = textElement();
+  element.importantButton = importantButton(taskObj);
+  element.editButton = editButton(element, taskElement, taskObj);
+  element.deleteButton = deleteButton(element, taskObj, deleteEvent);
+  element.detailsElement = bodyElement;
+  element.load = load.bind(element);
+
+  element.load(taskObj);
 
   headElement.append(
-    checkButton(taskInfo.isCompleted, partial(checkEvent, taskInfo)),
-    titleElement(taskInfo.title),
-    dateElement(taskInfo.date),
-    importantButton(taskInfo.isImportant, partial(importantEvent, taskInfo)),
-    editButton(),
-    deleteButton(deleteEvent.bind(taskWrapper, taskInfo))
+    element.checkButton,
+    element.titleElement,
+    element.dateElement,
+    element.importantButton,
+    element.editButton,
+    element.deleteButton
   );
-
   taskElement.append(headElement, bodyElement);
-  taskWrapper.append(taskElement);
-  return taskWrapper;
+  element.append(taskElement);
+
+  return element;
 }
 
-function checkButton(checked, clickEvent) {
-  return binaryButton(
-    checked,
+function load(taskObj) {
+  this.checkButton.setState(taskObj.isCompleted);
+  this.titleElement.innerText = taskObj.title;
+  this.titleElement.title = taskObj.title;
+  this.dateElement.innerText = taskObj.dueDate.toLocaleDateString("en-GB");
+  this.importantButton.setState(taskObj.isImportant);
+  this.detailsElement.innerText = taskObj.details;
+}
+
+function checkButton(taskObj) {
+  function stateChange(state, event) {
+    if (event) event.preventDefault();
+    taskObj.isCompleted = state;
+  }
+
+  const button = binaryButton(
+    stateChange,
+    taskObj.isCompleted,
     {
       title: "Unmark as completed",
       faIconHTML: '<i class="fa-solid fa-circle-check"></i>',
+      className: "task-completed",
     },
     {
       title: "Mark as completed",
       faIconHTML: '<i class="fa-regular fa-circle"></i>',
-    },
-    clickEvent
+    }
   );
+
+  button.classList.add("task-completed-btn");
+
+  return button;
 }
 
-function checkEvent(taskInfo, event) {
-  event.preventDefault();
-  taskInfo.isCompleted = this.state;
-}
-
-function titleElement(title = "") {
+function textElement(className, title) {
   const element = document.createElement("p");
-  element.innerText = title;
+  if (className) element.className = className;
+  if (title) element.innerText = title;
   return element;
 }
 
-function dateElement(date = "") {
-  const element = document.createElement("p");
-  element.innerText = date;
-  return element;
-}
+function importantButton(taskObj) {
+  function stateChange(state, event) {
+    if (event) event.preventDefault();
+    taskObj.isImportant = state;
+  }
 
-function importantButton(isImportant = false, clickEvent) {
-  return binaryButton(
-    isImportant,
+  const button = binaryButton(
+    stateChange,
+    taskObj.isImportant,
     {
       title: "Unmark as important",
       faIconHTML: '<i class="fa-solid fa-star"></i>',
+      className: "task-important",
     },
     {
       title: "Mark as important",
       faIconHTML: '<i class="fa-regular fa-star"></i>',
-    },
+    }
+  );
+
+  button.classList.add("task-important-btn");
+
+  return button;
+}
+
+function editButton(element, taskElement, taskObj) {
+  function cancelEvent() {
+    taskElement.style.display = "";
+  }
+
+  function updateEvent(result) {
+    taskObj.title = result.title;
+    taskObj.details = result.details;
+    taskObj.dueDate = result.dueDate;
+    taskObj.isImportant = result.isImportant;
+    element.load(taskObj);
+    taskElement.style.display = "";
+  }
+
+  function clickEvent(event) {
+    if (event) event.preventDefault();
+    const form = taskForm(updateEvent, cancelEvent, "Update", taskObj);
+    taskElement.style.display = "none";
+    element.append(form);
+  }
+
+  return iconButton(
+    "Edit",
+    '<i class="fa-solid fa-pen-to-square"></i>',
     clickEvent
   );
 }
 
-function importantEvent(taskInfo, event) {
-  event.preventDefault();
-  taskInfo.isImportant = this.state;
-}
+function deleteButton(taskElement, taskObj, deleteEvent) {
+  function clickEvent(event) {
+    if (event) event.preventDefault();
+    if (deleteEvent) deleteEvent(taskObj, event);
+    taskElement.remove();
+  }
 
-function editButton() {
-  return iconButton("Edit", '<i class="fa-solid fa-pen-to-square"></i>', null);
-}
-
-function deleteButton(clickEvent) {
   return iconButton("Delete", '<i class="fa-solid fa-xmark"></i>', clickEvent);
 }

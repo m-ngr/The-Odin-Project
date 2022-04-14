@@ -16,6 +16,10 @@ class Project {
   get tasks() {
     return [...this.#tasks];
   }
+
+  task(index = 0) {
+    return this.#tasks[index];
+  }
 }
 
 export function project(title) {

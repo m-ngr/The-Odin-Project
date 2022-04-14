@@ -2,7 +2,7 @@ import { partial } from "../../utils";
 import { binaryButton } from "./binary";
 
 /**
- * @param {(state:Boolean) => any} stateChangeEvent
+ * @param {(state:Boolean, e:MouseEvent) => any} stateChangeEvent
  */
 export function binaryTextButton(
   stateChangeEvent,

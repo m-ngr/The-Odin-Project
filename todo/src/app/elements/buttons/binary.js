@@ -1,7 +1,7 @@
 import { iconButton } from "./icon";
 
 /**
- * @param {(state:Boolean) => any} stateChangeEvent
+ * @param {(state:Boolean, e:MouseEvent) => any} stateChangeEvent
  */
 
 export function binaryButton(
@@ -30,10 +30,10 @@ export function binaryButton(
 function biState(state = false, showState, stateChangeEvent) {
   if (showState) showState(state);
 
-  function _setState(value) {
+  function _setState(value, e) {
     state = Boolean(value);
     if (showState) showState(state);
-    if (stateChangeEvent) stateChangeEvent(state);
+    if (stateChangeEvent) stateChangeEvent(state, e);
   }
 
   return {
@@ -43,8 +43,8 @@ function biState(state = false, showState, stateChangeEvent) {
     setState(value) {
       _setState(value);
     },
-    toggleState() {
-      _setState(!state);
+    toggleState(e) {
+      _setState(!state, e);
     },
   };
 }

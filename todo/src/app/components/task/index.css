@@ -1,25 +1,31 @@
-.task-item {
-  display: grid;
-  grid-template-columns: max-content minmax(200px, 1fr) repeat(4, max-content);
-  align-items: center;
-  gap: calc(var(--small-gap) / 2) var(--small-gap);
-  padding: var(--small-gap) var(--small-gap) calc(var(--small-gap) / 2);
+.task-element {
+  margin: 10px;
 
+  padding: calc(var(--small-gap) / 2) var(--small-gap);
   border: 2px solid;
   border-radius: 5px;
 }
-
-.task-item details > p {
-  grid-column: 2/-1;
-  font-size: smaller;
-}
-
-.task-item :is(summary, details) {
-  display: contents;
-}
-.task-item summary {
+.task-element summary {
   cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
-.task-item summary::marker {
+.task-element summary::marker {
   content: none;
+}
+.task-element p {
+  font-size: smaller;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.task-title {
+  flex-grow: 1;
+  width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

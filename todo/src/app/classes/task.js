@@ -27,7 +27,7 @@ class Task {
   }
 
   get dueDate() {
-    return this.#dueDate.toLocaleDateString("en-GB");
+    return this.#dueDate;
   }
   set dueDate(value) {
     this.#dueDate = new Date(value);

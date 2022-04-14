@@ -5,6 +5,10 @@ export const projectManager = {
     return [..._projects];
   },
 
+  project(index = 0) {
+    return _projects[index];
+  },
+
   addProject(...projects) {
     _projects.push(...projects);
   },
