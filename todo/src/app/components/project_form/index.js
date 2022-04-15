@@ -82,7 +82,10 @@ function controls(addEvent, closeEvent, submitButtonTitle) {
 
 function addEvent(externalEvent, event) {
   if (this.checkValidity()) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     const result = {
       title: this.titleInput.value,
     };
@@ -92,6 +95,10 @@ function addEvent(externalEvent, event) {
 }
 
 function closeEvent(externalEvent, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
   if (externalEvent) externalEvent.call(this, event);
   this.remove();
 }

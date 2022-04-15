@@ -1,82 +1,61 @@
-import { iconTextButton, listElement } from "../../elements";
-import "./index.css";
-
-export function projectList(projectManager) {
-  const element = listElement("Projects");
-
-  showProjects(element, projectManager);
-  const addButton = iconTextButton(
-    "Add Task",
-    '<i class="fa-solid fa-plus"></i>'
-    //partial(showAddForm, element, projectObj)
-  );
-
-  element.append(addButton);
-  return element;
-}
-
-function showProjects(element, projectManager) {
-  element.removeAll();
-
-  const taskElements = projectObj.tasks.map((taskObj) =>
-    taskElement(taskObj, partial(deleteEvent, element, projectObj))
-  );
-
-  element.addElements(...taskElements);
-}
-
-/*
-
 import "./index.css";
 import { iconTextButton, listElement } from "../../elements";
-import { task as taskElement } from "../task";
+import { projectItem } from "../project_item";
 import { partial } from "../../utils";
-import { taskForm } from "../task_form";
-import { task as taskObject } from "../../classes";
+import { projectForm } from "../project_form";
+import { project as projectObject } from "../../classes";
+import { project as projectElement } from "../project";
 
-export function project(projectObj) {
-  const element = listElement(projectObj.title);
+export function projectList(projectManager, showAreaElement) {
+  const element = listElement("Projects", [], { autoSelect: true });
 
-  showTasks(element, projectObj);
+  projectManager.projects.forEach((projectObj) => {
+    addProjectItem(element, projectManager, projectObj, showAreaElement);
+  });
 
   const addButton = iconTextButton(
     "Add Task",
     '<i class="fa-solid fa-plus"></i>',
-    partial(showAddForm, element, projectObj)
+    partial(showAddForm, element, projectManager, showAreaElement)
   );
 
   element.append(addButton);
   return element;
 }
 
-function showTasks(element, projectObj) {
-  element.removeAll();
-
-  const taskElements = projectObj.tasks.map((taskObj) =>
-    taskElement(taskObj, partial(deleteEvent, element, projectObj))
+function addProjectItem(element, projectManager, projectObj, showAreaElement) {
+  element.addElements(
+    projectItem(
+      projectObj,
+      showEvent.bind(element, showAreaElement),
+      partial(deleteEvent, element, projectManager, showAreaElement),
+      partial(updateEvent, element, projectObj, showAreaElement)
+    )
   );
-
-  element.addElements(...taskElements);
 }
 
-function deleteEvent(element, projectObj, taskObj, event) {
-  if (event) event.preventDefault();
-  projectObj.removeTask(taskObj);
+function updateEvent(element, projectObj, showAreaElement) {
+  if (element.isSelected(this.parentElement)) {
+    showEvent(showAreaElement, projectObj);
+  }
+}
+
+function deleteEvent(element, projectManager, showAreaElement, projectObj) {
+  if (element.isSelected(this.parentElement)) {
+    showAreaElement.innerHTML = "";
+  }
+  projectManager.removeProject(projectObj);
+
   element.removeElements(this.parentElement);
 }
 
-function showAddForm(element, projectObj) {
+function showAddForm(element, projectManager, showAreaElement) {
   const button = this;
 
   function addEvent(result) {
-    const newTask = taskObject(
-      result.title,
-      result.details,
-      result.dueDate,
-      result.isImportant
-    );
-    projectObj.addTask(newTask);
-    showTasks(element, projectObj);
+    const newProject = projectObject(result.title);
+    projectManager.addProject(newProject);
+    addProjectItem(element, projectManager, newProject, showAreaElement);
     button.style.display = "";
   }
 
@@ -84,10 +63,12 @@ function showAddForm(element, projectObj) {
     button.style.display = "";
   }
 
-  const form = taskForm(addEvent, cancelEvent);
+  const form = projectForm(addEvent, cancelEvent);
   element.insertBefore(form, button);
   button.style.display = "none";
 }
 
-
-*/
+function showEvent(showAreaElement, projectObj) {
+  showAreaElement.innerHTML = "";
+  showAreaElement.append(projectElement(projectObj));
+}

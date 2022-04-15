@@ -8,12 +8,14 @@ import * as components from "./components";
 export function devTestTool() {
   load();
   let main = document.getElementById("content");
-
+  let sidebar = document.getElementById("sidebar");
   window.t = projectManager.project(0).task(0);
   window.p = projectManager.project(0);
+  window.m = projectManager;
 
-  let x = components.projectItem(window.p);
-  main.append(x);
+  let x = components.projectList(projectManager, main);
+
+  sidebar.append(x);
 }
 
 function tc() {
