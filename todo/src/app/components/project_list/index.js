@@ -6,7 +6,7 @@ import { projectForm } from "../project_form";
 import { project as projectObject } from "../../classes";
 import { project as projectElement } from "../project";
 
-export function projectList(projectManager, showAreaElement) {
+export function projectList(projectManager, showAreaElement, relatedLists) {
   const element = listElement("Projects", [], { autoSelect: true });
 
   projectManager.projects.forEach((projectObj) => {
@@ -19,6 +19,7 @@ export function projectList(projectManager, showAreaElement) {
     partial(showAddForm, element, projectManager, showAreaElement)
   );
 
+  element.relatedLists = relatedLists || [];
   element.append(addButton);
   return element;
 }
@@ -69,6 +70,7 @@ function showAddForm(element, projectManager, showAreaElement) {
 }
 
 function showEvent(showAreaElement, projectObj) {
+  this.relatedLists.forEach((list) => list.unselectAll());
   showAreaElement.innerHTML = "";
-  showAreaElement.append(projectElement(projectObj));
+  showAreaElement.append(projectElement(projectObj, false));
 }

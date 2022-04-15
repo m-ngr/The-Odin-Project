@@ -1,41 +1,6 @@
 import { task, project, projectManager } from "./classes";
-import * as components from "./components";
-
-/**
- * @todo change all CSS class names to a unique working group with a naming convension
- */
-
 export function devTestTool() {
   load();
-  let main = document.getElementById("content");
-  let sidebar = document.getElementById("sidebar");
-  window.t = projectManager.project(0).task(0);
-  window.p = projectManager.project(0);
-  window.m = projectManager;
-
-  let x = components.projectList(projectManager, main);
-
-  sidebar.append(x);
-}
-
-function tc() {
-  const t = document.createElement("p");
-  t.innerText = "Test Component";
-  return t;
-}
-
-function viewAllFilter() {
-  let viewAll = projectManager.filter((tsk) => {
-    return tsk.isCompleted === false;
-  });
-  return viewAll;
-}
-
-function viewImportantFilter() {
-  let viewAll = projectManager.filter((tsk) => {
-    return tsk.isImportant === true;
-  });
-  return viewAll;
 }
 
 function load() {

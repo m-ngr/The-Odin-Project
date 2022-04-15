@@ -5,26 +5,28 @@ import { partial } from "../../utils";
 import { taskForm } from "../task_form";
 import { task as taskObject } from "../../classes";
 
-export function project(projectObj) {
+export function project(projectObj, viewMode) {
   const element = listElement(projectObj.title);
 
-  showTasks(element, projectObj);
+  showTasks(element, projectObj, viewMode);
 
-  const addButton = iconTextButton(
-    "Add Task",
-    '<i class="fa-solid fa-plus"></i>',
-    partial(showAddForm, element, projectObj)
-  );
+  if (viewMode === false) {
+    const addButton = iconTextButton(
+      "Add Task",
+      '<i class="fa-solid fa-plus"></i>',
+      partial(showAddForm, element, projectObj, viewMode)
+    );
+    element.append(addButton);
+  }
 
-  element.append(addButton);
   return element;
 }
 
-function showTasks(element, projectObj) {
+function showTasks(element, projectObj, viewMode) {
   element.removeAll();
 
   const taskElements = projectObj.tasks.map((taskObj) =>
-    taskElement(taskObj, partial(deleteEvent, element, projectObj))
+    taskElement(taskObj, partial(deleteEvent, element, projectObj), viewMode)
   );
 
   element.addElements(...taskElements);
@@ -36,7 +38,7 @@ function deleteEvent(element, projectObj, taskObj, event) {
   element.removeElements(this.parentElement);
 }
 
-function showAddForm(element, projectObj) {
+function showAddForm(element, projectObj, viewMode) {
   const button = this;
 
   function addEvent(result) {
@@ -47,7 +49,7 @@ function showAddForm(element, projectObj) {
       result.isImportant
     );
     projectObj.addTask(newTask);
-    showTasks(element, projectObj);
+    showTasks(element, projectObj, viewMode);
     button.style.display = "";
   }
 

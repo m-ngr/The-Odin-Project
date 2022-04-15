@@ -1,28 +1,19 @@
-import { projectManager, project, task } from "./classes/index";
-import * as components from "./components/index";
+import { projectManager } from "./classes";
+import * as components from "./components";
 import { devTestTool } from "./test";
 
 export default function run() {
   setup();
   devTestTool();
-  // ================ TEST ==========================
+  let main = document.getElementById("content");
+  let sidebar = document.getElementById("sidebar");
 
-  // let t1 = task("Js Task Title", "details", "06/04/2022", false);
-  // let t2 = task("Js Task Title", "details", "06/04/2022", false);
-  // let t3 = task("Js Task Title", "details", "06/04/2022", false);
+  let viewsList = components.viewsList(projectManager, main);
+  let ProjectList = components.projectList(projectManager, main);
+  viewsList.relatedLists.push(ProjectList);
+  ProjectList.relatedLists.push(viewsList);
 
-  // let p1 = project("Project 1");
-  // p1.addTask(t1, t2, t3);
-  // let p2 = project("Project 2");
-
-  // let pm = projectManager;
-  // pm.addProject(p1);
-  // pm.addProject(p2);
-  // pm.selected = p1;
-
-  // document.getElementById("sidebar").append(components.projectList(pm));
-
-  // document.getElementById("content").append(components.project(pm.selected));
+  sidebar.append(viewsList, ProjectList);
 }
 
 function setup() {

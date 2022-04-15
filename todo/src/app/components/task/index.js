@@ -12,7 +12,7 @@ import "./index.css";
  * @param {(taskObj: taskObj, ev: MouseEvent) => any} deleteEvent
  */
 
-export function task(taskObj, deleteEvent) {
+export function task(taskObj, deleteEvent, viewMode) {
   const element = document.createElement("section");
   const taskElement = document.createElement("details");
   const headElement = document.createElement("summary");
@@ -24,9 +24,8 @@ export function task(taskObj, deleteEvent) {
   element.titleElement = textElement("task-title");
   element.dateElement = textElement();
   element.importantButton = importantButton(taskObj);
-  element.editButton = editButton(element, taskElement, taskObj);
-  element.deleteButton = deleteButton(element, taskObj, deleteEvent);
   element.detailsElement = bodyElement;
+
   element.load = load.bind(element);
 
   element.load(taskObj);
@@ -35,10 +34,16 @@ export function task(taskObj, deleteEvent) {
     element.checkButton,
     element.titleElement,
     element.dateElement,
-    element.importantButton,
-    element.editButton,
-    element.deleteButton
+    element.importantButton
   );
+
+  if (viewMode === false) {
+    element.editButton = editButton(element, taskElement, taskObj);
+    element.deleteButton = deleteButton(element, taskObj, deleteEvent);
+
+    headElement.append(element.editButton, element.deleteButton);
+  }
+
   taskElement.append(headElement, bodyElement);
   element.append(taskElement);
 
