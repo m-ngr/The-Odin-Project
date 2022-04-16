@@ -15,6 +15,9 @@
 
   --t-color1: #374958;
 
+  --red: red;
+  --gold: goldenrod;
+
   --accent-light: #2abd67;
   --accent-dark: #1f8d4d;
   --accent-bg: #2abd6770;
@@ -35,4 +38,8 @@
   --bg-color4: #273746;
 
   --t-color1: #eaebec;
+}
+
+.dark :is(input, textarea) {
+  color-scheme: dark;
 }

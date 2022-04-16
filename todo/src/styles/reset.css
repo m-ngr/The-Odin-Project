@@ -21,3 +21,8 @@ button {
   font: inherit;
   cursor: pointer;
 }
+
+input,
+textarea {
+  font: inherit;
+}

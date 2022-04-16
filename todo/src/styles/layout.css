@@ -28,3 +28,15 @@ main {
 footer {
   grid-area: footer;
 }
+
+@media screen and (max-width: 840px) {
+  body {
+    grid-template-columns: auto;
+    grid-template-rows: max-content max-content 1fr max-content;
+    grid-template-areas:
+      "header"
+      "side-bar"
+      "content"
+      "footer";
+  }
+}

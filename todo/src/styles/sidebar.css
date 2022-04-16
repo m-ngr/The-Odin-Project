@@ -5,68 +5,62 @@ aside {
   flex-direction: column;
   gap: var(--gap);
   user-select: none;
-
-  max-width: 350px;
-  width: 30vw;
-  min-width: max-content;
 }
 
 aside.hide {
   display: none;
 }
 
-aside h2 {
+.list-element.side-list {
+  padding: 0;
+}
+
+.side-list > h2 {
   border-bottom: 2px solid var(--t-color1);
   padding-bottom: 5px;
   margin-bottom: var(--small-gap);
 }
 
-.side-list > li {
+.side-item {
   background-color: var(--bg-color1);
-  padding: 5px var(--gap);
-  margin-bottom: 5px;
   border-radius: var(--small-rad);
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: max-content 1fr max-content;
-  align-items: center;
-  gap: 5px;
+  border-left: var(--small-rad) solid transparent;
 }
 
-.side-list > li:hover {
+.side-item:hover {
   filter: contrast(85%);
 }
 
-.side-list > li.selected {
-  border-left: var(--small-rad) solid var(--accent-light);
+.side-selected {
+  border-left-color: var(--accent-light);
   background-color: var(--accent-bg);
 }
 
-.add-btn {
+.side-item.edit-mode {
+  background-color: inherit;
+  color: inherit;
+  padding: var(--small-gap);
+  border-left-color: transparent;
+}
+
+.common-btn.add-project-btn {
   width: 100%;
-  display: flex;
-  align-items: center;
   gap: var(--gap);
   padding: var(--small-gap) var(--gap);
   border-radius: var(--small-rad);
   background-color: var(--bg-color2);
 }
 
-.add-btn:hover {
+.add-project-btn:hover {
   filter: contrast(85%);
 }
 
-.item-opt {
-  display: flex;
-  align-items: center;
-  gap: var(--small-gap);
-  visibility: hidden;
-}
-
-.item-opt > *:hover {
-  color: var(--accent-light);
-}
-
-.side-list > li:hover .item-opt {
-  visibility: visible;
+@media screen and (max-width: 480px) {
+  aside {
+    padding: var(--small-gap);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    user-select: none;
+  }
 }

@@ -3,7 +3,13 @@ import { iconTextButton, listElement } from "../../elements";
 import { project as projectElement } from "../project";
 
 export function viewsList(projectManager, showAreaElement, relatedLists) {
-  const element = listElement("Home", [], { autoSelect: true });
+  const element = listElement("Home", [], {
+    autoSelect: true,
+    selectedClass: "side-selected",
+    itemClass: "side-item",
+  });
+
+  element.classList.add("side-list");
 
   element.addElements(
     allTasksElement(element, projectManager, showAreaElement),
@@ -42,6 +48,8 @@ function allTasksElement(element, projectManager, showAreaElement) {
     clickEvent
   );
 
+  button.classList.add("view-btn");
+
   return button;
 }
 
@@ -60,6 +68,8 @@ function todayElement(element, projectManager, showAreaElement) {
     '<i class="fa-solid fa-calendar-day"></i>',
     clickEvent
   );
+
+  button.classList.add("view-btn");
 
   return button;
 }
@@ -85,6 +95,8 @@ function thisWeekElement(element, projectManager, showAreaElement) {
     clickEvent
   );
 
+  button.classList.add("view-btn");
+
   return button;
 }
 
@@ -101,6 +113,8 @@ function importantElement(element, projectManager, showAreaElement) {
     '<i class="fa-solid fa-star"></i>',
     clickEvent
   );
+
+  button.classList.add("view-btn");
 
   return button;
 }

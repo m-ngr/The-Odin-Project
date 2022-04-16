@@ -1,0 +1,41 @@
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+  width: 100%;
+}
+
+.project-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.project-form-input > input {
+  background-color: var(--bg-color1);
+  color: var(--t-color1);
+  border: 3px solid var(--t-color1);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.project-form-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.project-form-controls > button {
+  min-width: 100px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: white;
+}
+
+.project-add-btn {
+  background-color: green;
+}
+.project-cancel-btn {
+  background-color: red;
+}

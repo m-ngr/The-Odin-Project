@@ -6,7 +6,11 @@ import { taskForm } from "../task_form";
 import { task as taskObject } from "../../classes";
 
 export function project(projectObj, viewMode) {
-  const element = listElement(projectObj.title);
+  const element = listElement(projectObj.title, [], {
+    titleClass: "project-title",
+  });
+
+  element.classList.add("project");
 
   showTasks(element, projectObj, viewMode);
 
@@ -16,6 +20,9 @@ export function project(projectObj, viewMode) {
       '<i class="fa-solid fa-plus"></i>',
       partial(showAddForm, element, projectObj, viewMode)
     );
+
+    addButton.classList.add("add-task-btn");
+
     element.append(addButton);
   }
 

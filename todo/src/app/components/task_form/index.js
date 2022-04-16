@@ -95,11 +95,17 @@ function importantInput(form) {
   const button = binaryTextButton(
     null,
     false,
-    { title: "Mark as Important" },
-    { title: "Mark as Important" }
+    {
+      title: "Mark as Important",
+      faIconHTML: '<i class="fa-solid fa-star"></i>',
+      className: "task-form-important-checked",
+    },
+    {
+      title: "Mark as Important",
+      faIconHTML: '<i class="fa-regular fa-star"></i>',
+    }
   );
-
-  element.classList.add("task-form-check");
+  element.classList.add("task-form-important");
   button.type = "button";
   element.append(button);
   form.importantInput = button;
@@ -119,6 +125,8 @@ function controls(addEvent, closeEvent, submitButtonTitle) {
   cancelButton.addEventListener("click", closeEvent);
 
   element.className = "task-form-controls";
+  addButton.classList.add("task-add-btn");
+  cancelButton.classList.add("task-cancel-btn");
 
   element.append(addButton, cancelButton);
   return element;

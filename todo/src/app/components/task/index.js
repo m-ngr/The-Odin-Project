@@ -19,10 +19,11 @@ export function task(taskObj, deleteEvent, viewMode) {
   const bodyElement = document.createElement("p");
 
   element.className = "task-element";
+  bodyElement.className = "task-details";
 
   element.checkButton = checkButton(taskObj);
   element.titleElement = textElement("task-title");
-  element.dateElement = textElement();
+  element.dateElement = textElement("task-date");
   element.importantButton = importantButton(taskObj);
   element.detailsElement = bodyElement;
 
@@ -137,11 +138,15 @@ function editButton(element, taskElement, taskObj) {
     element.append(form);
   }
 
-  return iconButton(
+  const button = iconButton(
     "Edit",
     '<i class="fa-solid fa-pen-to-square"></i>',
     clickEvent
   );
+
+  button.className = "task-edit-btn";
+
+  return button;
 }
 
 function deleteButton(element, taskObj, deleteEvent) {
@@ -151,5 +156,12 @@ function deleteButton(element, taskObj, deleteEvent) {
     element.remove();
   }
 
-  return iconButton("Delete", '<i class="fa-solid fa-xmark"></i>', clickEvent);
+  const button = iconButton(
+    "Delete",
+    '<i class="fa-solid fa-xmark"></i>',
+    clickEvent
+  );
+
+  button.className = "task-delete-btn";
+  return button;
 }

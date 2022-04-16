@@ -1,13 +1,35 @@
 .list-element.project {
   padding: var(--gap) var(--large-gap);
+  gap: var(--gap);
+}
+
+.project > .list-element-list {
   gap: var(--small-gap);
 }
 
-.titled-list.project > h2 {
+.project-title {
   background-color: var(--accent-light);
   color: #f7f5f5;
   padding: var(--small-gap);
   border-radius: var(--small-rad);
   font-weight: normal;
   text-align: center;
+}
+
+.common-btn.add-task-btn {
+  background-color: var(--accent-dark);
+  color: #f7f5f5;
+  gap: var(--gap);
+  padding: var(--small-gap) var(--gap);
+  border-radius: var(--small-rad);
+}
+
+.add-task-btn:hover {
+  filter: contrast(85%);
+}
+
+@media screen and (max-width: 480px) {
+  .list-element.project {
+    padding: var(--gap) var(--small-gap);
+  }
 }

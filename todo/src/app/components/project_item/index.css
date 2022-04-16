@@ -1,9 +1,38 @@
 .project-item {
+  position: relative;
   display: flex;
-  gap: 20px;
+  width: 100%;
+}
+
+.project-item-btn {
+  flex-grow: 1;
+  justify-content: flex-start;
+  padding: 5px var(--gap);
+  padding-right: calc(var(--gap) + 30px + (2 * var(--small-gap)));
+}
+
+.project-item-btn > span {
+  text-align: left;
+  width: 150px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .project-item-controls {
+  position: absolute;
+  right: var(--small-gap);
+  top: 8.5px;
   display: flex;
-  gap: 10px;
+  gap: var(--small-gap);
+  align-items: center;
+  visibility: hidden;
+}
+
+.project-item-controls > *:hover {
+  color: var(--accent-light);
+}
+
+.side-item:hover .project-item-controls {
+  visibility: visible;
 }

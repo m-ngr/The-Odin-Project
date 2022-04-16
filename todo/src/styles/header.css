@@ -8,6 +8,7 @@ header {
   background-color: var(--bg-color3);
   font-size: 1.5rem;
   border-bottom: 2px solid var(--accent-dark);
+  user-select: none;
 }
 
 header > .logo {
@@ -16,7 +17,6 @@ header > .logo {
   gap: var(--small-gap);
 
   font-weight: bold;
-  user-select: none;
 }
 
 .logo > * {
@@ -48,4 +48,13 @@ header > .logo {
 
 .circle {
   border-radius: 50%;
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    padding: var(--small-gap);
+  }
+  .logo > * {
+    font-size: 1.8rem;
+  }
 }

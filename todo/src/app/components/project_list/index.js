@@ -1,4 +1,3 @@
-import "./index.css";
 import { iconTextButton, listElement } from "../../elements";
 import { projectItem } from "../project_item";
 import { partial } from "../../utils";
@@ -7,17 +6,25 @@ import { project as projectObject } from "../../classes";
 import { project as projectElement } from "../project";
 
 export function projectList(projectManager, showAreaElement, relatedLists) {
-  const element = listElement("Projects", [], { autoSelect: true });
+  const element = listElement("Projects", [], {
+    autoSelect: true,
+    selectedClass: "side-selected",
+    itemClass: "side-item",
+  });
+
+  element.classList.add("side-list");
 
   projectManager.projects.forEach((projectObj) => {
     addProjectItem(element, projectManager, projectObj, showAreaElement);
   });
 
   const addButton = iconTextButton(
-    "Add Task",
+    "Add Project",
     '<i class="fa-solid fa-plus"></i>',
     partial(showAddForm, element, projectManager, showAreaElement)
   );
+
+  addButton.classList.add("add-project-btn");
 
   element.relatedLists = relatedLists || [];
   element.append(addButton);
@@ -37,7 +44,7 @@ function addProjectItem(element, projectManager, projectObj, showAreaElement) {
 
 function updateEvent(element, projectObj, showAreaElement) {
   if (element.isSelected(this.parentElement)) {
-    showEvent(showAreaElement, projectObj);
+    showEvent.call(element, showAreaElement, projectObj);
   }
 }
 

@@ -1,11 +1,6 @@
 import "./index.css";
 
 /**
- * @todo change all classNames to project-form
- * @todo style the component
- */
-
-/**
  *
  * @param {(result:{title: String}, ev: MouseEvent) => any} submitEvent
  * @param {(ev: MouseEvent)=> any} cancelEvent
@@ -32,7 +27,7 @@ export function projectForm(
   form.titleInput = titleIn.inputElement;
 
   form.autocomplete = "off";
-  form.className = "task-form";
+  form.className = "project-form";
   form.load = load.bind(form);
 
   if (projectObj) form.load(projectObj);
@@ -50,13 +45,13 @@ function titleInput() {
   element.labelElement = document.createElement("label");
   element.inputElement = document.createElement("input");
 
-  element.labelElement.innerText = "Title:";
-  element.labelElement.setAttribute("for", "task-form-title");
-  element.inputElement.id = "task-form-title";
+  element.labelElement.innerText = "Project Title:";
+  element.labelElement.setAttribute("for", "project-form-title");
+  element.inputElement.id = "project-form-title";
   element.inputElement.type = "text";
   element.inputElement.required = true;
 
-  element.className = "task-form-input";
+  element.className = "project-form-input";
 
   element.append(element.labelElement, element.inputElement);
   return element;
@@ -71,10 +66,13 @@ function controls(addEvent, closeEvent, submitButtonTitle) {
   cancelButton.innerText = "Cancel";
   cancelButton.type = "button";
 
+  addButton.classList.add("project-add-btn");
+  cancelButton.classList.add("project-cancel-btn");
+
   addButton.addEventListener("click", addEvent);
   cancelButton.addEventListener("click", closeEvent);
 
-  element.className = "task-form-controls";
+  element.className = "project-form-controls";
 
   element.append(addButton, cancelButton);
   return element;

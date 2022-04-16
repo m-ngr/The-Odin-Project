@@ -13,14 +13,16 @@ export function projectItem(projectObj, clickEvent, deleteEvent, updateEvent) {
   const element = document.createElement("div");
   const controls = document.createElement("div");
 
-  element.className = "project-item";
-  controls.className = "project-item-controls";
-
   element.projectItem = iconTextButton(
     projectObj.title,
     '<i class="fa-solid fa-table-list"></i>',
     clickEvent.bind(element, projectObj)
   );
+
+  element.className = "project-item";
+  controls.className = "project-item-controls";
+  element.projectItem.classList.add("project-item-btn");
+
   element.load = load.bind(element);
 
   element.load(projectObj);
@@ -45,6 +47,12 @@ function load(projectObj) {
 }
 
 function setDisplay(elements = [], show) {
+  if (show) {
+    this.parentElement.classList.remove("edit-mode");
+  } else {
+    this.parentElement.classList.add("edit-mode");
+  }
+
   elements.forEach((ele) => {
     if (show) {
       ele.style.display = "";
