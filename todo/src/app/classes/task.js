@@ -1,3 +1,4 @@
+import { save } from "./index";
 class Task {
   #title = "";
   #details = "";
@@ -6,10 +7,10 @@ class Task {
   #isImportant = false;
 
   constructor(title, details, dueDate, isImportant) {
-    this.title = title;
-    this.details = details;
-    this.dueDate = dueDate;
-    this.isImportant = isImportant;
+    this.#title = title;
+    this.#details = details;
+    this.#dueDate = new Date(dueDate);
+    this.#isImportant = Boolean(isImportant);
   }
 
   get title() {
@@ -17,6 +18,7 @@ class Task {
   }
   set title(value) {
     this.#title = value;
+    save();
   }
 
   get details() {
@@ -24,6 +26,7 @@ class Task {
   }
   set details(value) {
     this.#details = value;
+    save();
   }
 
   get dueDate() {
@@ -31,6 +34,7 @@ class Task {
   }
   set dueDate(value) {
     this.#dueDate = new Date(value);
+    save();
   }
 
   get isImportant() {
@@ -38,6 +42,7 @@ class Task {
   }
   set isImportant(value) {
     this.#isImportant = Boolean(value);
+    save();
   }
 
   get isCompleted() {
@@ -45,6 +50,28 @@ class Task {
   }
   set isCompleted(value) {
     this.#isCompleted = Boolean(value);
+    save();
+  }
+
+  toJSON() {
+    return {
+      title: this.title,
+      details: this.details,
+      dueDate: this.dueDate.toJSON(),
+      isImportant: this.isImportant,
+      isCompleted: this.isCompleted,
+    };
+  }
+
+  fromJSON(taskJSON) {
+    if (taskJSON) {
+      this.#title = taskJSON.title;
+      this.#details = taskJSON.details;
+      this.#dueDate = new Date(taskJSON.dueDate);
+      this.#isImportant = Boolean(taskJSON.isImportant);
+      this.#isCompleted = Boolean(taskJSON.isCompleted);
+    }
+    return this;
   }
 }
 

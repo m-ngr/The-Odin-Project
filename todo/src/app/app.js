@@ -1,10 +1,13 @@
-import { projectManager } from "./classes";
+import { projectManager, load } from "./classes";
 import * as components from "./components";
-import { devTestTool } from "./test";
 
 export default function run() {
   setup();
-  devTestTool();
+  load();
+  show();
+}
+
+function show() {
   let main = document.getElementById("content");
   let sidebar = document.getElementById("sidebar");
 

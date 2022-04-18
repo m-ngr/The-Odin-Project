@@ -1,3 +1,5 @@
+import { project, save } from "./index";
+
 let _projects = [];
 
 export const projectManager = {
@@ -11,10 +13,12 @@ export const projectManager = {
 
   addProject(...projects) {
     _projects.push(...projects);
+    save();
   },
 
   removeProject(targetProject) {
     _projects = _projects.filter((project) => project !== targetProject);
+    save();
   },
 
   filter(pred) {
@@ -31,5 +35,16 @@ export const projectManager = {
     });
 
     return viewItems;
+  },
+
+  toJSON() {
+    return this.projects.map((proj) => proj.toJSON());
+  },
+
+  fromJSON(json) {
+    if (json) {
+      _projects = json.map((proj) => project().fromJSON(proj));
+    }
+    return this;
   },
 };
