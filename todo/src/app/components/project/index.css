@@ -8,24 +8,11 @@
 }
 
 .project-title {
-  background-color: var(--accent-light);
-  color: #f7f5f5;
+  background-color: var(--accent-bg);
   padding: var(--small-gap);
   border-radius: var(--small-rad);
   font-weight: normal;
   text-align: center;
-}
-
-.common-btn.add-task-btn {
-  background-color: var(--accent-dark);
-  color: #f7f5f5;
-  gap: var(--gap);
-  padding: var(--small-gap) var(--gap);
-  border-radius: var(--small-rad);
-}
-
-.add-task-btn:hover {
-  filter: contrast(85%);
 }
 
 @media screen and (max-width: 480px) {

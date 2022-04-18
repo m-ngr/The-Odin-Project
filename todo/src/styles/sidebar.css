@@ -13,12 +13,13 @@ aside.hide {
 
 .list-element.side-list {
   padding: 0;
+  gap: var(--gap);
 }
 
 .side-list > h2 {
-  border-bottom: 2px solid var(--t-color1);
-  padding-bottom: 5px;
-  margin-bottom: var(--small-gap);
+  border-bottom: 2px solid;
+  padding-bottom: var(--tiny-gap);
+  font-weight: normal;
 }
 
 .side-item {
@@ -27,12 +28,8 @@ aside.hide {
   border-left: var(--small-rad) solid transparent;
 }
 
-.side-item:hover {
-  filter: contrast(85%);
-}
-
 .side-selected {
-  border-left-color: var(--accent-light);
+  border-left-color: var(--accent);
   background-color: var(--accent-bg);
 }
 
@@ -43,24 +40,16 @@ aside.hide {
   border-left-color: transparent;
 }
 
-.common-btn.add-project-btn {
-  width: 100%;
-  gap: var(--gap);
-  padding: var(--small-gap) var(--gap);
-  border-radius: var(--small-rad);
-  background-color: var(--bg-color2);
+.side-list > ul .icon-text-btn > i {
+  color: var(--accent);
 }
 
-.add-project-btn:hover {
-  filter: contrast(85%);
+.side-list .side-selected .icon-text-btn > i {
+  color: inherit;
 }
 
 @media screen and (max-width: 480px) {
   aside {
     padding: var(--small-gap);
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap);
-    user-select: none;
   }
 }

@@ -21,7 +21,7 @@ export function project(projectObj, viewMode) {
       partial(showAddForm, element, projectObj, viewMode)
     );
 
-    addButton.classList.add("add-task-btn");
+    addButton.classList.add("show-form-btn", "hover");
 
     element.append(addButton);
   }

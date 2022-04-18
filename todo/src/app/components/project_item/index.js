@@ -22,6 +22,7 @@ export function projectItem(projectObj, clickEvent, deleteEvent, updateEvent) {
   element.className = "project-item";
   controls.className = "project-item-controls";
   element.projectItem.classList.add("project-item-btn");
+  element.projectItem.titleElement.classList.add("limited-text");
 
   element.load = load.bind(element);
 
@@ -89,11 +90,15 @@ function editButton(element, projectObj, show, hide, externalUpdateEvent) {
     element.append(form);
   }
 
-  return iconButton(
+  const button = iconButton(
     "Edit",
     '<i class="fa-solid fa-pen-to-square"></i>',
     clickEvent
   );
+
+  button.classList.add("edit-ibtn");
+
+  return button;
 }
 
 function deleteButton(element, projectObj, deleteEvent) {
@@ -106,5 +111,13 @@ function deleteButton(element, projectObj, deleteEvent) {
     element.remove();
   }
 
-  return iconButton("Delete", '<i class="fa-solid fa-xmark"></i>', clickEvent);
+  const button = iconButton(
+    "Delete",
+    '<i class="fa-solid fa-xmark"></i>',
+    clickEvent
+  );
+
+  button.classList.add("delete-ibtn");
+
+  return button;
 }

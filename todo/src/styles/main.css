@@ -3,6 +3,8 @@
 
 @import url(./reset.css);
 @import url(./layout.css);
+@import url(./general.css);
+@import url(./add_form.css);
 @import url(./header.css);
 @import url(./sidebar.css);
 @import url(./footer.css);
@@ -13,15 +15,14 @@
   --bg-color3: #f2f3f5;
   --bg-color4: #f3f1f3;
 
-  --t-color1: #374958;
+  --t-color1: #2b3339;
 
-  --red: red;
-  --gold: goldenrod;
+  --accent: #1f8d4d;
+  --accent-bg: #99ff99;
+  --red: #ff6767;
+  --gold: #daa520;
 
-  --accent-light: #2abd67;
-  --accent-dark: #1f8d4d;
-  --accent-bg: #2abd6770;
-
+  --tiny-gap: 5px;
   --small-gap: 10px;
   --gap: 20px;
   --large-gap: 40px;
@@ -37,9 +38,10 @@
   --bg-color3: #22303c;
   --bg-color4: #273746;
 
-  --t-color1: #eaebec;
-}
+  --t-color1: #f5f5f5;
 
-.dark :is(input, textarea) {
-  color-scheme: dark;
+  --accent: #2abd67;
+  --accent-bg: #2abd67a0;
+  --red: #ff3b18;
+  --gold: #ffb700;
 }

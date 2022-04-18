@@ -6,7 +6,7 @@ export function viewsList(projectManager, showAreaElement, relatedLists) {
   const element = listElement("Home", [], {
     autoSelect: true,
     selectedClass: "side-selected",
-    itemClass: "side-item",
+    itemClass: "side-item hover",
   });
 
   element.classList.add("side-list");

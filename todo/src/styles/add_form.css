@@ -1,0 +1,53 @@
+.common-btn.show-form-btn {
+  gap: var(--gap);
+  padding: var(--small-gap) var(--gap);
+  border-radius: var(--small-rad);
+  background-color: var(--accent-bg);
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tiny-gap);
+}
+
+.form-input > :is(input, textarea) {
+  outline: none;
+  background-color: inherit;
+  color: inherit;
+  border: 2px solid;
+  border-radius: var(--small-rad);
+  padding: var(--tiny-gap) var(--small-gap);
+}
+
+.form-input > :is(input, textarea):focus-visible {
+  border-color: var(--accent);
+}
+
+.form-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap);
+  margin-top: var(--gap);
+}
+
+.form-controls > button {
+  min-width: 100px;
+  padding: var(--tiny-gap) var(--small-gap);
+  border-radius: var(--small-rad);
+}
+
+.form-add-btn {
+  background-color: var(--accent-bg);
+}
+
+.form-cancel-btn {
+  background-color: var(--red);
+}

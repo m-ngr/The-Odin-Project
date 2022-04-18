@@ -1,7 +1,7 @@
 .task-element {
-  padding: calc(var(--small-gap) / 2) var(--small-gap);
+  padding: var(--tiny-gap) var(--small-gap);
   border: 2px solid;
-  border-radius: 5px;
+  border-radius: var(--small-rad);
 }
 
 .task-element summary::marker {
@@ -11,18 +11,14 @@
 .task-element summary {
   cursor: pointer;
   user-select: none;
-
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--small-gap);
 }
 
 .task-title {
   flex-grow: 1;
   width: 100px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .task-date {
@@ -30,24 +26,23 @@
 }
 
 .task-completed {
-  color: green;
+  color: var(--accent);
 }
 
+.task-important-btn:hover,
 .task-important {
-  color: goldenrod;
-}
-
-.task-edit-btn:hover {
-  color: goldenrod;
-}
-
-.task-delete-btn:hover {
-  color: red;
+  color: var(--gold);
 }
 
 .task-details {
   font-size: smaller;
   font-style: italic;
-  margin-left: 10px;
-  margin-top: 5px;
+  margin-left: var(--small-gap);
+  margin-top: var(--tiny-gap);
+}
+
+@media screen and (max-width: 480px) {
+  .task-element summary {
+    gap: var(--tiny-gap);
+  }
 }

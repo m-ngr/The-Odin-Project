@@ -27,7 +27,7 @@ export function projectForm(
   form.titleInput = titleIn.inputElement;
 
   form.autocomplete = "off";
-  form.className = "project-form";
+  form.className = "add-form project-form";
   form.load = load.bind(form);
 
   if (projectObj) form.load(projectObj);
@@ -51,7 +51,7 @@ function titleInput() {
   element.inputElement.type = "text";
   element.inputElement.required = true;
 
-  element.className = "project-form-input";
+  element.className = "form-input";
 
   element.append(element.labelElement, element.inputElement);
   return element;
@@ -66,13 +66,13 @@ function controls(addEvent, closeEvent, submitButtonTitle) {
   cancelButton.innerText = "Cancel";
   cancelButton.type = "button";
 
-  addButton.classList.add("project-add-btn");
-  cancelButton.classList.add("project-cancel-btn");
+  addButton.classList.add("form-add-btn", "hover");
+  cancelButton.classList.add("form-cancel-btn", "hover");
 
   addButton.addEventListener("click", addEvent);
   cancelButton.addEventListener("click", closeEvent);
 
-  element.className = "project-form-controls";
+  element.className = "form-controls";
 
   element.append(addButton, cancelButton);
   return element;

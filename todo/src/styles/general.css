@@ -1,0 +1,50 @@
+.dark :is(input, textarea) {
+  color-scheme: dark;
+}
+
+/* .hover:hover {
+  filter: contrast(85%);
+} */
+
+.hover:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+}
+
+.dark .hover:hover {
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+.active-scale:active {
+  transform: scale(90%);
+}
+
+.circle {
+  border-radius: 50%;
+  padding: var(--small-gap);
+  line-height: 1;
+}
+
+.rectangle {
+  border-radius: var(--small-rad);
+  padding: var(--small-gap);
+  line-height: 1;
+}
+
+.limited-text {
+  text-align: left;
+  width: 150px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.edit-ibtn:hover {
+  color: var(--accent);
+}
+
+.delete-ibtn:hover {
+  color: var(--red);
+}

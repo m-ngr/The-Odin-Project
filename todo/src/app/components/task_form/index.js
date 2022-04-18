@@ -22,7 +22,7 @@ export function taskForm(submitEvent, cancelEvent, submitButtonTitle, taskObj) {
   );
 
   form.autocomplete = "off";
-  form.className = "task-form";
+  form.className = "add-form task-form";
   form.load = load.bind(form);
 
   if (taskObj) form.load(taskObj);
@@ -49,7 +49,7 @@ function titleInput(form) {
   input.type = "text";
   input.required = true;
 
-  element.className = "task-form-input";
+  element.className = "form-input";
 
   element.append(label, input);
   form.titleInput = input;
@@ -65,7 +65,7 @@ function detailsInput(form) {
   label.setAttribute("for", "task-form-details");
   input.id = "task-form-details";
 
-  element.className = "task-form-input";
+  element.className = "form-input";
 
   element.append(label, input);
   form.detailsInput = input;
@@ -83,7 +83,7 @@ function dateInput(form) {
   input.type = "date";
   input.required = true;
 
-  element.className = "task-form-input";
+  element.className = "form-input";
 
   element.append(label, input);
   form.dateInput = input;
@@ -98,14 +98,14 @@ function importantInput(form) {
     {
       title: "Mark as Important",
       faIconHTML: '<i class="fa-solid fa-star"></i>',
-      className: "task-form-important-checked",
+      className: "form-important-checked",
     },
     {
       title: "Mark as Important",
       faIconHTML: '<i class="fa-regular fa-star"></i>',
     }
   );
-  element.classList.add("task-form-important");
+  element.classList.add("form-important");
   button.type = "button";
   element.append(button);
   form.importantInput = button;
@@ -124,9 +124,9 @@ function controls(addEvent, closeEvent, submitButtonTitle) {
   addButton.addEventListener("click", addEvent);
   cancelButton.addEventListener("click", closeEvent);
 
-  element.className = "task-form-controls";
-  addButton.classList.add("task-add-btn");
-  cancelButton.classList.add("task-cancel-btn");
+  element.className = "form-controls";
+  addButton.classList.add("form-add-btn", "hover");
+  cancelButton.classList.add("form-cancel-btn", "hover");
 
   element.append(addButton, cancelButton);
   return element;

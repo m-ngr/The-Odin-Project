@@ -9,7 +9,7 @@ export function projectList(projectManager, showAreaElement, relatedLists) {
   const element = listElement("Projects", [], {
     autoSelect: true,
     selectedClass: "side-selected",
-    itemClass: "side-item",
+    itemClass: "side-item hover",
   });
 
   element.classList.add("side-list");
@@ -24,7 +24,7 @@ export function projectList(projectManager, showAreaElement, relatedLists) {
     partial(showAddForm, element, projectManager, showAreaElement)
   );
 
-  addButton.classList.add("add-project-btn");
+  addButton.classList.add("show-form-btn", "hover");
 
   element.relatedLists = relatedLists || [];
   element.append(addButton);

@@ -22,7 +22,7 @@ export function task(taskObj, deleteEvent, viewMode) {
   bodyElement.className = "task-details";
 
   element.checkButton = checkButton(taskObj);
-  element.titleElement = textElement("task-title");
+  element.titleElement = textElement("limited-text task-title");
   element.dateElement = textElement("task-date");
   element.importantButton = importantButton(taskObj);
   element.detailsElement = bodyElement;
@@ -144,7 +144,7 @@ function editButton(element, taskElement, taskObj) {
     clickEvent
   );
 
-  button.className = "task-edit-btn";
+  button.className = "edit-ibtn";
 
   return button;
 }
@@ -162,6 +162,6 @@ function deleteButton(element, taskObj, deleteEvent) {
     clickEvent
   );
 
-  button.className = "task-delete-btn";
+  button.className = "delete-ibtn";
   return button;
 }

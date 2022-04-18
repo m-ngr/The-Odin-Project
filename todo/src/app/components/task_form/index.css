@@ -1,53 +1,13 @@
 .task-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--small-gap);
   padding: var(--small-gap);
-  border-radius: 5px;
-  margin-top: 10px;
+  border-radius: var(--small-rad);
+  margin-top: var(--small-gap);
 }
 
-.task-form-input {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.form-important > button {
+  gap: var(--small-gap);
 }
 
-.task-form-input > :is(input, textarea) {
-  background-color: var(--bg-color1);
-  color: var(--t-color1);
-  border: 2px solid var(--t-color1);
-  border-radius: 5px;
-  padding: 5px 10px;
-}
-
-.task-form-important > button {
-  gap: 10px;
-  align-items: center;
-}
-
-.task-form-important-checked {
-  color: goldenrod;
-}
-
-.task-form-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--gap);
-  margin-top: 20px;
-}
-
-.task-form-controls > button {
-  min-width: 100px;
-  padding: 5px 15px;
-  border-radius: 5px;
-  color: white;
-}
-
-.task-add-btn {
-  background-color: green;
-}
-.task-cancel-btn {
-  background-color: red;
+.form-important-checked {
+  color: var(--gold);
 }
