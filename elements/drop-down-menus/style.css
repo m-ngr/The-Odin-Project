@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  display: flex;
+  gap: 10px;
+}
+/* ==================================== bones ======================================== */
+.ddl {
+  position: relative;
+  user-select: none;
+}
+
+.ddl-btn {
+  appearance: none;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ddl-list {
+  list-style: none;
+  position: absolute;
+}
+
+.ddl.hide > .ddl-list {
+  display: none;
+}
+
+.ddl-list > * {
+  cursor: pointer;
+}
+/* ==================================== shape ==================================== */
+.rect-ddl > .ddl-btn {
+  padding: 5px 15px;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+}
+
+.rect-ddl.hide > .ddl-btn {
+  border-radius: 5px;
+}
+
+.rect-ddl > .ddl-list {
+  border: 2px solid;
+  border-radius: 0 0 5px 5px;
+  padding: 5px 0px;
+  min-width: 100%;
+}
+
+.rect-ddl > .ddl-list > * {
+  padding: 5px 20px;
+  word-break: normal;
+}
+/* ------------------------------ */
+.wide-ddl {
+  width: 200px;
+}
+/* ========================================== color ====================================== */
+
+.blue-ddl > .ddl-btn {
+  background-color: royalblue;
+  color: white;
+}
+
+.blue-ddl > .ddl-list {
+  border-color: royalblue;
+}
+
+.blue-ddl > .ddl-list > *:hover {
+  background-color: lightskyblue;
+}
+
+.blue-ddl > .ddl-list > *:active {
+  background-color: royalblue;
+  color: white;
+}
+/* ----------------------------------------- */
+.green-ddl > .ddl-btn {
+  background-color: teal;
+  color: white;
+}
+
+.green-ddl > .ddl-list {
+  border-color: teal;
+}
+
+.green-ddl > .ddl-list > *:hover {
+  background-color: rgb(198, 233, 198);
+}
+
+.green-ddl > .ddl-list > *:active {
+  background-color: teal;
+  color: white;
+}
