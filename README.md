@@ -27,3 +27,5 @@ This page contains a list of projects I made throughout The Odin Project curricu
 - Project 2: [Tic Tac Toe](https://m-ngr.github.io/The-Odin-Project/tic-tac-toe/ "OOP using Factory, Module, and Mediator Patterns").
 
 - Project 3: [Restaurant](https://m-ngr.github.io/The-Odin-Project/restaurant/dist/ "Modular JS Project using Webpack").
+
+- Project 4: [Todo List](https://m-ngr.github.io/The-Odin-Project/todo/dist/).
