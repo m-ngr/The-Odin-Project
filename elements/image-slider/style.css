@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  width: 700px;
+  height: 300px;
+}
+/* ==================================== slider ======================================== */
+.slider {
+  position: relative;
+  background-color: rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.slider > figure {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.slider > figure > img {
+  width: 0;
+  transition: width 600ms;
+}
+
+.slider > figure > img.show {
+  width: 100%;
+}
+
+.slider > button {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  color: white;
+  font-size: 50px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.18);
+  visibility: hidden;
+  bottom: 0;
+}
+
+.slider > button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.right {
+  right: 0;
+}
+
+.slider > .dots {
+  display: flex;
+  gap: 5px;
+  padding: 5px 8px;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  visibility: hidden;
+}
+
+.slider:hover > :is(button, .dots) {
+  visibility: visible;
+}
+
+.slider .dot {
+  width: 15px;
+  height: 15px;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.slider .dot.show {
+  background-color: white;
+}
+
+.slider .dot:hover {
+  transform: scale(120%);
+}
