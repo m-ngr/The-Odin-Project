@@ -9,7 +9,11 @@ header {
 }
 
 header > * {
-  font-size: clamp(36px, 10vw, 54px);
+  font-size: clamp(2rem, 10vw, 3rem);
+}
+
+.logo {
+  color: var(--accent);
 }
 
 @media screen and (max-width: 480px) {

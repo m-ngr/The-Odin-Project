@@ -18,7 +18,28 @@
       <h1>Weather App</h1>
     </header>
 
-    <main></main>
+    <main>
+      <div class="search">
+        <input type="text" id="search-input" placeholder="Enter city name" />
+        <button id="search-btn">Search</button>
+      </div>
+
+      <div id="weather-info" class="card hide">
+        <div class="location">
+          <h2 id="city-name"></h2>
+          <span id="country"></span>
+        </div>
+        <span id="temperature"></span>
+        <span id="temperature-feel"></span>
+        <span id="humidity"></span>
+        <span id="wind"></span>
+      </div>
+
+      <div id="weather-error" class="error hide">
+        <i class="fa-solid fa-xmark"></i>
+        <span id="error-msg"></span>
+      </div>
+    </main>
 
     <footer>
       <p>Coded by Mahmoud Elnagar</p>

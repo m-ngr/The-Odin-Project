@@ -10,6 +10,7 @@
 @import url(./layout.css);
 @import url(./header.css);
 @import url(./content.css);
+@import url(./output.css);
 @import url(./footer.css);
 
 :root {
@@ -17,9 +18,9 @@
   --color-2: #f5f5f5;
   --accent: #acb4f4;
 
-  --gap: 20px;
-  --small-gap: 10px;
+  --gap: 1.12rem;
+  --small-gap: 0.56rem;
 
-  --rad: 10px;
-  --small-rad: 5px;
+  --rad: 0.56rem;
+  --small-rad: 0.3rem;
 }
