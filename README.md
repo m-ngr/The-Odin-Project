@@ -28,4 +28,6 @@ This page contains a list of projects I made throughout The Odin Project curricu
 
 - Project 3: [Restaurant](https://m-ngr.github.io/The-Odin-Project/restaurant/dist/ "Modular JS Project using Webpack").
 
-- Project 4: [Todo List](https://m-ngr.github.io/The-Odin-Project/todo/dist/).
+- Project 4: [Todo List](https://m-ngr.github.io/The-Odin-Project/todo/dist/ "OOP final project").
+
+- Project 5: [Weather App](https://m-ngr.github.io/The-Odin-Project/weather/dist/ "API based project").
