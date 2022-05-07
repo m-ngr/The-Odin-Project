@@ -1,0 +1,2 @@
+// using babel to allow ES Modules with Jest
+{ "presets": ["@babel/preset-env"] }
