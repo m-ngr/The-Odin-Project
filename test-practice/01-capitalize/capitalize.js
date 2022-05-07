@@ -5,7 +5,9 @@
  */
 
 export function capitalize(value) {
-  if (!value) return "";
-  value = value.toLocaleLowerCase();
-  return value.at(0).toLocaleUpperCase() + value.slice(1);
+  if (typeof value === "string") {
+    if (!value) return "";
+    value = value.toLocaleLowerCase();
+    return value.at(0).toLocaleUpperCase() + value.slice(1);
+  }
 }

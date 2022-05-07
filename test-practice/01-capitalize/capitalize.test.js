@@ -1,13 +1,5 @@
 import { capitalize } from "./capitalize";
 
-test("undefined => ''", () => {
-  expect(capitalize()).toBe("");
-});
-
-test("null => ''", () => {
-  expect(capitalize(null)).toBe("");
-});
-
 test("empty string", () => {
   expect(capitalize("")).toBe("");
 });
@@ -34,4 +26,8 @@ test("mixed-case string", () => {
 
 test("no capitalization on strings that starts with symbols", () => {
   expect(capitalize("#web DeV!")).toBe("#web dev!");
+});
+
+test("non-string value", () => {
+  expect(capitalize(123)).toBe(undefined);
 });
