@@ -23,10 +23,6 @@ describe("ship object", () => {
 });
 
 describe("length property", () => {
-  test("should exist", () => {
-    expect(ship(4)).toHaveProperty("length");
-  });
-
   test("should be a function", () => {
     expect(ship(4).length).toBeInstanceOf(Function);
   });
@@ -39,10 +35,6 @@ describe("length property", () => {
 });
 
 describe("hit property", () => {
-  test("should exist", () => {
-    expect(ship(4)).toHaveProperty("hit");
-  });
-
   test("should be a function", () => {
     expect(ship(4).hit).toBeInstanceOf(Function);
   });
@@ -77,10 +69,6 @@ describe("hit property", () => {
 });
 
 describe("isSunk property", () => {
-  test("should exist", () => {
-    expect(ship(4)).toHaveProperty("isSunk");
-  });
-
   test("should be a function", () => {
     expect(ship(4).isSunk).toBeInstanceOf(Function);
   });
