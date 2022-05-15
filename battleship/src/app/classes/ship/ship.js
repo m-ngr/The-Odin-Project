@@ -10,16 +10,27 @@ export default function ship(length) {
 
   return {
     length: () => parts.length,
-
-    hit(position) {
-      if (typeof position === "number" && parts[position] === ALIVE) {
-        parts[position] = HIT;
-        return true;
+    /**
+     * @param {number} position
+     */
+    isHit(position) {
+      if (typeof position !== "number" || position < 0 || position >= length) {
+        throw Error(`Position must be a number in range [0,${length})`);
       }
-
-      return false;
+      return parts[position] !== ALIVE;
     },
-
+    /**
+     * @param {number} position
+     */
+    hit(position) {
+      if (this.isHit(position)) {
+        throw Error("this position has been hit before");
+      }
+      parts[position] = HIT;
+    },
+    /**
+     * @returns {boolean}
+     */
     isSunk: () => parts.reduce((p, c) => p && c === HIT, true),
   };
 }

@@ -1,6 +1,6 @@
 import ship from "./ship";
 
-describe("ship object", () => {
+describe("ship factory", () => {
   test("should throw error if length parameter isn't a number", () => {
     expect(() => {
       ship(null);
@@ -34,37 +34,79 @@ describe("length property", () => {
   });
 });
 
+describe("isHit property", () => {
+  test("should be a function", () => {
+    expect(ship(4).isHit).toBeInstanceOf(Function);
+  });
+
+  test("should throw error if if position isn't a non-negative number", () => {
+    expect(() => {
+      ship(4).isHit();
+    }).toThrow();
+
+    expect(() => {
+      ship(4).isHit("2");
+    }).toThrow();
+
+    expect(() => {
+      ship(4).isHit(-1);
+    }).toThrow();
+  });
+
+  test("should throw error if position >= ship.length()", () => {
+    expect(() => {
+      ship(4).isHit(4);
+    }).toThrow();
+    expect(() => {
+      ship(4).isHit(5);
+    }).toThrow();
+  });
+
+  test("should return false if position wasn't hit before", () => {
+    expect(ship(4).isHit(1)).toBe(false);
+  });
+
+  test("should return true if position was hit before", () => {
+    const testShip = ship(5);
+    testShip.hit(2);
+    expect(testShip.isHit(2)).toBe(true);
+  });
+});
+
 describe("hit property", () => {
   test("should be a function", () => {
     expect(ship(4).hit).toBeInstanceOf(Function);
   });
 
-  test("should return false if position isn't a number", () => {
-    expect(ship(4).hit()).toBe(false);
-    expect(ship(4).hit("2")).toBe(false);
-    expect(ship(4).hit([0, 3])).toBe(false);
+  test("should throw error if if position isn't a non-negative number", () => {
+    expect(() => {
+      ship(4).hit();
+    }).toThrow();
+
+    expect(() => {
+      ship(4).hit("2");
+    }).toThrow();
+
+    expect(() => {
+      ship(4).hit(-1);
+    }).toThrow();
   });
 
-  test("should return false if position is negative", () => {
-    expect(ship(4).hit(-1)).toBe(false);
+  test("should throw error if position >= ship.length()", () => {
+    expect(() => {
+      ship(4).hit(4);
+    }).toThrow();
+    expect(() => {
+      ship(4).hit(5);
+    }).toThrow();
   });
 
-  test("should return false if position >= ship.length()", () => {
-    expect(ship(4).hit(4)).toBe(false);
-    expect(ship(4).hit(5)).toBe(false);
-  });
-
-  test("should return false if position was hit before", () => {
+  test("should throw error if position was hit before", () => {
     const testShip = ship(5);
     testShip.hit(2);
-    expect(testShip.hit(2)).toBe(false);
-  });
-
-  test("should return true if position wasn't hit before", () => {
-    const testShip = ship(3);
-    expect(testShip.hit(0)).toBe(true);
-    expect(testShip.hit(1)).toBe(true);
-    expect(testShip.hit(2)).toBe(true);
+    expect(() => {
+      testShip.hit(2);
+    }).toThrow();
   });
 });
 
