@@ -2,7 +2,7 @@ import { Component } from "react";
 import ControlledList from "../ControlledList/ControlledList";
 import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
-import PersonalInfo from "../PersonalInfo/PersonalInfo";
+import Personal from "../Personal/Personal";
 import PreviewCV from "../PreviewCV/PreviewCV";
 import Slider from "../Slider/Slider";
 
@@ -17,7 +17,7 @@ export default class CVBuilder extends Component {
 
     return (
       <Slider>
-        <PersonalInfo info={personal} update={this.updatePersonal} />
+        <Personal info={personal} update={this.updatePersonal} />
         <ExperienceList info={experience} update={this.updateExperience} />
         <EducationList info={education} update={this.updateEducation} />
         <PreviewCV info={this.state} />
