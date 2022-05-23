@@ -10,7 +10,7 @@ export default class Slider extends Component {
   render() {
     return (
       <section>
-        <div>{this.getCurrentSlide()}</div>
+        {this.getCurrentSlide()}
         {this.backButton()}
         {this.nextButton()}
       </section>
