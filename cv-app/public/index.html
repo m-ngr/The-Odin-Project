@@ -2,24 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      rel="icon"
+      href="%PUBLIC_URL%/favicon.svg"
+      sizes="any"
+      type="image/svg+xml"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="CV builder app" />
     <title>CV App</title>
   </head>
   <body>
+    <header>
+      <span class="logo"><i class="fa-solid fa-paper-plane"></i></span>
+      <h1>CV Builder App</h1>
+    </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <main id="root"></main>
+    <footer>
+      <p>Coded by Mahmoud Elnagar</p>
+      <nav class="social-links">
+        <a
+          class="social-icon"
+          title="github"
+          href="https://github.com/m-ngr"
+          target="_blank"
+        >
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a
+          class="social-icon"
+          title="linkedin"
+          href="https://www.linkedin.com/in/m-ngr/"
+          target="_blank"
+        >
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a
+          class="social-icon"
+          title="twitter"
+          href="https://twitter.com/dev_ngr"
+          target="_blank"
+        >
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </nav>
+    </footer>
   </body>
 </html>

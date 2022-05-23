@@ -1,0 +1,24 @@
+header {
+  padding: var(--gap);
+  font-family: "Antic Slab", serif;
+  display: flex;
+  gap: var(--gap);
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+header > * {
+  font-size: clamp(1.8rem, 10vw, 3rem);
+}
+
+.logo {
+  color: var(--accent);
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    padding: var(--gap) var(--small-gap);
+    gap: var(--small-gap);
+  }
+}
