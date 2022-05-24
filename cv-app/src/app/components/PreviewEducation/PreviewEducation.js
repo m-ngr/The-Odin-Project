@@ -2,29 +2,27 @@ import { Component } from "react";
 
 export default class PreviewEducation extends Component {
   render() {
-    const { university, city, degree, subject, from, to } =
+    const { university, description, course, from, to } =
       this.getPrintableText();
     return (
-      <section>
-        <span>{university}</span>
-        <span>{city}</span>
-        <span>{degree}</span>
-        <span>{subject}</span>
-        <span>{from}</span>
-        <span>{to}</span>
+      <section className={this.props.className}>
+        <div>
+          <h4>{course}</h4>
+          <span>{`${university} | ${from} - ${to}`}</span>
+        </div>
+        <p>{description}</p>
       </section>
     );
   }
   getPrintableText() {
-    let { university, city, degree, subject, from, to } = this.props.info;
+    let { university, description, course, from, to } = this.props.info;
 
     university = university || "University";
-    city = city || "City";
-    degree = degree || "Degree";
-    subject = subject || "Subject";
+    description = description || "";
+    course = course || "Course";
     from = from || "From";
     to = to || "To";
 
-    return { university, city, degree, subject, from, to };
+    return { university, description, course, from, to };
   }
 }

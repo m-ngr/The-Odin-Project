@@ -1,0 +1,47 @@
+.PreviewPersonal {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-areas:
+    "fullname    info"
+    "title       info"
+    "bar         bar"
+    "description description";
+
+  gap: var(--gap);
+  align-items: flex-start;
+}
+
+.PreviewPersonal > h3 {
+  grid-area: fullname;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.PreviewPersonal > span {
+  grid-area: title;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.PreviewPersonal > ul {
+  grid-area: info;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 5px;
+  align-items: center;
+}
+
+.PreviewPersonal > ul > li {
+  display: contents;
+}
+
+.PreviewPersonal > ul > li > i {
+  justify-self: center;
+}
+
+.PreviewPersonal > hr {
+  grid-area: bar;
+}
+
+.PreviewPersonal > p {
+  grid-area: description;
+}

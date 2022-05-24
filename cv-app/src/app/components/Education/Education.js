@@ -7,9 +7,8 @@ export default class Education extends Component {
     this.state = Object.assign(
       {
         university: "",
-        city: "",
-        degree: "",
-        subject: "",
+        description: "",
+        course: "",
         from: "",
         to: "",
       },
@@ -18,9 +17,9 @@ export default class Education extends Component {
   }
 
   render() {
-    const { university, city, degree, subject, from, to } = this.state;
+    const { university, description, course, from, to } = this.state;
     return (
-      <section>
+      <div className="fieldset">
         <input
           type="text"
           placeholder="University"
@@ -28,26 +27,11 @@ export default class Education extends Component {
           value={university}
           onChange={this.handleInput}
         />
-
         <input
           type="text"
-          placeholder="City"
-          name="city"
-          value={city}
-          onChange={this.handleInput}
-        />
-        <input
-          type="text"
-          placeholder="Degree"
-          name="degree"
-          value={degree}
-          onChange={this.handleInput}
-        />
-        <input
-          type="text"
-          placeholder="Subject"
-          name="subject"
-          value={subject}
+          placeholder="Course / Program"
+          name="course"
+          value={course}
           onChange={this.handleInput}
         />
         <input
@@ -64,8 +48,14 @@ export default class Education extends Component {
           value={to}
           onChange={this.handleInput}
         />
+        <textarea
+          placeholder="Description"
+          name="description"
+          value={description}
+          onChange={this.handleInput}
+        />
         <button onClick={this.props.remove}>Delete</button>
-      </section>
+      </div>
     );
   }
 

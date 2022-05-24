@@ -2,28 +2,29 @@ import { Component } from "react";
 
 export default class PreviewExperience extends Component {
   render() {
-    const { position, company, city, from, to } = this.getPrintableText();
+    const { position, company, description, from, to } =
+      this.getPrintableText();
 
     return (
-      <section>
-        <span>{position}</span>
-        <span>{company}</span>
-        <span>{city}</span>
-        <span>{from}</span>
-        <span>{to}</span>
+      <section className={this.props.className}>
+        <div>
+          <h4>{position}</h4>
+          <span>{`${company} | ${from} - ${to}`}</span>
+        </div>
+        <p>{description}</p>
       </section>
     );
   }
 
   getPrintableText() {
-    let { position, company, city, from, to } = this.props.info;
+    let { position, company, description, from, to } = this.props.info;
 
     position = position || "Position";
     company = company || "Company";
-    city = city || "City";
+    description = description || "";
     from = from || "From";
     to = to || "To";
 
-    return { position, company, city, from, to };
+    return { position, company, description, from, to };
   }
 }

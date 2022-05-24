@@ -1,0 +1,11 @@
+.Slide {
+  grid-area: slide;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.Slide > h2 {
+  font-family: "Antic Slab", serif;
+}

@@ -5,15 +5,15 @@ export default class Experience extends Component {
     super(props);
 
     this.state = Object.assign(
-      { position: "", company: "", city: "", from: "", to: "" },
+      { position: "", company: "", description: "", from: "", to: "" },
       { ...props.info }
     );
   }
 
   render() {
-    const { position, company, city, from, to } = this.state;
+    const { position, company, description, from, to } = this.state;
     return (
-      <section>
+      <div className="fieldset">
         <input
           type="text"
           placeholder="Position"
@@ -30,13 +30,6 @@ export default class Experience extends Component {
         />
         <input
           type="text"
-          placeholder="City"
-          name="city"
-          value={city}
-          onChange={this.handleInput}
-        />
-        <input
-          type="text"
           placeholder="From"
           name="from"
           value={from}
@@ -49,8 +42,14 @@ export default class Experience extends Component {
           value={to}
           onChange={this.handleInput}
         />
+        <textarea
+          placeholder="Description"
+          name="description"
+          value={description}
+          onChange={this.handleInput}
+        />
         <button onClick={this.props.remove}>Delete</button>
-      </section>
+      </div>
     );
   }
 

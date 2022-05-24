@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
+import "./ControlledList.css";
 
 export default class ControlledList extends Component {
   constructor(props) {
@@ -19,11 +20,10 @@ export default class ControlledList extends Component {
 
   render() {
     const { list } = this.state;
-    const { title, type } = this.props;
+    const { type } = this.props;
 
     return (
-      <article>
-        {title}
+      <div className="ControlledList">
         <ul>
           {list.map((item) => (
             <li key={item.id}>
@@ -35,8 +35,9 @@ export default class ControlledList extends Component {
             </li>
           ))}
         </ul>
+
         <button onClick={this.addItem}>Add</button>
-      </article>
+      </div>
     );
   }
 

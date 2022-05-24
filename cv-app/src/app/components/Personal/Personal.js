@@ -23,8 +23,7 @@ export default class Personal extends Component {
       this.state;
 
     return (
-      <article>
-        <h2>Personal Information</h2>
+      <div className="fieldset">
         <input
           type="text"
           placeholder="First name"
@@ -73,7 +72,7 @@ export default class Personal extends Component {
           name="description"
           onChange={this.handleInput}
         />
-      </article>
+      </div>
     );
   }
 

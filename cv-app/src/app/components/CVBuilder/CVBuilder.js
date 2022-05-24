@@ -4,6 +4,7 @@ import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
 import Personal from "../Personal/Personal";
 import PreviewCV from "../PreviewCV/PreviewCV";
+import Slide from "../Slide/Slide";
 import Slider from "../Slider/Slider";
 
 export default class CVBuilder extends Component {
@@ -17,37 +18,83 @@ export default class CVBuilder extends Component {
 
     return (
       <Slider>
-        <Personal info={personal} update={this.updatePersonal} />
-        <ExperienceList info={experience} update={this.updateExperience} />
-        <EducationList info={education} update={this.updateEducation} />
-        <PreviewCV info={this.state} />
+        <Slide title="Personal Info">
+          <Personal info={personal} update={this.updatePersonal} />
+        </Slide>
+
+        <Slide title="Experience">
+          <ExperienceList info={experience} update={this.updateExperience} />
+        </Slide>
+
+        <Slide title="Education">
+          <EducationList info={education} update={this.updateEducation} />
+        </Slide>
+
+        <Slide title="Preview CV">
+          <PreviewCV info={this.state} />
+          <button className="btn" onClick={this.loadExample}>
+            Show Example
+          </button>
+        </Slide>
       </Slider>
     );
   }
-
   updatePersonal = (info) => this.setState({ personal: info });
   updateExperience = (info) => this.setState({ experience: info });
   updateEducation = (info) => this.setState({ education: info });
+
+  loadExample = () => this.setState({ ...cvExample() });
 }
 
 function ExperienceList({ info, update }) {
-  return (
-    <ControlledList
-      type={<Experience />}
-      title={<h2>Experience</h2>}
-      info={info}
-      update={update}
-    />
-  );
+  return <ControlledList type={<Experience />} info={info} update={update} />;
 }
 
 function EducationList({ info, update }) {
-  return (
-    <ControlledList
-      type={<Education />}
-      title={<h2>Education</h2>}
-      info={info}
-      update={update}
-    />
-  );
+  return <ControlledList type={<Education />} info={info} update={update} />;
+}
+
+function cvExample() {
+  return {
+    personal: {
+      firstName: "Mahmoud",
+      lastName: "Elnagar",
+      title: "Full-Stack Developer",
+      phone: "+201009233595",
+      address: "Menofia, Egypt",
+      email: "mahmoud.elnagar1698@gmail.com",
+      description:
+        "Highly motivated Electrical Engineer with a lifelong learning mindset who is seeking a career in Software Engineering. very passionate about web development.",
+    },
+    experience: [
+      {
+        id: "0",
+        position: "Full-Stack Developer...probably!",
+        company: "My 1st Company",
+        from: "Near Future",
+        to: "Far Future",
+        description:
+          "If you want to hire me, contact me at https://www.linkedin.com/in/m-ngr/",
+      },
+    ],
+    education: [
+      {
+        id: "0",
+        university: "The Odin Project",
+        course: "Full Stack JavaScript",
+        from: "2022",
+        to: "Present",
+        description:
+          "Free full stack curriculum and supported by a passionate open source community",
+      },
+      {
+        id: "1",
+        university: "Faculty of Engineering, MU",
+        course: "Electrical Engineering",
+        from: "2016",
+        to: "2021",
+        description: "A bachelor's degree in Electrical Engineering",
+      },
+    ],
+  };
 }

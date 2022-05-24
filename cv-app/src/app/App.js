@@ -1,7 +1,8 @@
-import "./App.css";
+import { Component } from "react";
+import CVBuilder from "./components/CVBuilder/CVBuilder";
 
-function App() {
-  return <div>hello world</div>;
+export default class App extends Component {
+  render() {
+    return <CVBuilder />;
+  }
 }
-
-export default App;

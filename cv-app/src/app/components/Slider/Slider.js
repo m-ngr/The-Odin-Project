@@ -9,7 +9,8 @@ export default class Slider extends Component {
 
   render() {
     return (
-      <section>
+      <section className="Slider">
+        <></>
         {this.getCurrentSlide()}
         {this.backButton()}
         {this.nextButton()}
@@ -22,6 +23,7 @@ export default class Slider extends Component {
     return React.cloneElement(backButton, {
       onClick: this.getPreviousSlide,
       disabled: !this.hasPrevious(),
+      className: (backButton.props.className ?? "") + " Slider-back",
     });
   }
 
@@ -30,7 +32,7 @@ export default class Slider extends Component {
     return React.cloneElement(nextButton, {
       onClick: this.getNextSlide,
       disabled: !this.hasNext(),
-      // className: nextButton.props.className + " hello",
+      className: (nextButton.props.className ?? "") + " Slider-next",
     });
   }
 
@@ -69,6 +71,14 @@ export default class Slider extends Component {
 }
 
 Slider.defaultProps = {
-  nextButton: <button>Next</button>,
-  backButton: <button>Back</button>,
+  nextButton: (
+    <button title="Next">
+      <i className="fa-solid fa-chevron-right"></i>
+    </button>
+  ),
+  backButton: (
+    <button title="Back">
+      <i className="fa-solid fa-chevron-left"></i>
+    </button>
+  ),
 };

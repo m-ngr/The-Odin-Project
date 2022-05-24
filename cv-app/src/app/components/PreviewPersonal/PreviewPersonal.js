@@ -1,18 +1,30 @@
 import { Component } from "react";
-
+import "./PreviewPersonal.css";
 export default class PreviewPersonal extends Component {
   render() {
     const { firstName, lastName, title, address, phone, email, description } =
       this.getPrintableText();
 
     return (
-      <section>
-        <span>{`${firstName} ${lastName}`}</span>
+      <section className="PreviewPersonal">
+        <h3>{`${firstName} ${lastName}`}</h3>
         <span>{title}</span>
-        <span>{address}</span>
-        <span>{phone}</span>
-        <span>{email}</span>
-        <span>{description}</span>
+        <ul>
+          <li>
+            <i className="fa-solid fa-phone"></i>
+            <span>{phone}</span>
+          </li>
+          <li>
+            <i className="fa-solid fa-envelope"></i>
+            <span>{email}</span>
+          </li>
+          <li>
+            <i className="fa-solid fa-location-dot"></i>
+            <span>{address}</span>
+          </li>
+        </ul>
+        <hr />
+        <p>{description}</p>
       </section>
     );
   }

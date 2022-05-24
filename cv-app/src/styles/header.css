@@ -1,5 +1,5 @@
 header {
-  padding: var(--gap);
+  padding: var(--small-gap);
   font-family: "Antic Slab", serif;
   display: flex;
   gap: var(--gap);
@@ -9,7 +9,7 @@ header {
 }
 
 header > * {
-  font-size: clamp(1.8rem, 10vw, 3rem);
+  font-size: clamp(1.8rem, 10vw, 2.6rem);
 }
 
 .logo {
@@ -18,7 +18,6 @@ header > * {
 
 @media screen and (max-width: 480px) {
   header {
-    padding: var(--gap) var(--small-gap);
     gap: var(--small-gap);
   }
 }
