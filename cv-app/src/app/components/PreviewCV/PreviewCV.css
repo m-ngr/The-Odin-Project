@@ -1,27 +1,48 @@
 .PreviewCV {
-  border: 2px solid;
-  padding: clamp(var(--gap), 5%, 50px);
+  --thickness: clamp(2px, 0.3vw, 5px);
+  --space: clamp(10px, 2vw, 20px);
+  --small-space: clamp(5px, 1vw, 10px);
+  --tiny-space: clamp(3px, 0.5vw, 5px);
+
+  border: var(--thickness) solid;
+  padding: clamp(var(--small-gap), 5%, 50px);
   display: flex;
   flex-direction: column;
-  gap: var(--gap);
+  gap: var(--space);
   width: 100%;
+  font-size: clamp(12px, 1.8vw, 27px);
+  max-width: 800px;
+  /* min-width: 400px; */
+}
+
+.PreviewCV hr {
+  height: var(--thickness);
+}
+
+.PreviewCV h3 {
+  font-size: clamp(12px, 2.1vw, 27px);
 }
 
 .PreviewCV .list {
   display: flex;
   flex-direction: column;
-  gap: var(--small-gap);
+  gap: var(--small-space);
 }
 
 .list-item {
-  border-left: 3px solid;
-  padding-left: 5px;
+  border-left: var(--thickness) solid;
+  padding-left: var(--tiny-space);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: var(--tiny-space);
 }
 
 .list-item > div {
   display: flex;
   justify-content: space-between;
+  gap: var(--tiny-space);
+}
+
+.list-item > div > span {
+  text-align: right;
 }
