@@ -3,15 +3,26 @@ import { Component } from "react";
 import PreviewEducation from "../PreviewEducation/PreviewEducation";
 import PreviewExperience from "../PreviewExperience/PreviewExperience";
 import PreviewPersonal from "../PreviewPersonal/PreviewPersonal";
+import ReactToPrint from "react-to-print";
 
 export default class PreviewCV extends Component {
   render() {
     const { personal, experience, education } = this.props.info;
     return (
-      <div className="PreviewCV">
-        <PreviewPersonal info={personal} />
-        <ExperienceList info={experience} />
-        <EducationList info={education} />
+      <div>
+        <ReactToPrint
+          trigger={() => {
+            return (
+              <i className="fa-solid fa-print print-btn" title="Print CV"></i>
+            );
+          }}
+          content={() => this.componentRef}
+        />
+        <div className="PreviewCV" ref={(el) => (this.componentRef = el)}>
+          <PreviewPersonal info={personal} />
+          <ExperienceList info={experience} />
+          <EducationList info={education} />
+        </div>
       </div>
     );
   }

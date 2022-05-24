@@ -1,3 +1,11 @@
+.print-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
 .PreviewCV {
   --thickness: clamp(2px, 0.3vw, 5px);
   --space: clamp(10px, 2vw, 20px);
@@ -9,10 +17,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--space);
-  width: 100%;
   font-size: clamp(12px, 1.8vw, 27px);
-  max-width: 800px;
-  /* min-width: 400px; */
+  color: black;
+  margin: 8px;
+  width: calc(100% - 16px);
+  max-width: 1100px;
 }
 
 .PreviewCV hr {
