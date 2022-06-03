@@ -7,6 +7,7 @@ import Personal from "../Personal/Personal";
 import PreviewCV from "../PreviewCV/PreviewCV";
 import Slide from "../Slide/Slide";
 import Slider from "../Slider/Slider";
+import Project from "../Project/Project";
 
 export default class CVBuilder extends Component {
   constructor(props) {
@@ -16,11 +17,12 @@ export default class CVBuilder extends Component {
       experience: [{}],
       education: [{}],
       skills: [{}],
+      projects: [{}],
     };
   }
 
   render() {
-    const { personal, experience, education, skills } = this.state;
+    const { personal, experience, education, skills, projects } = this.state;
 
     return (
       <Slider>
@@ -40,6 +42,10 @@ export default class CVBuilder extends Component {
           <SkillsList info={skills} update={this.updateSkills} />
         </Slide>
 
+        <Slide title="Projects">
+          <ProjectsList info={projects} update={this.updateProjects} />
+        </Slide>
+
         <Slide title="Preview CV">
           <PreviewCV info={this.state} />
           <button className="btn" onClick={this.loadExample}>
@@ -53,6 +59,7 @@ export default class CVBuilder extends Component {
   updateExperience = (info) => this.setState({ experience: info });
   updateEducation = (info) => this.setState({ education: info });
   updateSkills = (info) => this.setState({ skills: info });
+  updateProjects = (info) => this.setState({ projects: info });
 
   loadExample = () => this.setState({ ...cvExample() });
 }
@@ -66,6 +73,9 @@ function EducationList({ info, update }) {
 }
 function SkillsList({ info, update }) {
   return <ControlledList type={<Skill />} info={info} update={update} />;
+}
+function ProjectsList({ info, update }) {
+  return <ControlledList type={<Project />} info={info} update={update} />;
 }
 
 function cvExample() {
@@ -120,6 +130,35 @@ function cvExample() {
       { id: "6", name: "Express" },
       { id: "7", name: "MongoDB" },
       { id: "8", name: "PostgreSQL" },
+    ],
+    projects: [
+      {
+        id: "0",
+        title: "Project #1",
+        description: "Project 1 description",
+        links: [
+          { id: "0", title: "Live", url: "https://www.project1.com/" },
+          { id: "1", title: "Repo", url: "https://www.github.com/..." },
+        ],
+      },
+      {
+        id: "1",
+        title: "Project #2",
+        description: "Project 2 description",
+        links: [
+          { id: "0", title: "Live", url: "https://www.project2.com/" },
+          { id: "1", title: "Repo", url: "https://www.github.com/..." },
+        ],
+      },
+      {
+        id: "2",
+        title: "Project #3",
+        description: "Project 3 description",
+        links: [
+          { id: "0", title: "Live", url: "https://www.project3.com/" },
+          { id: "1", title: "Repo", url: "https://www.github.com/..." },
+        ],
+      },
     ],
   };
 }
