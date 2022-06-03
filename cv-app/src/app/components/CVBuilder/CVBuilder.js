@@ -4,10 +4,10 @@ import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
 import Skill from "../Skill/Skill";
 import Personal from "../Personal/Personal";
-import PreviewCV from "../PreviewCV/PreviewCV";
 import Slide from "../Slide/Slide";
 import Slider from "../Slider/Slider";
 import Project from "../Project/Project";
+import Preview from "../Preview/Preview";
 
 export default class CVBuilder extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class CVBuilder extends Component {
         </Slide>
 
         <Slide title="Preview CV">
-          <PreviewCV info={this.state} />
+          <Preview info={this.state} />
           <button className="btn" onClick={this.loadExample}>
             Show Example
           </button>

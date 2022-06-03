@@ -3,7 +3,6 @@ import { Component } from "react";
 import PreviewEducation from "../PreviewEducation/PreviewEducation";
 import PreviewExperience from "../PreviewExperience/PreviewExperience";
 import PreviewPersonal from "../PreviewPersonal/PreviewPersonal";
-import ReactToPrint from "react-to-print";
 import PreviewSkill from "../PreviewSkill/PreviewSkill";
 import PreviewProject from "../PreviewProject/PreviewProject";
 
@@ -11,23 +10,16 @@ export default class PreviewCV extends Component {
   render() {
     const { personal, experience, education, skills, projects } =
       this.props.info;
+
+    const { showExperience, showEducation, showSkills, showProjects } =
+      this.props.controls;
     return (
-      <div>
-        <ReactToPrint
-          trigger={() => {
-            return (
-              <i className="fa-solid fa-print print-btn" title="Print CV"></i>
-            );
-          }}
-          content={() => this.componentRef}
-        />
-        <div className="PreviewCV" ref={(el) => (this.componentRef = el)}>
-          <PreviewPersonal info={personal} />
-          <ExperienceList info={experience} />
-          <EducationList info={education} />
-          <SkillList info={skills} />
-          <ProjectList info={projects} />
-        </div>
+      <div className="PreviewCV">
+        <PreviewPersonal info={personal} />
+        {showExperience ? <ExperienceList info={experience} /> : null}
+        {showEducation ? <EducationList info={education} /> : null}
+        {showSkills ? <SkillList info={skills} /> : null}
+        {showProjects ? <ProjectList info={projects} /> : null}
       </div>
     );
   }

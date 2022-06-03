@@ -1,11 +1,3 @@
-.print-btn {
-  display: flex;
-  justify-content: flex-end;
-  padding: 5px;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
 .PreviewCV {
   --thickness: clamp(2px, 0.3vw, 5px);
   --space: clamp(10px, 2vw, 20px);
