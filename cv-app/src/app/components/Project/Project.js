@@ -38,6 +38,7 @@ export default class Project extends Component {
           type={<LinkField />}
           info={links}
           update={this.updateLinks}
+          addTitle="Add Link"
         />
 
         <button onClick={this.props.remove}>Delete</button>

@@ -36,7 +36,7 @@ export default class ControlledList extends Component {
           ))}
         </ul>
 
-        <button onClick={this.addItem}>Add</button>
+        <button onClick={this.addItem}>{this.props.addTitle}</button>
       </div>
     );
   }
@@ -62,3 +62,7 @@ export default class ControlledList extends Component {
     });
   };
 }
+
+ControlledList.defaultProps = {
+  addTitle: "Add",
+};

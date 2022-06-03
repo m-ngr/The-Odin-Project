@@ -9,7 +9,7 @@ export default class PreviewControls extends Component {
     return (
       <details className="PreviewControls">
         <summary>Preview Controls</summary>
-        <p className="details">
+        <section className="details">
           <Checkbox
             name="showExperience"
             checked={showExperience}
@@ -34,7 +34,7 @@ export default class PreviewControls extends Component {
             title="Show Projects"
             handler={this.props.handler}
           />
-        </p>
+        </section>
       </details>
     );
   }
