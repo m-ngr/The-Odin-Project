@@ -55,3 +55,9 @@
 .list-item > div > span {
   text-align: right;
 }
+
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--tiny-space);
+}

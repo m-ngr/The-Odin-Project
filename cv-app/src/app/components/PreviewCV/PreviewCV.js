@@ -4,10 +4,11 @@ import PreviewEducation from "../PreviewEducation/PreviewEducation";
 import PreviewExperience from "../PreviewExperience/PreviewExperience";
 import PreviewPersonal from "../PreviewPersonal/PreviewPersonal";
 import ReactToPrint from "react-to-print";
+import PreviewSkill from "../PreviewSkill/PreviewSkill";
 
 export default class PreviewCV extends Component {
   render() {
-    const { personal, experience, education } = this.props.info;
+    const { personal, experience, education, skills } = this.props.info;
     return (
       <div>
         <ReactToPrint
@@ -22,6 +23,7 @@ export default class PreviewCV extends Component {
           <PreviewPersonal info={personal} />
           <ExperienceList info={experience} />
           <EducationList info={education} />
+          <SkillList info={skills} />
         </div>
       </div>
     );
@@ -46,6 +48,19 @@ function EducationList({ info }) {
       {info.map((ed) => (
         <PreviewEducation key={ed.id} info={ed} className="list-item" />
       ))}
+    </section>
+  );
+}
+
+function SkillList({ info }) {
+  return (
+    <section className="list">
+      <h3>Skills</h3>
+      <div className="grid-list">
+        {info.map((skill) => (
+          <PreviewSkill key={skill.id} info={skill} className="llist-item" />
+        ))}
+      </div>
     </section>
   );
 }

@@ -2,6 +2,7 @@ import { Component } from "react";
 import ControlledList from "../ControlledList/ControlledList";
 import Education from "../Education/Education";
 import Experience from "../Experience/Experience";
+import Skill from "../Skill/Skill";
 import Personal from "../Personal/Personal";
 import PreviewCV from "../PreviewCV/PreviewCV";
 import Slide from "../Slide/Slide";
@@ -10,11 +11,16 @@ import Slider from "../Slider/Slider";
 export default class CVBuilder extends Component {
   constructor(props) {
     super(props);
-    this.state = { personal: {}, experience: [{}], education: [{}] };
+    this.state = {
+      personal: {},
+      experience: [{}],
+      education: [{}],
+      skills: [{}],
+    };
   }
 
   render() {
-    const { personal, experience, education } = this.state;
+    const { personal, experience, education, skills } = this.state;
 
     return (
       <Slider>
@@ -30,6 +36,10 @@ export default class CVBuilder extends Component {
           <EducationList info={education} update={this.updateEducation} />
         </Slide>
 
+        <Slide title="Skills">
+          <SkillsList info={skills} update={this.updateSkills} />
+        </Slide>
+
         <Slide title="Preview CV">
           <PreviewCV info={this.state} />
           <button className="btn" onClick={this.loadExample}>
@@ -42,6 +52,7 @@ export default class CVBuilder extends Component {
   updatePersonal = (info) => this.setState({ personal: info });
   updateExperience = (info) => this.setState({ experience: info });
   updateEducation = (info) => this.setState({ education: info });
+  updateSkills = (info) => this.setState({ skills: info });
 
   loadExample = () => this.setState({ ...cvExample() });
 }
@@ -52,6 +63,9 @@ function ExperienceList({ info, update }) {
 
 function EducationList({ info, update }) {
   return <ControlledList type={<Education />} info={info} update={update} />;
+}
+function SkillsList({ info, update }) {
+  return <ControlledList type={<Skill />} info={info} update={update} />;
 }
 
 function cvExample() {
@@ -95,6 +109,17 @@ function cvExample() {
         to: "2021",
         description: "A bachelor's degree in Electrical Engineering",
       },
+    ],
+    skills: [
+      { id: "0", name: "HTML" },
+      { id: "1", name: "CSS" },
+      { id: "2", name: "JavaScript" },
+      { id: "3", name: "TypeScript" },
+      { id: "4", name: "React" },
+      { id: "5", name: "Node.js" },
+      { id: "6", name: "Express" },
+      { id: "7", name: "MongoDB" },
+      { id: "8", name: "PostgreSQL" },
     ],
   };
 }
