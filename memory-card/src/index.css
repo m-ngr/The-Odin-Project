@@ -1,0 +1,26 @@
+@import url("../node_modules/@fortawesome/fontawesome-free/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Antic+Slab&family=Roboto:wght@400;700&display=swap");
+
+/*
+  font-family: 'Antic Slab', serif;
+  font-family: 'Roboto', sans-serif;
+*/
+
+@import url(./styles/reset.css);
+@import url(./styles/layout.css);
+@import url(./styles/header.css);
+@import url(./styles/main.css);
+@import url(./styles/footer.css);
+@import url(./styles/general.css);
+
+:root {
+  --color-1: #262526;
+  --color-2: #f5f5f5;
+  --accent: #acb4f4;
+
+  --gap: 1.12rem;
+  --small-gap: 0.56rem;
+
+  --rad: 0.56rem;
+  --small-rad: 0.3rem;
+}
