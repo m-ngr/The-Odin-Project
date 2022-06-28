@@ -1,49 +1,81 @@
-import { useEffect, useState } from "react";
-import Card from "./components/Card/Card";
-import { loadCards } from "./utils/cardList";
-import { randomize } from "./utils/randomize";
+import { useState } from "react";
+import { EntryScreen } from "./components/EntryScreen/EntryScreen";
+import { LevelUpScreen } from "./components/LevelUpScreen/LevelUpScreen";
+import { PlayScreen } from "./components/PlayScreen/PlayScreen";
+import { ResultScreen } from "./components/ResultScreen/ResultScreen";
 
-let cards = loadCards();
+const MAX_LEVEL = 6;
+const MIN_LEVEL = 1;
+
+export const GAME_STATE = {
+  notStarted: 0,
+  started: 1,
+  lost: 2,
+  levelUp: 3,
+  win: 4,
+};
 
 export default function App() {
-  const [score, setScore] = useState(0);
+  const [level, setLevel] = useState(1);
+  const [gameState, setGameState] = useState(GAME_STATE.notStarted);
   const [bestScore, setBestScore] = useState(0);
-  const [usedIDs, setUsedIDs] = useState([]);
-  cards = randomize(cards);
 
-  function resetGame() {
-    setScore(0);
-    setUsedIDs([]);
+  function updateLevel(lvl) {
+    if (MIN_LEVEL <= lvl && lvl <= MAX_LEVEL) setLevel(lvl);
   }
 
-  function handleCard(card) {
-    if (usedIDs.includes(card.id)) {
-      console.log("You Lose");
-      resetGame();
+  function winHandler() {
+    if (level < MAX_LEVEL) {
+      setLevel(level + 1);
+      setGameState(GAME_STATE.levelUp);
+      setTimeout(() => {
+        setGameState(GAME_STATE.started);
+      }, 2000);
     } else {
-      setUsedIDs(usedIDs.concat(card.id));
-      setScore(score + 1);
-      if (score === bestScore) setBestScore(score + 1);
+      setGameState(GAME_STATE.win);
     }
   }
 
-  useEffect(() => {
-    if (usedIDs.length === cards.length) {
-      console.log("You win");
-      resetGame();
-    }
-  }, [usedIDs]);
+  switch (gameState) {
+    case GAME_STATE.started:
+      return (
+        <PlayScreen
+          bestScore={bestScore}
+          updateScore={setBestScore}
+          level={level}
+          exitHandler={() => setGameState(GAME_STATE.notStarted)}
+          winHandler={winHandler}
+          loseHandler={() => setGameState(GAME_STATE.lost)}
+        />
+      );
 
-  return (
-    <div>
-      <p>Welcome to Memory Cards</p>
-      <p>Current Score: {score}</p>
-      <p>Best Score: {bestScore}</p>
-      <div>
-        {cards.map((c) => (
-          <Card key={c.id} card={c} onClick={handleCard} />
-        ))}
-      </div>
-    </div>
-  );
+    case GAME_STATE.win:
+      return (
+        <ResultScreen
+          isWinner={true}
+          exitHandler={() => setGameState(GAME_STATE.notStarted)}
+        />
+      );
+
+    case GAME_STATE.lost:
+      return (
+        <ResultScreen
+          isWinner={false}
+          playHandler={() => setGameState(GAME_STATE.started)}
+          exitHandler={() => setGameState(GAME_STATE.notStarted)}
+        />
+      );
+
+    case GAME_STATE.levelUp:
+      return <LevelUpScreen level={level} />;
+
+    default:
+      return (
+        <EntryScreen
+          level={level}
+          updateLevel={updateLevel}
+          startHandler={() => setGameState(GAME_STATE.started)}
+        />
+      );
+  }
 }
