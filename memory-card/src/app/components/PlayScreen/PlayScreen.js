@@ -4,8 +4,6 @@ import Card from "../Card/Card";
 import { loadCards } from "../../utils/cardList";
 import { randomize } from "../../utils/randomize";
 
-let cards = loadCards();
-
 export function PlayScreen({
   bestScore,
   level,
@@ -16,8 +14,9 @@ export function PlayScreen({
 }) {
   const [usedIDs, setUsedIDs] = useState([]);
   const [score, setScore] = useState(0);
-
-  cards = randomize(cards);
+  const [cards, setCards] = useState(
+    randomize(loadCards()).slice(0, 4 * level)
+  );
 
   function resetGame() {
     setScore(0);
@@ -35,6 +34,7 @@ export function PlayScreen({
     } else {
       setUsedIDs(usedIDs.concat(card.id));
       setScore(score + 1);
+      setCards(randomize(cards));
     }
   }
 
