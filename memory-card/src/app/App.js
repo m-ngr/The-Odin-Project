@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { EntryScreen } from "./components/EntryScreen/EntryScreen";
-import { LevelUpScreen } from "./components/LevelUpScreen/LevelUpScreen";
 import { PlayScreen } from "./components/PlayScreen/PlayScreen";
 import { ResultScreen } from "./components/ResultScreen/ResultScreen";
 
 const MAX_LEVEL = 6;
 const MIN_LEVEL = 1;
 
-export const GAME_STATE = {
+const GAME_STATE = {
   notStarted: 0,
   started: 1,
   lost: 2,
@@ -16,7 +15,7 @@ export const GAME_STATE = {
 };
 
 export default function App() {
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(MIN_LEVEL);
   const [gameState, setGameState] = useState(GAME_STATE.notStarted);
   const [bestScore, setBestScore] = useState(0);
 
@@ -41,7 +40,7 @@ export default function App() {
       return (
         <PlayScreen
           bestScore={bestScore}
-          updateScore={setBestScore}
+          updateBestScore={setBestScore}
           level={level}
           exitHandler={() => setGameState(GAME_STATE.notStarted)}
           winHandler={winHandler}
@@ -53,6 +52,7 @@ export default function App() {
       return (
         <ResultScreen
           isWinner={true}
+          bestScore={bestScore}
           exitHandler={() => setGameState(GAME_STATE.notStarted)}
         />
       );
@@ -61,13 +61,14 @@ export default function App() {
       return (
         <ResultScreen
           isWinner={false}
+          bestScore={bestScore}
           playHandler={() => setGameState(GAME_STATE.started)}
           exitHandler={() => setGameState(GAME_STATE.notStarted)}
         />
       );
 
     case GAME_STATE.levelUp:
-      return <LevelUpScreen level={level} />;
+      return <ResultScreen isWinner={true} isLevelUp={true} level={level} />;
 
     default:
       return (

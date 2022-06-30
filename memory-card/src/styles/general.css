@@ -1,0 +1,43 @@
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  height: 100%;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  background-color: var(--color-1);
+  color: var(--color-2);
+  padding: 5px 15px;
+  border-radius: 5px;
+  min-width: 120px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-wrapper > input {
+  background-color: transparent;
+  border: 2px solid;
+  padding: 0 5px;
+  width: 100px;
+  outline: none;
+  text-align: center;
+}
+
+.round {
+  background-color: var(--accent);
+  padding: 5px 15px;
+  border-radius: 30px;
+}

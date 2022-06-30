@@ -1,0 +1,33 @@
+.Card {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  transition: order 1s;
+}
+
+.Card:active {
+  transform: scale(97%);
+}
+
+.Card > img {
+  width: 100%;
+  border-radius: 2px;
+}
+
+.Card > figcaption {
+  text-align: center;
+}
+
+@media screen and (min-width: 860px) {
+  .Card {
+    filter: grayscale(1);
+    transition: filter 0.2s, transform 0.2s;
+  }
+
+  .Card:hover {
+    transform: scale(103%);
+    filter: grayscale(0);
+  }
+}

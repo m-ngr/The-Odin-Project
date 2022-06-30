@@ -2,9 +2,9 @@ main {
   background-color: var(--color-2);
   color: var(--color-1);
 
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--gap);
+  gap: var(--gap); */
   padding: var(--small-gap);
 }

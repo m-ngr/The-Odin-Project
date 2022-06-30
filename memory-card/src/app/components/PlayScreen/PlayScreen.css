@@ -1,0 +1,13 @@
+.play-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  padding: 25px 0;
+  transition: opacity 0.3s;
+}
+
+.fade {
+  opacity: 0;
+}

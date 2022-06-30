@@ -8,40 +8,33 @@ function importAll(r) {
   return files;
 }
 
-const cards = [];
+const imgs = importAll(require.context("../../images/", false, /\.(png)$/));
 
-export function loadCards() {
-  if (cards.length === 0) {
-    const imgs = importAll(
-      require.context("../../images/", false, /\.(png|jpe?g)$/)
-    );
+const cards = [
+  card("Sasuke", imgs["sasuke.png"]),
+  card("Naruto", imgs["naruto.png"]),
+  card("Itachi", imgs["itachi.png"]),
+  card("Obito", imgs["obito.png"]),
+  card("Madara", imgs["madara.png"]),
+  card("Kakashi", imgs["kakashi.png"]),
+  card("Sakura", imgs["sakura.png"]),
+  card("Pain", imgs["pain.png"]),
+  card("Minato", imgs["minato.png"]),
+  card("Hinata", imgs["hinata.png"]),
+  card("Gaara", imgs["gaara.png"]),
+  card("Jiraiya", imgs["jiraiya.png"]),
+  card("Orochimaru", imgs["orochimaru.png"]),
+  card("Shikamaru", imgs["shikamaru.png"]),
+  card("Neji", imgs["neji.png"]),
+  card("Yamato", imgs["yamato.png"]),
+  card("Asuma", imgs["asuma.png"]),
+  card("Rock Lee", imgs["rock_lee.png"]),
+  card("Kisame", imgs["kisame.png"]),
+  card("Kabuto", imgs["kabuto.png"]),
+  card("Hashirama", imgs["hashirama.png"]),
+  card("Tobirama", imgs["tobirama.png"]),
+  card("Hiruzen", imgs["hiruzen.png"]),
+  card("Danzo", imgs["danzo.png"]),
+];
 
-    cards.push(
-      card("Sasuke", imgs["sasuke.jpg"]),
-      card("Naruto", imgs["naruto.png"]),
-      card("Itachi", imgs["itachi.jpg"]),
-      card("Obito", imgs["obito.jpg"]),
-      card("Madara", imgs["madara.jpg"]),
-      card("Kakashi", imgs["0.png"]),
-      card("Sakura", imgs["0.png"]),
-      card("Nagato", imgs["0.png"]),
-      card("Minato", imgs["0.png"]),
-      card("Hinata", imgs["0.png"]),
-      card("Gaara", imgs["0.png"]),
-      card("Jiraiya", imgs["0.png"]),
-      card("Orochimaru", imgs["0.png"]),
-      card("Shikamaru", imgs["0.png"]),
-      card("Neji", imgs["0.png"]),
-      card("Yamato", imgs["0.png"]),
-      card("Asuma", imgs["0.png"]),
-      card("Rock Lee", imgs["0.png"]),
-      card("Kisame", imgs["0.png"]),
-      card("Kabuto", imgs["0.png"]),
-      card("Hashirama", imgs["0.png"]),
-      card("Tobirama", imgs["0.png"]),
-      card("Hiruzen", imgs["0.png"]),
-      card("Danzo", imgs["0.png"])
-    );
-  }
-  return [...cards];
-}
+export const loadCards = () => [...cards];
