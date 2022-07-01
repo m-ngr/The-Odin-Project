@@ -4,7 +4,6 @@
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.2s;
-  transition: order 1s;
 }
 
 .Card:active {
