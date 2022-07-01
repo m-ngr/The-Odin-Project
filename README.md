@@ -33,3 +33,5 @@ This page contains a list of projects I made throughout The Odin Project curricu
 - Project 5: [Weather App](https://m-ngr.github.io/The-Odin-Project/weather/dist/ "API based project").
 
 - Project 6: [CV Builder App](https://ngr-cv-app.netlify.app/ "First React App").
+
+- Project 7: [Memory Card App](https://ngr-memory-card.netlify.app/ "React with hooks").
