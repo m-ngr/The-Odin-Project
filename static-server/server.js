@@ -32,10 +32,18 @@ server.listen(PORT, () => {
 async function sendResource(res, resourcePath) {
   try {
     const content = await fs.readFile(resourcePath, "utf-8");
-    res.statusCode = 200;
+    res.writeHead(200, { "Content-Type": contentType(resourcePath) });
     res.end(content);
   } catch (error) {
     res.statusCode = 500;
     res.end();
   }
+}
+
+function contentType(resourcePath) {
+  const ext = path.extname(resourcePath);
+  if (ext === ".html") return "text/html";
+  if (ext === ".css") return "text/css";
+  if (ext === ".js") return "text/js";
+  return "text/plain";
 }
