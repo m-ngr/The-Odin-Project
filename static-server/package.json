@@ -1,0 +1,12 @@
+{
+  "name": "static-server",
+  "version": "1.0.0",
+  "description": "First Node.js Project in TOP curriculum",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mahmoud Elnagar <mahmoud.elnagar1698@gmail.com>",
+  "license": "ISC"
+}
