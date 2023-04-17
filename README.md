@@ -35,3 +35,7 @@ This page contains a list of projects I made throughout The Odin Project curricu
 - Project 6: [CV Builder App](https://ngr-cv-app.netlify.app/ "First React App").
 
 - Project 7: [Memory Card App](https://ngr-memory-card.netlify.app/ "React with hooks").
+
+## Node.js
+
+- Project 1: [Basic Static Server](https://static-server.m-ngr.repl.co "Basic Node.js Static Server").
