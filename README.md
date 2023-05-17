@@ -39,3 +39,4 @@ This page contains a list of projects I made throughout The Odin Project curricu
 ## Node.js
 
 - Project 1: [Basic Static Server](https://static-server.m-ngr.repl.co "Basic Node.js Static Server").
+- Project 2: [MDN Local Library](https://mdn-local-library-production.up.railway.app/ "First MEN App.").
